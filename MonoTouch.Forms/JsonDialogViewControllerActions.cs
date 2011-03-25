@@ -6,6 +6,7 @@ using System.Reflection;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using MonoTouch.Forms.Elements;
 namespace MonoTouch.Forms
 {
 	public partial class JsonDialogViewController
@@ -103,18 +104,18 @@ namespace MonoTouch.Forms
 		private void _processSubmissionResult(string value){
 			JsonObject json = ((JsonObject)(_parse(value)["result"]));
 			
-			if (!string.IsNullOrEmpty(json.s("message"))){
-				using (var v = new UIAlertView(json.b("success") ? "Success" : "Error", json.s("message"), null, "OK")) {
+			if (!string.IsNullOrEmpty(json.asString("message"))){
+				using (var v = new UIAlertView(json.asBoolean("success") ? "Success" : "Error", json.asString("message"), null, "OK")) {
 					v.Show();
 				}
 			}
-			var action = json.s("action");
-			var url = json.s("navigateto");
+			var action = json.asString("action");
+			var url = json.asString("navigateto");
 			if (!string.IsNullOrEmpty(action)){
 				_invokeSubmissionResultAction(action, json);
 			} else if (!string.IsNullOrEmpty(url)){
 				NavigateTo(url);
-			} else if (json.b("success")) {
+			} else if (json.asBoolean("success")) {
 				if (NavigationController.ViewControllers[0]==this &&
 				    NavigationController!=null && NavigationController.ParentViewController!=null &&
 				    NavigationController.ParentViewController.ModalViewController==NavigationController){

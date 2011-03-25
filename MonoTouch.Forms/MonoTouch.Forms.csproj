@@ -82,11 +82,13 @@
     <Compile Include="JsonDialogViewControllerActions.cs" />
     <Compile Include="JsonObjectExtensions.cs" />
     <Compile Include="LRUCache.cs" />
-    <Compile Include="ActionElement.cs" />
     <Compile Include="UrlConnection.cs" />
     <Compile Include="Elements\ActivityElement.cs" />
-    <Compile Include="Elements\MapElement.cs" />
     <Compile Include="Elements\SimpleImageElement.cs" />
+    <Compile Include="Elements\SubmitElement.cs" />
+    <Compile Include="Elements\ActionElement.cs" />
+    <Compile Include="Elements\EmptyListElement.cs" />
+    <Compile Include="ActionCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

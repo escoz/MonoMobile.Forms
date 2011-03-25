@@ -8,7 +8,8 @@ using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-namespace MonoTouch.Forms
+using MonoTouch.MVVM;
+namespace MonoTouch.Forms.Elements
 {
 	public class ActionElement : StringElement {
 		static NSString skey = new NSString("ActionElement");
@@ -16,10 +17,9 @@ namespace MonoTouch.Forms
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		//public ActionElement(string caption, NSAction tapped) : base (caption, tapped) {}
-		
-		public ActionElement(string caption, string action, NSAction tapped) : base(caption) { // TODO Handle action tapped
+		public ActionElement(string caption, string action, Action tapped) : base(caption) { 
 			Action = action;
+			this.Command = new ActionCommand(tapped);
 		}
 		
 		public override UITableViewElementCell GetCell (UITableView tv)
@@ -38,22 +38,7 @@ namespace MonoTouch.Forms
 		}
 	}
 	
-	public class SubmitElement : ActionElement {
-		public string Url;
-		
-		public SubmitElement(string caption, string url, string action, NSAction tapped) : base(caption, action, tapped){
-			Url = url;
-		}
-	}
+
 	
-	public class EmptyListElement : StringElement {
-		public EmptyListElement(string message):base(message){}
-		
-		public override UITableViewElementCell GetCell (UITableView tv)
-		{
-			var cell= base.GetCell (tv);
-			cell.TextLabel.TextColor = UIColor.LightGray;
-			return cell;
-		}
-	}
+
 }

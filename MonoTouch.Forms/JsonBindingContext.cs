@@ -20,6 +20,7 @@ using System.Json;
 using System.Linq;
 using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
+using MonoTouch.Forms.Elements;
 
 namespace MonoTouch.Forms
 {
@@ -76,10 +77,10 @@ namespace MonoTouch.Forms
 			}
 			
 			foreach (JsonObject section in jsonRoot){
-				var sec = new Section(section.s("caption"), section.s("footer"));
+				var sec = new Section(section.asString("caption"), section.asString("footer"));
 				
-				if (!string.IsNullOrEmpty(section.s("captionImage"))) {
-					var imgDevice = section.s("captionImage").Split(' ');
+				if (!string.IsNullOrEmpty(section.asString("captionImage"))) {
+					var imgDevice = section.asString("captionImage").Split(' ');
 					var img = UIDevice.CurrentDevice.UserInterfaceIdiom==UIUserInterfaceIdiom.Phone ? imgDevice[0] : imgDevice[1];
 					sec.HeaderView = new UIImageView(UIImage.FromBundle(img));
 				}
@@ -88,11 +89,11 @@ namespace MonoTouch.Forms
 					foreach (JsonObject elem in section["elements"]) {
 						
 						var dataForElement = data;
-						var bindExpression = elem.s("bind");
+						var bindExpression = elem.asString("bind");
 						if (bindExpression!=null) {
 							try {
 								if (data!=null && data.JsonType==JsonType.Object){
-									var bind = elem.s("bind");
+									var bind = elem.asString("bind");
 									if (data != null && !string.IsNullOrEmpty(bind) && data.ContainsKey(bind)) {
 										dataForElement = data[bind];
 									}
@@ -167,14 +168,16 @@ namespace MonoTouch.Forms
 			try {
 				type = json["type"];
 				if (type=="HiddenElement"){
-					var name = json.s("id");
+					var name = json.asString("id");
 					
-					_controller.SetValue(name, data==null? json.s("value") : data.CleanString());	
+					_controller.SetValue(name, data==null? json.asString("value") : data.CleanString());	
 				} else {
 					string id = (json.ContainsKey("id") ? json["id"] : null);
 					var newElement = _parseFunctions[type](json, _controller, data);
 					if (newElement!=null) {
-						newElement.Id = new NSString(id);
+						if (!string.IsNullOrEmpty(id))
+							newElement.Id = new NSString(id);
+						
 						_elements.Add(newElement);
 						section.Add(newElement);
 					}
@@ -219,37 +222,39 @@ namespace MonoTouch.Forms
 		private static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> _parseFunctions = 
 			new Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>>(){
 				{"EntryElement", (json, dvc, data)=>{
-					return new EntryElement(json.s("caption"), json.s("placeholder"), data==null? json.s("value") : data.CleanString(), json.b("ispassword")){
-							KeyboardType = (UIKeyboardType)Enum.Parse(typeof(UIKeyboardType), json.s("keyboard") ?? "Default"),
+					return new EntryElement(json.asString("caption"), json.asString("placeholder"), data==null? json.asString("value") : data.CleanString(), json.asBoolean("ispassword")){
+							KeyboardType = (UIKeyboardType)Enum.Parse(typeof(UIKeyboardType), json.asString("keyboard") ?? "Default"),
 						}; }},
 				{"ActionElement", (json, dvc, data)=>{ 
 					ActionElement el = null;
-					el = new ActionElement(json.s("caption"), json.s("action"), ()=>{
+					el = new ActionElement(json.asString("caption"), json.asString("action"), ()=>{
 						dvc.InvokeAction(el);
 					});
 					return el;
 				}},
 				{"SubmitElement", (json, dvc, data)=>{
 					SubmitElement el = null;
-					el = new SubmitElement(json.s("caption"), data==null? json.s("url") : data.CleanString(), json.s("action"), ()=>{
+					el = new SubmitElement(json.asString("caption"), data==null? json.asString("url") : data.CleanString(), json.asString("action"), ()=>{
 						dvc.InvokeAction(el);
 					});
 					return el;
 				}},
-				{"BooleanElement", (json, dvc, data)=>{return new BooleanElement(json.s("caption"), json.b("value")) ;}},
+				{"BooleanElement", (json, dvc, data)=>{return new BooleanElement(json.asString("caption"), json.asBoolean("value")) ;}},
 				{"StringElement", (json, dvc, data)=>{
 					string v = "";
 					if (data==null)
-						v = json.s("value");
-					else if (string.IsNullOrEmpty(json.s("bind")))
+						v = json.asString("value");
+					else if (string.IsNullOrEmpty(json.asString("bind")))
 						v = "";
 					else if (data.GetType()==typeof(JsonPrimitive))
 						v = data.CleanString();
 					
-					return new StringElement(json.s("caption"), v);
+					return new StringElement(json.asString("caption"), v){
+						Command = new ActionCommand(json.asAction(dvc))
+					};
 				}},
 				//{"ImageStringElement", (json, dvc, data)=>{return  new ImageStringElement(json.s("caption"), json.s("value"), json.a(dvc), json.i("image"), json.s("imageurl"));}},
-				{"MapElement", (json, dvc, data)=>{return new MapElement(json.s("caption"), json.s("value"), new CLLocationCoordinate2D(json.d("lat").Value, json.d("lng").Value));}},
+				{"MapElement", (json, dvc, data)=>{return new MapElement(json.asString("caption"), json.asString("value"), new CLLocationCoordinate2D(json.asDouble("lat").Value, json.asDouble("lng").Value));}},
 				//{"WebElement", (json, dvc, data)=>{ 
 				//	var url= data==null ? json.s("url") : data.CleanString();
 				//	if (string.IsNullOrEmpty(url) || (data!=null && data.GetType()!=typeof(JsonPrimitive)))
@@ -258,25 +263,25 @@ namespace MonoTouch.Forms
 				//}},
 				{"RadioElement", (json, dvc, data)=>{
 					var radios = new List<RadioElement>();
-					var popAutomatically = json.b("pop");
+					var popAutomatically = json.asBoolean("pop");
 					foreach (string item in json.sl("items")){
 						radios.Add(new RadioElement(item, popAutomatically));
 					}
 					int selected = 0;
 					if (json.ContainsKey("selected")) {
-						selected = (int)json.d("selected");
+						selected = (int)json.asDouble("selected");
 					} else if (!string.IsNullOrEmpty(data)) {
 						selected = int.Parse(data);
 					}
-					return new RootElement<int>(json.s("caption"), new RadioGroup(null, selected)) {
+					return new RootElement<int>(json.asString("caption"), new RadioGroup(null, selected)) {
 						new Section(){
 							radios.ToArray()		
 						}
 					};
 				}},
-				{"DateElement", (json, dvc, data)=>{return  new DateElement(json.s("caption"), json.dt("value"));}},
-				{"TimeElement", (json, dvc, data)=>{return  new TimeElement(json.s("caption"), json.dt("value"));}},
-				{"DateTimeElement", (json, dvc, data)=>{return  new DateTimeElement(json.s("caption"), json.dt("value"));}},
+				{"DateElement", (json, dvc, data)=>{return  new DateElement(json.asString("caption"), json.dt("value"));}},
+				{"TimeElement", (json, dvc, data)=>{return  new TimeElement(json.asString("caption"), json.dt("value"));}},
+				{"DateTimeElement", (json, dvc, data)=>{return  new DateTimeElement(json.asString("caption"), json.dt("value"));}},
 				//{"MultilineElement", (json, dvc, data)=>{ return  new MultilineElement(data==null ? json.s("caption") : data.CleanString() ?? "", null, json.a(dvc));}},
 				//{"SimpleImageElement", (json, dvc, data)=>{ return  new SimpleImageElement(
 				//	                            UIImage.FromBundle(json.s(UIDevice.CurrentDevice.UserInterfaceIdiom==UIUserInterfaceIdiom.Phone? "url" : "urlIpad")));

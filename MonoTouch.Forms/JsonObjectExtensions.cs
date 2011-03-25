@@ -42,42 +42,42 @@ namespace MonoTouch.Forms
 			return e.Clean();
 		}
 			
-		public static bool b(this JsonObject json, string name){
+		public static bool asBoolean(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return json[name];
 			
 			return false;
 		}
 		
-		public static Nullable<double> d(this JsonObject json, string name){
+		public static Nullable<double> asDouble(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return json[name];
 			
 			return null;
 		}
 		
-		public static UIImage i(this JsonObject json, string name){
+		public static UIImage asUIImage(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return UIImage.FromBundle(json["image"]);
 			
 			return null;
 		}
 		
-		public static string s(this JsonObject json, string name){
+		public static string asString(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return Clean(json[name]);
 			
 			return null;
 		}	
 		
-		public static JsonValue o(this JsonObject json, string name){
+		public static JsonValue asJsonValue(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return json[name];
 			
 			return null;
 		}	
 		
-		public static NSAction a(this JsonObject json, JsonDialogViewController dvc){
+		public static Action asAction(this JsonObject json, JsonDialogViewController dvc){
 			if (json!=null && json.ContainsKey("navigateto") && json.ContainsKey("action")) {
 				string file = json["navigateto"];
 				string action = json["action"];
@@ -106,12 +106,12 @@ namespace MonoTouch.Forms
 		
 		public static string GravatarUrl(this JsonObject json, string name ){
 			//&d=https%3A%2F%2Fgithub.com%2Fimages%2Fgravatars%2Fgravatar-140.png
-			return string.Format("https://secure.gravatar.com/avatar/{0}?s=140", json.s(name));
+			return string.Format("https://secure.gravatar.com/avatar/{0}?s=140", json.asString(name));
 		}
 		
 		public static DateTime dt(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
-				return DateTime.Parse(json.s(name));//json[name];
+				return DateTime.Parse(json.asString(name));//json[name];
 			
 			return DateTime.MinValue;
 		}
