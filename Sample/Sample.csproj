@@ -66,9 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="js\another.js" />
-    <None Include="js\countries.js" />
-    <None Include="js\custom.js" />
     <None Include="js\form.js" />
   </ItemGroup>
   <ItemGroup>
@@ -103,5 +100,8 @@
   <ItemGroup>
     <Content Include="js\sample.js" />
     <Content Include="js\login.js" />
+    <Content Include="js\another.js" />
+    <Content Include="js\countries.js" />
+    <Content Include="js\custom.js" />
   </ItemGroup>
 </Project>
