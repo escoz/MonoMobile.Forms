@@ -248,6 +248,8 @@ namespace MonoTouch.Forms
 						v = "";
 					else if (data.GetType()==typeof(JsonPrimitive))
 						v = data.CleanString();
+					else if (data.GetType()==typeof(JsonObject))
+						v = ((JsonObject)data).asString(json.asString("bind"));
 					
 					return new StringElement(json.asString("caption"), v){
 						Command = new ActionCommand(json.asAction(dvc))

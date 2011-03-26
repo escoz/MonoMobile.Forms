@@ -96,7 +96,6 @@ namespace MonoTouch.Forms
 		}
 		
 		private void _processContentOfFile(string file, string values){
-			Loading(true);
 			var json = _parse(file);
 			JsonObject valueJson = null;
 			
