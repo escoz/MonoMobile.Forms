@@ -60,9 +60,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="System.Json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="SampleFormController.cs" />
+    <Compile Include="CustomElements.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />
@@ -105,5 +106,6 @@
     <Content Include="js\custom.js" />
     <Content Include="js\person.json" />
     <Content Include="js\person.js" />
+    <Content Include="js\personnodata.js" />
   </ItemGroup>
 </Project>

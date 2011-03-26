@@ -170,9 +170,7 @@ namespace MonoTouch.Forms
 				}
 					
 				if (item.ContainsKey("action")) {
-						rightBarItem = item.ContainsKey("url") ? 
-							new SubmitElement(item.asString("caption"), datavalue ?? item.asString("url"), null, null) :
-							new ActionElement(item.asString("caption"), datavalue ?? item.asString("action"), null);
+						rightBarItem = new ActionElement(item.asString("caption"), datavalue ?? item.asString("action"), null);
 						rightBarItem.Id = new NSString(id);
 				}	
 				if (item.ContainsKey("image")){
@@ -188,9 +186,7 @@ namespace MonoTouch.Forms
 			if (json.ContainsKey("leftbaritem")){
 				var item = (JsonObject)json["leftbaritem"];
 				if (item.ContainsKey("action")) {
-						leftBarItem = item.ContainsKey("url") ? 
-							new SubmitElement(item.asString("caption"), item.asString("url"), null, null) :
-							new ActionElement(item.asString("caption"), item.asString("action"), null);
+						leftBarItem = new ActionElement(item.asString("caption"), item.asString("action"), null);
 						leftBarItem.Id = new NSString(item.asString("id"));
 				}	
 				NavigationItem.LeftBarButtonItem = new UIBarButtonItem(item.asString("caption"), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{

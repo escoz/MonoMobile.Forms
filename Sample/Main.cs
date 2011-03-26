@@ -15,14 +15,11 @@ namespace Sample
 		}
 	}
 
-	// The name AppDelegate is referenced in the MainWindow.xib file.
 	public partial class AppDelegate : UIApplicationDelegate
 	{
-		// This method is invoked when the application has loaded its UI and its ready to run
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			// If you have defined a view, add it here:
-			// window.AddSubview (navigationController.View);
+			CustomElements.RegisterAll();
 			
 			window.AddSubview(new UINavigationController(new SampleFormController()).View);
 			window.MakeKeyAndVisible ();

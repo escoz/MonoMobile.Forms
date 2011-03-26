@@ -18,7 +18,7 @@
 		{ "caption":"Custom Actions", "elements":[
 				{ "type":"ActionElement", "caption":"Execute Simple Action", "action":"ShowTime"},
 				{ "type":"ActionElement", "caption":"Show Values", "action":"ShowValues"},
-				{ "type":"SubmitElement", "caption":"Submit and Execute Action", "url":"http://escoz.com/loginPostWithAction.js"}
+				{ "type":"ActionElement", "caption":"Submit and Execute Action", "url":"http://escoz.com/loginPostWithAction.js"}
 			]
 		},
 		

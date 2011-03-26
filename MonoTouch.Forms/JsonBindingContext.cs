@@ -232,13 +232,6 @@ namespace MonoTouch.Forms
 					});
 					return el;
 				}},
-				{"SubmitElement", (json, dvc, data)=>{
-					SubmitElement el = null;
-					el = new SubmitElement(json.asString("caption"), data==null? json.asString("url") : data.CleanString(), json.asString("action"), ()=>{
-						dvc.InvokeAction(el);
-					});
-					return el;
-				}},
 				{"BooleanElement", (json, dvc, data)=>{return new BooleanElement(json.asString("caption"), json.asBoolean("value")) ;}},
 				{"StringElement", (json, dvc, data)=>{
 					string v = "";

@@ -11,15 +11,15 @@
 			]
 		},
 		{ "elements":[
-				{ "id":"login", "type":"SubmitElement", "caption":"Login", "url":"http://escoz.com/loginPost.js" }
+				{ "id":"login", "type":"ActionElement", "caption":"Login", "url":"http://escoz.com/loginPost.js" }
 			]
 		},
 		{ "elements":[
-				{ "id":"back", "type":"SubmitElement", "caption":"Post and go back", "url":"http://escoz.com/loginPostAndGoBack.js" }
+				{ "id":"back", "type":"ActionElement", "caption":"Post and go back", "url":"http://escoz.com/loginPostAndGoBack.js" }
 			]
 		},
 		{ "elements":[
-				{ "id":"error", "type":"SubmitElement", "caption":"Validation Error", "url":"http://escoz.com/loginValidationError.js" }
+				{ "id":"error", "type":"ActionElement", "caption":"Validation Error", "url":"http://escoz.com/loginValidationError.js" }
 			]
 		}
 	]
