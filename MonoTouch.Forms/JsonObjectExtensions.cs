@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -93,7 +92,6 @@ namespace MonoTouch.Forms
 				};
 			}
 			
-			
 			if (json.ContainsKey(Constants.Action)) {
 				return ()=>{
 					dvc.InvokeAction(json[Constants.Action], new Element(""));
@@ -101,7 +99,6 @@ namespace MonoTouch.Forms
 			}
 			
 			return null;
-			
 		}
 		
 		public static DateTime asDateTime(this JsonObject json, string name){

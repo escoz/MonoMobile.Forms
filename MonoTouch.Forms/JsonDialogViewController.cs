@@ -43,6 +43,23 @@ namespace MonoTouch.Forms
 			Loading(false);
 		}
 		
+		protected virtual void Loading(bool isLoading){
+			InvokeOnMainThread(()=>{
+				_shouldbeLoading = isLoading;
+				if (isLoading) {
+					if (string.IsNullOrEmpty(Title))
+						Title = Constants.LoadingTitle;
+					indicator.StartAnimating();
+					this.indicator.Hidden = false;
+					_shouldbeLoading = true;
+				} else {
+					if (string.IsNullOrEmpty(Title))
+						Title = Constants.DefaultTitle;
+					indicator.StopAnimating();
+					this.indicator.Hidden = true;
+				}
+			});
+		}
 		
 		public override void ViewDidLoad ()
 		{
@@ -96,7 +113,6 @@ namespace MonoTouch.Forms
 				}, (error)=>{ NetworkFailed(); });
 			} else {
 				_processContentOfFile(File.ReadAllText(file), values);
-				
 			}
 		}
 		
@@ -164,58 +180,42 @@ namespace MonoTouch.Forms
 				DataRootName = json[Constants.DataRoot];
 			
 			if (json.ContainsKey(Constants.RightBarItem)){
-				var item = (JsonObject)json[Constants.RightBarItem];
-				string datavalue = null, id = null;
-				id = item.asString(Constants.Id);
-				if (valuesJson!=null && !string.IsNullOrEmpty(id)){
-					datavalue = valuesJson.asString(id);
-				}
-					
-				if (item.ContainsKey(Constants.Action)) {
-						rightBarItem = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
-						rightBarItem.ID = new NSString(id);
-				}	
-				if (item.ContainsKey(Constants.Image)){
-					NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-						InvokeAction(this.rightBarItem);
-					});
-				} else {
-					NavigationItem.RightBarButtonItem = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(this.rightBarItem);
-				});
-				}
+				NavigationItem.RightBarButtonItem = _createButtonItemFor(Constants.RightBarItem, json, valuesJson);
+				
 			}
 			if (json.ContainsKey(Constants.LeftBarItem)){
-				var item = (JsonObject)json[Constants.LeftBarItem];
-				if (item.ContainsKey(Constants.Action)) {
-						leftBarItem = new ActionElement(item.asString(Constants.Caption), item.asString(Constants.Action), null);
-						leftBarItem.ID = new NSString(item.asString(Constants.Id));
-				}	
-				NavigationItem.LeftBarButtonItem = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(this.leftBarItem);
-				});
+				NavigationItem.LeftBarButtonItem = _createButtonItemFor(Constants.LeftBarItem, json, valuesJson);
 			}
+		}
+		
+		private UIBarButtonItem _createButtonItemFor(string property, JsonValue json, JsonObject valuesJson){
+			UIBarButtonItem result = null;
+			var item = (JsonObject)json[property];
+			string datavalue = null, id = null;
+			id = item.asString(Constants.Id);
+			
+			if (valuesJson!=null && !string.IsNullOrEmpty(id)){
+				datavalue = valuesJson.asString(id);
+			}
+				
+			if (item.ContainsKey(Constants.Action)) {
+					rightBarItem = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
+					rightBarItem.ID = new NSString(id);
+			}	
+			if (item.ContainsKey(Constants.Image)){
+				result = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+					InvokeAction(this.rightBarItem);
+				});
+			} else {
+				result = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+					InvokeAction(this.rightBarItem);
+				});
+			}	
+			return result;
 		}
 		
 		private bool _shouldbeLoading = false;
 		
-		protected virtual void Loading(bool isLoading){
-			InvokeOnMainThread(()=>{
-				_shouldbeLoading = isLoading;
-				if (isLoading) {
-					if (string.IsNullOrEmpty(Title))
-						Title = Constants.LoadingTitle;
-					indicator.StartAnimating();
-					this.indicator.Hidden = false;
-					_shouldbeLoading = true;
-				} else {
-					if (string.IsNullOrEmpty(Title))
-						Title = Constants.DefaultTitle;
-					indicator.StopAnimating();
-					this.indicator.Hidden = true;
-				}
-			});
-		}
 		
 		public override void LoadView () {
 			base.LoadView();
