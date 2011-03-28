@@ -66,7 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
-    <None Include="js\form.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xib.designer.cs">
@@ -103,7 +102,6 @@
     <Content Include="js\login.js" />
     <Content Include="js\another.js" />
     <Content Include="js\countries.js" />
-    <Content Include="js\custom.js" />
     <Content Include="js\person.json" />
     <Content Include="js\person.js" />
     <Content Include="js\personnodata.js" />
