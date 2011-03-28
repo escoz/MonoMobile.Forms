@@ -62,6 +62,7 @@ namespace MonoTouch.Forms
 			
 		}
 			
+
 		void Populate (JsonValue json, RootElement root, JsonValue data)
 		{
 			if (json.ContainsKey("title"))
@@ -76,72 +77,7 @@ namespace MonoTouch.Forms
 			}
 			
 			foreach (JsonObject section in jsonRoot){
-				var sec = new Section(section.asString("caption"), section.asString("footer"));
-				
-				if (!string.IsNullOrEmpty(section.asString("captionImage"))) {
-					var imgDevice = section.asString("captionImage").Split(' ');
-					var img = UIDevice.CurrentDevice.UserInterfaceIdiom==UIUserInterfaceIdiom.Phone ? imgDevice[0] : imgDevice[1];
-					sec.HeaderView = new UIImageView(UIImage.FromBundle(img));
-				}
-				
-				if (section.ContainsKey("elements")){
-					foreach (JsonObject elem in section["elements"]) {
-						
-						var dataForElement = data;
-						var bindExpression = elem.asString("bind");
-						if (bindExpression!=null) {
-							try {
-								if (data!=null && data.JsonType==JsonType.Object){
-									var bind = elem.asString("bind");
-									if (data != null && !string.IsNullOrEmpty(bind) && data.ContainsKey(bind)) {
-										dataForElement = data[bind];
-									}
-								} else if (bindExpression.StartsWith("#")) {
-									dataForElement = _controller.GetValue(bindExpression.Replace("#", "")); 
-								}
-							} catch (Exception){
-								Console.WriteLine("Exception when binding element " + elem.ToString());	
-							}
-						}
-						
-						_parseElement(elem, sec, dataForElement);
-					}
-					
-				} else if (section.ContainsKey("iterate") && data != null){
-					string iterationname = section["iterate"];	
-					string emptyMessage = section.ContainsKey("empty") ? section["empty"].CleanString() : "Empty";
-					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonArray)data : (JsonArray)data[iterationname];
-					var template = (JsonObject)section["template"];
-					
-					var items = iterationdata.ToList();
-					if (items.Count>0) {
-						foreach(JsonValue v in items){
-							_parseElement(template, sec, v);
-						}
-					} else {
-						sec.Add(new EmptyListElement(emptyMessage));
-						
-					}
-					
-				} else if (section.ContainsKey("iterateproperties") && data != null){
-					string iterationname = section["iterateproperties"];	
-					string emptyMessage = section.ContainsKey("empty") ? section["empty"].CleanString() : "Empty";
-					
-					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonObject)data 
-						: data.ContainsKey(iterationname) ? (JsonObject)data[iterationname] : null;
-					var template = (JsonObject)section["template"];
-					var items =  iterationdata == null ? new List<string>() : iterationdata.Keys;
-					if (items.Count>0) {
-						foreach(string v in items){
-							var obj = new JsonObject();
-							obj.Add(v, iterationdata[v]);
-							_parseElement(template, sec, obj);
-						}
-					} else {
-						sec.Add(new EmptyListElement(emptyMessage));
-						
-					}
-				}
+				var sec = new JsonSectionBuilder(this._controller).Build(section, data);
 				root.Add(sec);
 			}
 		}
@@ -154,37 +90,14 @@ namespace MonoTouch.Forms
 		{
 			var result = new Dictionary<string, string>();
 			foreach (var el in _elements){
-				if (!string.IsNullOrEmpty(el.ID) && _fetchFunctions.ContainsKey(el.GetType())){
-					result.Add(el.ID, _fetchFunctions[el.GetType()](el));
+				if (!string.IsNullOrEmpty(el.ID) && ElementFetchers.Fetchers.ContainsKey(el.GetType())){
+					result.Add(el.ID, ElementFetchers.Fetchers[el.GetType()](el));
 				}
 			}
 			
 			return result;
 		}
 		
-		private void _parseElement(JsonObject json, Section section, JsonValue data){
-			string type = "Unknown";
-			try {
-				type = json["type"];
-				if (type=="HiddenElement"){
-					var name = json.asString("id");
-					
-					_controller.SetValue(name, data==null? json.asString("value") : data.CleanString());	
-				} else {
-					string id = (json.ContainsKey("id") ? json["id"] : null);
-					var newElement = _parseFunctions[type](json, _controller, data);
-					if (newElement!=null) {
-						if (!string.IsNullOrEmpty(id))
-							newElement.ID = new NSString(id);
-						
-						_elements.Add(newElement);
-						section.Add(newElement);
-					}
-				}
-			} catch (Exception e){
-				Console.WriteLine("Problem parsing element. Element was skipped. Type: "+type+" = " + e.ToString());
-			}
-		}
 		
 		public void Dispose ()
 		{
@@ -200,18 +113,6 @@ namespace MonoTouch.Forms
 			}
 		}
 		
-		public static void RegisterFetcher(Type t, Func<Element, string> f) {
-			_fetchFunctions.Add(t, f);	
-		}
-		
-		public static void RegisterParser(string s, Func<JsonObject, JsonDialogViewController, JsonValue , Element> f) {
-			_parseFunctions.Add(s, f);	
-		}
-		
-		public static Dictionary<Type, Func<Element, string>> _fetchFunctions = DefaultElementsFetchers.Create();
-		
-		private static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> _parseFunctions = 
-			DefaultElementsParsers.Create();
 	}
 }
 	

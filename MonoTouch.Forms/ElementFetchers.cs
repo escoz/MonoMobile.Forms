@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using MonoTouch.Dialog;
 namespace MonoTouch.Forms
 {
-	public class DefaultElementsFetchers
+	public class ElementFetchers
 	{
-		public static Dictionary<Type, Func<Element, string>> Create(){
+		
+		public static Dictionary<Type, Func<Element, string>> Fetchers = ElementFetchers.CreateDefaultFetchers();
+		
+		
+		private static Dictionary<Type, Func<Element, string>> CreateDefaultFetchers(){
 			var result = new Dictionary<Type, Func<Element, string>>(){
 					{typeof(EntryElement), (e)=>{return ((EntryElement)e).Value; } },
 					{typeof(BooleanElement), (e)=>{return ((BooleanElement)e).Value ? "1" : "0";}},

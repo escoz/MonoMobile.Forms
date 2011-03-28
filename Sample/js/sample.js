@@ -14,11 +14,11 @@
 		} , 
 		{ "caption":"Data Binding", "elements":[ 
 				{ "id":"login", "type":"StringElement", "caption":"Person With Data Local", "navigateto":"js/person.js js/person.json" } , 
-				{ "id":"login", "type":"StringElement", "caption":"Person With Data Remote", "navigateto":"js/person.js http://escoz.com/samples/person.json" }
+				{ "id":"login", "type":"StringElement", "caption":"Person With Data Remote", "navigateto":"js/person.js http://escoz.com/samples/person.json" },
+				{ "id":"login", "type":"StringElement", "caption":"Person With Form Remote", "navigateto":"http://escoz.com/samples/person.js http://escoz.com/samples/person.json" }
 			]
 		}
 	],
-	
 	
 	"leftbaritem":{ "caption":"Details", "id":"details", "action":"ShowPopup"},
 	"rightbaritem":{ "caption":"More Info", "id":"reload", "action":"ShowPopup" }

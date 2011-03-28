@@ -10,9 +10,14 @@ namespace MonoTouch.Forms
 {
 	
 	[Preserve(AllMembers=true)]
-	public class DefaultElementsParsers
+	public class ElementParsers
 	{
-		public static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> Create()
+		
+		public static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> Parsers = 
+			ElementParsers.CreateDefaultParsers();
+		
+		
+		private static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> CreateDefaultParsers()
 		{
 			var result = new Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>>();
 			
