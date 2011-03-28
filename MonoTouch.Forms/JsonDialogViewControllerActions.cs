@@ -25,9 +25,13 @@ namespace MonoTouch.Forms
 		}
 		
 		private void _invokeAction(string action, Element element){
+			try {
 			this.GetType().InvokeMember(action,
 				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public,
 				    null, this, new object[]{element});
+			} catch (Exception e){
+				Console.WriteLine("Could not invoke action '{0}' on dialog '{1}'. {2}", action, this.GetType().Name, e.ToString());
+			}
 		}
 		
 		public void DismissModal(Element el){
@@ -55,12 +59,12 @@ namespace MonoTouch.Forms
 			});
 		}
 		
-		
-		private void _invokeSubmissionResultAction(string action, JsonObject json){
-			this.GetType().InvokeMember(action,
-				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, 
-				    null, this, new object[]{json});
-		}
+//		
+//		private void _invokeSubmissionResultAction(string action, JsonObject json){
+//			this.GetType().InvokeMember(action,
+//				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, 
+//				    null, this, new object[]{json});
+//		}
 		
 		public void Reload(Element el){
 			PrepareRoot(new RootElement(Title));

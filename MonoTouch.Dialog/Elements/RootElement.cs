@@ -390,11 +390,7 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			tableView.DeselectRow (path, false);
 			dvc.PushRootElement(this);
-//			var newDvc = MakeViewController ();
-			//PrepareDialogViewController (newDvc);
-			//dvc.ActivateController (newDvc, dvc);
 		}
 		
 		public void Reload (Section section, UITableViewRowAnimation animation)

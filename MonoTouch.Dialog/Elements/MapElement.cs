@@ -26,6 +26,8 @@ namespace MonoTouch.Dialog {
 	    public override UITableViewCell GetCell (UITableView tv)
 	    {
 	        UITableViewCell cell = base.GetCell (tv);
+			
+			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 	        cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 	        return cell;
 	    }

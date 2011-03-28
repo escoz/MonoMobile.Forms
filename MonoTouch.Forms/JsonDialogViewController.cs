@@ -53,6 +53,9 @@ namespace MonoTouch.Forms
 		}
 		
 		public string GetValue(string name){
+			if (!BindingValues.ContainsKey(name))
+				return null;
+			
 			return BindingValues[name];
 		}
 		
@@ -150,8 +153,6 @@ namespace MonoTouch.Forms
 		
 		private void _configureDialog(JsonValue json, JsonObject valuesJson){
 			
-			Console.WriteLine("Nav configDialog " + this.NavigationController);
-			
 			if (json.ContainsKey("grouped")) {
 				Style = bool.Parse(json["grouped"].ToString()) ? UITableViewStyle.Grouped : UITableViewStyle.Plain;
 			}
@@ -193,10 +194,6 @@ namespace MonoTouch.Forms
 					InvokeAction(this.leftBarItem);
 				});
 			}
-			
-			
-			Console.WriteLine("Nav configDialog " + this.NavigationController);
-			
 		}
 		
 		private bool _shouldbeLoading = false;
@@ -228,7 +225,7 @@ namespace MonoTouch.Forms
 		{
 			base.ViewWillAppear (animated);
 			
-			Console.WriteLine("Nav willappear " + this.NavigationController);
+			string forceNavControllerToStaySeemsToBeABug = "getalinktotheTNC" + this.NavigationController;
 			Loading(_shouldbeLoading);
 		}
 		

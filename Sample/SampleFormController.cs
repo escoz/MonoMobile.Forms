@@ -2,6 +2,7 @@ using System;
 using MonoTouch.Forms;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using System.Collections.Generic;
 
 namespace Sample
 {
@@ -18,6 +19,11 @@ namespace Sample
 					popup.Show();
 				}
 			});
+		}
+		
+		public void LoginFormPopulated(Element element){
+			var values = new Dictionary<string, string>(){{"login", "escoz"}, {"password","mypass"},{"remember_me", "true"}};
+			this.NavigateTo("js/login.js", values);	
 		}
 	}
 }

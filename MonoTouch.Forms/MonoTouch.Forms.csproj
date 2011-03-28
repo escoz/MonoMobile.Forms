@@ -79,10 +79,10 @@
     <Compile Include="Elements\LRUCache.cs" />
     <Compile Include="Elements\ImageStore.cs" />
     <Compile Include="Elements\ImageStringElement.cs" />
-    <Compile Include="UIIndicatorView.cs" />
     <Compile Include="Elements\EmptyListElement.cs" />
     <Compile Include="DefaultElementsParsers.cs" />
     <Compile Include="DefaultElementsFetchers.cs" />
+    <Compile Include="Elements\UIIndicatorView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

@@ -64,7 +64,8 @@ namespace MonoTouch.Forms
 			);
 			
 			result.Add("BooleanElement", (json, dvc, data)=>{
-					return new BooleanElement(json.asString("caption"), json.asBoolean("value")) ;
+					return new BooleanElement(json.asString("caption"), 
+				                          string.IsNullOrEmpty(data)? json.asBoolean("value") : bool.Parse(data.CleanString())) ;
 				}
 			);
 			
@@ -131,12 +132,6 @@ namespace MonoTouch.Forms
 					    return null;
 					return new WebElement(json.asString("caption"), url);
 			});
-			
-				//{"MultilineElement", (json, dvc, data)=>{ return  new MultilineElement(data==null ? json.s("caption") : data.CleanString() ?? "", null, json.a(dvc));}},
-				//{"SimpleImageElement", (json, dvc, data)=>{ return  new SimpleImageElement(
-				//	                            UIImage.FromBundle(json.s(UIDevice.CurrentDevice.UserInterfaceIdiom==UIUserInterfaceIdiom.Phone? "url" : "urlIpad")));
-				//}},
-				//{"Template", (json, dvc, data)=>{return  null;}},
 			
 			return result;
 		}

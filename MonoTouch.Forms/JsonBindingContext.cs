@@ -97,7 +97,7 @@ namespace MonoTouch.Forms
 										dataForElement = data[bind];
 									}
 								} else if (bindExpression.StartsWith("#")) {
-									dataForElement = _controller.GetValue(bindExpression.Replace("#", "")); 	
+									dataForElement = _controller.GetValue(bindExpression.Replace("#", "")); 
 								}
 							} catch (Exception){
 								Console.WriteLine("Exception when binding element " + elem.ToString());	
@@ -127,9 +127,10 @@ namespace MonoTouch.Forms
 					string iterationname = section["iterateproperties"];	
 					string emptyMessage = section.ContainsKey("empty") ? section["empty"].CleanString() : "Empty";
 					
-					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonObject)data : (JsonObject)data[iterationname];
+					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonObject)data 
+						: data.ContainsKey(iterationname) ? (JsonObject)data[iterationname] : null;
 					var template = (JsonObject)section["template"];
-					var items =  iterationdata.Keys;
+					var items =  iterationdata == null ? new List<string>() : iterationdata.Keys;
 					if (items.Count>0) {
 						foreach(string v in items){
 							var obj = new JsonObject();
@@ -160,7 +161,6 @@ namespace MonoTouch.Forms
 			
 			return result;
 		}
-		
 		
 		private void _parseElement(JsonObject json, Section section, JsonValue data){
 			string type = "Unknown";
