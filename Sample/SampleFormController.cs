@@ -12,7 +12,6 @@ namespace Sample
 		public SampleFormController(RootElement root):base(root){}
 		public SampleFormController(string url, bool pushing):base(url, pushing){}
 		
-		
 		public void ShowPopup(Element element){
 			InvokeOnMainThread(()=>{
 				using (var popup = new UIAlertView("Hello", "This is a popup created from the action.", null, "OK")){
@@ -25,6 +24,13 @@ namespace Sample
 			var values = new Dictionary<string, string>(){{"login", "escoz"}, {"password","mypass"},{"remember_me", "true"}};
 			this.NavigateTo("js/login.js", values);	
 		}
+		
+		public void ShowValues(Element element){
+			Console.WriteLine("========== Form Values");
+			foreach (var v in GetAllValues())
+				Console.WriteLine("kv: "+v.Key+" - " +v.Value);
+		}
+		
 	}
 }
 

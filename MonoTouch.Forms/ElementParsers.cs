@@ -24,36 +24,36 @@ namespace MonoTouch.Forms
 			result.Add("StringElement", (json, dvc, data)=>{
 					string v = "";
 					if (data==null)
-						v = json.asString("value");
-					else if (string.IsNullOrEmpty(json.asString("bind")))
+						v = json.asString(Constants.Value);
+					else if (string.IsNullOrEmpty(json.asString(Constants.Bind)))
 						v = "";
 					else if (data.GetType()==typeof(JsonPrimitive))
 						v = data.CleanString();
 					else if (data.GetType()==typeof(JsonObject))
-						v = ((JsonObject)data).asString(json.asString("bind"));
+						v = ((JsonObject)data).asString(json.asString(Constants.Bind));
 					
-					return new StringElement(json.asString("caption"), v, json.asAction(dvc));
+					return new StringElement(json.asString(Constants.Caption), v, json.asAction(dvc));
 				}
 			);
 			
 			result.Add("MultilineElement", (json, dvc, data)=>{
 					string v = "";
 					if (data==null)
-						v = json.asString("value");
-					else if (string.IsNullOrEmpty(json.asString("bind")))
+						v = json.asString(Constants.Value);
+					else if (string.IsNullOrEmpty(json.asString(Constants.Bind)))
 						v = "";
 					else if (data.GetType()==typeof(JsonPrimitive))
 						v = data.CleanString();
 					else if (data.GetType()==typeof(JsonObject))
-						v = ((JsonObject)data).asString(json.asString("bind"));
+						v = ((JsonObject)data).asString(json.asString(Constants.Bind));
 					
-					return new MultilineElement(json.asString("caption"), v, json.asAction(dvc));
+					return new MultilineElement(json.asString(Constants.Caption), v, json.asAction(dvc));
 				}
 			);
 			
 			result.Add("EntryElement", (json, dvc, data)=>{
-					return new EntryElement(json.asString("caption"), json.asString("placeholder"), 
-				            data==null? json.asString("value") : data.CleanString(), json.asBoolean("ispassword")){
+					return new EntryElement(json.asString(Constants.Caption), json.asString("placeholder"), 
+				            data==null? json.asString(Constants.Value) : data.CleanString(), json.asBoolean("ispassword")){
 							KeyboardType = (UIKeyboardType)Enum.Parse(typeof(UIKeyboardType), json.asString("keyboard") ?? "Default"),
 						}; 
 				}
@@ -61,7 +61,7 @@ namespace MonoTouch.Forms
 			
 			result.Add("ActionElement", (json, dvc, data)=>{ 
 					ActionElement el = null;
-					el = new ActionElement(json.asString("caption"), json.asString("action"), ()=>{
+					el = new ActionElement(json.asString(Constants.Caption), json.asString(Constants.Action), ()=>{
 						dvc.InvokeAction(el);
 					});
 					return el;
@@ -69,23 +69,23 @@ namespace MonoTouch.Forms
 			);
 			
 			result.Add("BooleanElement", (json, dvc, data)=>{
-					return new BooleanElement(json.asString("caption"), 
-				                          string.IsNullOrEmpty(data)? json.asBoolean("value") : bool.Parse(data.CleanString())) ;
+					return new BooleanElement(json.asString(Constants.Caption), 
+				                          string.IsNullOrEmpty(data)? json.asBoolean(Constants.Value) : bool.Parse(data.CleanString())) ;
 				}
 			);
 			
 			result.Add("FloatElement", (json, dvc, data)=>{
-					return new FloatElement(json.asString("caption"), (float)json.asDouble("value")) ;
+					return new FloatElement(json.asString(Constants.Caption), (float)json.asDouble(Constants.Value)) ;
 				}
 			);
 				
 			result.Add("CheckboxElement", (json, dvc, data)=>{
-					return new CheckboxElement(json.asString("caption"), json.asBoolean("value"));
+					return new CheckboxElement(json.asString(Constants.Caption), json.asBoolean(Constants.Value));
 				}
 			);
 			
 			result.Add("MapElement", (json, dvc, data)=>{
-					return new MapElement(json.asString("caption"), json.asString("value"), 
+					return new MapElement(json.asString(Constants.Caption), json.asString(Constants.Value), 
 				                      new CLLocationCoordinate2D(json.asDouble("lat").Value, json.asDouble("lng").Value));
 				}
 			);
@@ -102,7 +102,7 @@ namespace MonoTouch.Forms
 					} else if (!string.IsNullOrEmpty(data)) {
 						selected = int.Parse(data);
 					}
-					return new RootElement(json.asString("caption"), new RadioGroup(null, selected)) {
+					return new RootElement(json.asString(Constants.Caption), new RadioGroup(null, selected)) {
 						new Section(){
 							radios.ToArray()		
 						}
@@ -115,27 +115,27 @@ namespace MonoTouch.Forms
 			});
 			
 			result.Add("DateElement", (json, dvc, data)=>{
-				return new DateElement(json.asString("caption"), json.dt("value"));
+				return new DateElement(json.asString(Constants.Caption), json.asDateTime(Constants.Value));
 			});
 			
 			result.Add("TimeElement", (json, dvc, data)=>{
-				return new TimeElement(json.asString("caption"), json.dt("value"));
+				return new TimeElement(json.asString(Constants.Caption), json.asDateTime(Constants.Value));
 			});
 			
 			result.Add("DateTimeElement", (json, dvc, data)=>{
-				return new DateTimeElement(json.asString("caption"), json.dt("value"));
+				return new DateTimeElement(json.asString(Constants.Caption), json.asDateTime(Constants.Value));
 			});
 				
 			result.Add("ImageStringElement", (json, dvc, data)=>{
-				return  new ImageStringElement(json.asString("caption"), json.asString("value"), 
-				        json.asAction(dvc), json.asUIImage("image"), json.asString("imageurl"));
+				return  new ImageStringElement(json.asString(Constants.Caption), json.asString(Constants.Value), 
+				        json.asAction(dvc), json.asUIImage(Constants.Image), json.asString("imageurl"));
 			});
 			
 			result.Add("WebElement", (json, dvc, data)=>{ 
 					var url= data==null ? json.asString("url") : data.CleanString();
 					if (string.IsNullOrEmpty(url) || (data!=null && data.GetType()!=typeof(JsonPrimitive)))
 					    return null;
-					return new WebElement(json.asString("caption"), url);
+					return new WebElement(json.asString(Constants.Caption), url);
 			});
 			
 			return result;

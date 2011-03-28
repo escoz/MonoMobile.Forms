@@ -84,6 +84,7 @@
     <Compile Include="JsonSectionBuilder.cs" />
     <Compile Include="ElementParsers.cs" />
     <Compile Include="ElementFetchers.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

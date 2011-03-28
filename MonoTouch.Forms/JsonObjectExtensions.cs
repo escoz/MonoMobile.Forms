@@ -58,7 +58,7 @@ namespace MonoTouch.Forms
 		
 		public static UIImage asUIImage(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
-				return UIImage.FromBundle(json["image"]);
+				return UIImage.FromBundle(json[Constants.Image]);
 			
 			return null;
 		}
@@ -78,25 +78,25 @@ namespace MonoTouch.Forms
 		}	
 		
 		public static Action asAction(this JsonObject json, JsonDialogViewController dvc){
-			if (json!=null && json.ContainsKey("navigateto") && json.ContainsKey("action")) {
-				string file = json["navigateto"];
-				string action = json["action"];
+			if (json!=null && json.ContainsKey(Constants.NavigateTo) && json.ContainsKey(Constants.Action)) {
+				string file = json[Constants.NavigateTo];
+				string action = json[Constants.Action];
 				return ()=>{
 					dvc.InvokeAction(action, new object[]{file});
 				};
 			}
 			
-			if (json.ContainsKey("navigateto")) {
-				string file = json["navigateto"];
+			if (json.ContainsKey(Constants.NavigateTo)) {
+				string file = json[Constants.NavigateTo];
 				return ()=>{
 					dvc.NavigateTo(file);
 				};
 			}
 			
 			
-			if (json.ContainsKey("action")) {
+			if (json.ContainsKey(Constants.Action)) {
 				return ()=>{
-					dvc.InvokeAction(json["action"], new Element("adf"));
+					dvc.InvokeAction(json[Constants.Action], new Element(""));
 				};
 			}
 			
@@ -104,12 +104,7 @@ namespace MonoTouch.Forms
 			
 		}
 		
-		public static string GravatarUrl(this JsonObject json, string name ){
-			//&d=https%3A%2F%2Fgithub.com%2Fimages%2Fgravatars%2Fgravatar-140.png
-			return string.Format("https://secure.gravatar.com/avatar/{0}?s=140", json.asString(name));
-		}
-		
-		public static DateTime dt(this JsonObject json, string name){
+		public static DateTime asDateTime(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return DateTime.Parse(json.asString(name));//json[name];
 			

@@ -59,18 +59,19 @@ namespace MonoTouch.Forms
 			});
 		}
 		
+		public void Reload(Element el){
+			PrepareRoot(new RootElement(Title));
+			ReloadData();
+			_processFile(Url, null);
+		}
+		
+			
 //		
 //		private void _invokeSubmissionResultAction(string action, JsonObject json){
 //			this.GetType().InvokeMember(action,
 //				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, 
 //				    null, this, new object[]{json});
 //		}
-		
-		public void Reload(Element el){
-			PrepareRoot(new RootElement(Title));
-			ReloadData();
-			_processFile(Url, null);
-		}
 //		
 //		public void Submit(){
 //			_submitForm(null);

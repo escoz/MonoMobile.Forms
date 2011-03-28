@@ -16,8 +16,9 @@ namespace MonoTouch.Forms
 	
 	public partial class JsonDialogViewController : DialogViewController 
 	{
-		public JsonBindingContext Context;
-		private ActionElement rightBarItem, leftBarItem;
+		protected JsonBindingContext Context;
+		protected ActionElement rightBarItem, leftBarItem;
+		Dictionary<string, string> _hiddenElements = new Dictionary<string, string>();
 		private string _url;
 		string _file, _values;
 		public string DataRootName;
@@ -37,32 +38,36 @@ namespace MonoTouch.Forms
 			Loading(false);
 		}
 		
-		private Dictionary<string, string> BindingValues = new Dictionary<string, string>();
 		
-		public void ShowBindingValues(){
-			Console.WriteLine("========== binding values");
-			foreach (var v in BindingValues)
-				Console.WriteLine("kv: "+v.Key+" - " +v.Value);
+		public virtual void NetworkFailed(){
+			Loading(false);
 		}
 		
-		public void SetValue(string name, string v){
-			if (BindingValues.ContainsKey(name))
-				BindingValues.Remove(name);
-			
-			BindingValues.Add(name, v);
-		}
-		
-		public string GetValue(string name){
-			if (!BindingValues.ContainsKey(name))
-				return null;
-			
-			return BindingValues[name];
-		}
 		
 		public override void ViewDidLoad ()
 		{
 			if (_file != null)
 				_processFile(_file, _values);
+		}
+		
+		public void SetValue(string key, string value){
+			if (_hiddenElements.ContainsKey(key))
+				_hiddenElements.Remove(key);
+			_hiddenElements.Add(key, value);
+		}
+		
+		public string GetValue(string key){
+			if (_hiddenElements.ContainsKey(key))
+				return _hiddenElements[key];
+			
+			return null;
+		}
+		
+		public Dictionary<string, string> GetAllValues(){
+			var formValues = Context.Fetch();
+			foreach (var v in _hiddenElements)
+				formValues.Add(v.Key, v.Value);
+			return formValues;
 		}
 		
 		public virtual NSMutableUrlRequest CreateRequestForUrl(string url) {
@@ -78,10 +83,10 @@ namespace MonoTouch.Forms
 			
 			_url = file + " " + values;
 			
-			if (file.StartsWith("http")){
+			if (file.StartsWith(Constants.Http)){
 				Loading(true);
 				var req = CreateRequestForUrl(file);
-				new UrlConnection("dialog", req, (string result)=>{
+				new UrlConnection(Constants.UrlConnectionNameForm, req, (string result)=>{
 					InvokeOnMainThread(()=>{
 						_processContentOfFile(result, values);	
 						LoadView();
@@ -100,11 +105,11 @@ namespace MonoTouch.Forms
 			JsonObject valueJson = null;
 			
 			if (!string.IsNullOrEmpty(values)){
-				if (values.StartsWith("http")){
+				if (values.StartsWith(Constants.Http)){
 					Context = new JsonBindingContext(this, json, Title);
 					Loading(true);
 					var req = CreateRequestForUrl(values);
-					new UrlConnection("dialogValues", req, (string result)=>{
+					new UrlConnection(Constants.UrlConnectionNameData, req, (string result)=>{
 						InvokeOnMainThread(()=>{
 							JsonValue resultValue = null;
 							try {
@@ -146,51 +151,47 @@ namespace MonoTouch.Forms
 			ReloadData();
 		}
 		
-		public virtual void NetworkFailed(){
-			Loading(false);
-		}
-		
 		
 		private void _configureDialog(JsonValue json, JsonObject valuesJson){
 			
-			if (json.ContainsKey("grouped")) {
-				Style = bool.Parse(json["grouped"].ToString()) ? UITableViewStyle.Grouped : UITableViewStyle.Plain;
+			if (json.ContainsKey(Constants.Grouped)) {
+				Style = bool.Parse(json[Constants.Grouped].ToString()) ? UITableViewStyle.Grouped : UITableViewStyle.Plain;
 			}
-			if (json.ContainsKey("title"))
-				Title = json["title"];
+			if (json.ContainsKey(Constants.Title))
+				Title = json[Constants.Title];
 			
-			if (json.ContainsKey("dataroot")) 
-				DataRootName = json["dataroot"];
+			if (json.ContainsKey(Constants.DataRoot)) 
+				DataRootName = json[Constants.DataRoot];
 			
-			if (json.ContainsKey("rightbaritem")){
-				var item = (JsonObject)json["rightbaritem"];
+			if (json.ContainsKey(Constants.RightBarItem)){
+				var item = (JsonObject)json[Constants.RightBarItem];
 				string datavalue = null, id = null;
-				id = item.asString("id");
+				id = item.asString(Constants.Id);
 				if (valuesJson!=null && !string.IsNullOrEmpty(id)){
 					datavalue = valuesJson.asString(id);
 				}
 					
-				if (item.ContainsKey("action")) {
-						rightBarItem = new ActionElement(item.asString("caption"), datavalue ?? item.asString("action"), null);
+				if (item.ContainsKey(Constants.Action)) {
+						rightBarItem = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
 						rightBarItem.ID = new NSString(id);
 				}	
-				if (item.ContainsKey("image")){
-					NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle(item.asString("image")), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+				if (item.ContainsKey(Constants.Image)){
+					NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
 						InvokeAction(this.rightBarItem);
 					});
 				} else {
-					NavigationItem.RightBarButtonItem = new UIBarButtonItem(item.asString("caption"), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+					NavigationItem.RightBarButtonItem = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
 					InvokeAction(this.rightBarItem);
 				});
 				}
 			}
-			if (json.ContainsKey("leftbaritem")){
-				var item = (JsonObject)json["leftbaritem"];
-				if (item.ContainsKey("action")) {
-						leftBarItem = new ActionElement(item.asString("caption"), item.asString("action"), null);
-						leftBarItem.ID = new NSString(item.asString("id"));
+			if (json.ContainsKey(Constants.LeftBarItem)){
+				var item = (JsonObject)json[Constants.LeftBarItem];
+				if (item.ContainsKey(Constants.Action)) {
+						leftBarItem = new ActionElement(item.asString(Constants.Caption), item.asString(Constants.Action), null);
+						leftBarItem.ID = new NSString(item.asString(Constants.Id));
 				}	
-				NavigationItem.LeftBarButtonItem = new UIBarButtonItem(item.asString("caption"), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+				NavigationItem.LeftBarButtonItem = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
 					InvokeAction(this.leftBarItem);
 				});
 			}
@@ -203,13 +204,13 @@ namespace MonoTouch.Forms
 				_shouldbeLoading = isLoading;
 				if (isLoading) {
 					if (string.IsNullOrEmpty(Title))
-						Title = "Loading...";
+						Title = Constants.LoadingTitle;
 					indicator.StartAnimating();
 					this.indicator.Hidden = false;
 					_shouldbeLoading = true;
 				} else {
 					if (string.IsNullOrEmpty(Title))
-						Title = "Form";
+						Title = Constants.DefaultTitle;
 					indicator.StopAnimating();
 					this.indicator.Hidden = true;
 				}
@@ -226,6 +227,7 @@ namespace MonoTouch.Forms
 			base.ViewWillAppear (animated);
 			
 			string forceNavControllerToStaySeemsToBeABug = "getalinktotheTNC" + this.NavigationController;
+			forceNavControllerToStaySeemsToBeABug = forceNavControllerToStaySeemsToBeABug+"removeWarning";
 			Loading(_shouldbeLoading);
 		}
 		

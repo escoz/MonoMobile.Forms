@@ -40,10 +40,9 @@ namespace MonoTouch.Forms
 									}
 								} else if (bindExpression.StartsWith("#")) {
 									dataForElement = _controller.GetValue(bindExpression.Replace("#", "")); 
-									Console.WriteLine("data - "+bindExpression + " - " + dataForElement);
 								}
-							} catch (Exception){
-								Console.WriteLine("Exception when binding element " + elem.ToString());	
+							} catch (Exception e){
+								Console.WriteLine("Exception when binding element " + elem.ToString()+ " - " + e.ToString());	
 							}
 						}
 						
@@ -97,7 +96,6 @@ namespace MonoTouch.Forms
 				type = json["type"];
 				if (type=="HiddenElement"){
 					var name = json.asString("id");
-					
 					_controller.SetValue(name, data==null? json.asString("value") : data.CleanString());	
 				} else {
 					string id = (json.ContainsKey("id") ? json["id"] : null);
