@@ -38,7 +38,6 @@ namespace MonoTouch.Forms
 			Loading(false);
 		}
 		
-		
 		public virtual void NetworkFailed(NSError error){
 			Loading(false);
 			InvokeOnMainThread(()=>{
