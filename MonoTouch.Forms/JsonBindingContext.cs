@@ -208,15 +208,7 @@ namespace MonoTouch.Forms
 			_parseFunctions.Add(s, f);	
 		}
 		
-		public static Dictionary<Type, Func<Element, string>> _fetchFunctions = new Dictionary<Type, Func<Element, string>>(){
-				{typeof(EntryElement), (e)=>{return ((EntryElement)e).Value; } },
-				{typeof(BooleanElement), (e)=>{return ((BooleanElement)e).Value ? "1" : "0";}},
-				{typeof(RadioElement), (e)=>{return ((RadioElement)e).Value;}},
-				//{typeof(RootElement), (e)=>{return ((RootElement)e).RadioSelected.ToString();}},
-				{typeof(DateElement), (e)=>{return ((DateElement)e).Value; }},
-				{typeof(TimeElement), (e)=>{return ((TimeElement)e).Value; }},
-				{typeof(DateTimeElement), (e)=>{return ((DateTimeElement)e).Value; }}				
-		};
+		public static Dictionary<Type, Func<Element, string>> _fetchFunctions = DefaultElementsFetchers.Create();
 		
 		private static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> _parseFunctions = 
 			DefaultElementsParsers.Create();

@@ -82,6 +82,7 @@
     <Compile Include="UIIndicatorView.cs" />
     <Compile Include="Elements\EmptyListElement.cs" />
     <Compile Include="DefaultElementsParsers.cs" />
+    <Compile Include="DefaultElementsFetchers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

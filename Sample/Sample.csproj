@@ -107,5 +107,6 @@
     <Content Include="js\person.json" />
     <Content Include="js\person.js" />
     <Content Include="js\personnodata.js" />
+    <Content Include="js\allelements.js" />
   </ItemGroup>
 </Project>
