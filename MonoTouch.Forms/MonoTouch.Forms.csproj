@@ -75,7 +75,6 @@
     <Compile Include="JsonDialogViewControllerActions.cs" />
     <Compile Include="JsonObjectExtensions.cs" />
     <Compile Include="Elements\ActivityElement.cs" />
-    <Compile Include="Elements\UrlConnection.cs" />
     <Compile Include="Elements\LRUCache.cs" />
     <Compile Include="Elements\ImageStore.cs" />
     <Compile Include="Elements\ImageStringElement.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="ElementParsers.cs" />
     <Compile Include="ElementFetchers.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="UrlConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />
