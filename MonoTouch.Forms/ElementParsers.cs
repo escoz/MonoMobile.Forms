@@ -68,6 +68,12 @@ namespace MonoTouch.Forms
 				}
 			);
 			
+			
+			result.Add("ActivityElement", (json, dvc, data)=>{ 
+					return new ActivityElement(json.asString(Constants.Caption), json.asString(Constants.Activity), json.asString(Constants.Value));
+				}
+			);
+			
 			result.Add("BooleanElement", (json, dvc, data)=>{
 					return new BooleanElement(json.asString(Constants.Caption), 
 				                          string.IsNullOrEmpty(data)? json.asBoolean(Constants.Value) : bool.Parse(data.CleanString())) ;

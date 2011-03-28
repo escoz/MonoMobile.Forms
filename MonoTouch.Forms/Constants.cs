@@ -13,6 +13,7 @@ namespace MonoTouch.Forms
 		public static string Action = "action";
 		public static string Image = "image";
 		public static string Caption = "caption";
+		public static string Activity = "activity";
 		public static string Value = "value";
 		public static string Bind = "bind";
 		public static string NavigateTo = "navigateto";

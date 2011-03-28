@@ -1,12 +1,59 @@
-using System;
-using System.Drawing;
-using MonoTouch.UIKit;
-using MonoTouch.Dialog;
 
-namespace MonoTouch.Forms.Elements
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
+using System.Drawing;
+using MonoTouch.Foundation;
+using MonoTouch.Dialog;
+using MonoTouch.Forms.Activities;
+namespace MonoTouch.Forms
 {
 	public class ActivityElement : UIViewElement, IElementSizing {
-		public ActivityElement () : base ("", new UIActivityIndicatorView (UIActivityIndicatorViewStyle.Gray), false)
+		
+		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
+		
+		private string _commandName;
+		public ActivityElement(string caption, string commandName, string value) :base(caption, new UIActivityIndicatorView (UIActivityIndicatorViewStyle.Gray), false)
+		{
+			_commandName = commandName;
+			Initialize();
+		}
+		
+		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+		{
+			tableView.DeselectRow(path, true);
+			var cell = tableView.CellAt(path);
+			cell.TextLabel.Hidden = true;
+			
+			Animating = true;
+			Type t = Type.GetType(_commandName); 
+			Activity c = Activator.CreateInstance(t) as Activity;
+			
+			c.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
+				View.InvokeOnMainThread(()=>{
+					Animating = false;	
+					cell.TextLabel.Hidden = false;
+				});
+			; });
+		}
+		
+		public override UITableViewCell GetCell (UITableView tv)
+		{
+			var cell = base.GetCell(tv);
+			
+			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
+			cell.TextLabel.Text = Caption;
+			cell.Accessory = UITableViewCellAccessory.None;
+			cell.TextLabel.TextAlignment = UITextAlignment.Center;
+			cell.TextLabel.TextColor = actionTextColor;
+			return cell;
+		}
+		
+		
+		public void Initialize()
 		{
 			var sbounds = UIScreen.MainScreen.Bounds;			
 			var uia = View as UIActivityIndicatorView;
@@ -14,7 +61,7 @@ namespace MonoTouch.Forms.Elements
 			uia.StartAnimating ();
 			
 			var vbounds = View.Bounds;
-			View.Frame = new RectangleF ((sbounds.Width-vbounds.Width)/2, 4, vbounds.Width, vbounds.Height + 0);
+			View.Frame = new RectangleF ((sbounds.Width-vbounds.Width)/2, 12, vbounds.Width, vbounds.Height + 0);
 			View.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
 		}
 		
@@ -24,8 +71,10 @@ namespace MonoTouch.Forms.Elements
 			}
 			set {
 				var activity = View as UIActivityIndicatorView;
-				if (value)
+				if (value) {
 					activity.StartAnimating ();
+					activity.Superview.BringSubviewToFront(activity);
+				}
 				else
 					activity.StopAnimating ();
 			}
@@ -33,9 +82,8 @@ namespace MonoTouch.Forms.Elements
 		
 		public new float GetHeight (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
 		{
-			return base.GetHeight (tableView, indexPath)+ 8;
+			return base.GetHeight (tableView, indexPath)+ 24;
 		}
-		
+	
 	}
 }
-

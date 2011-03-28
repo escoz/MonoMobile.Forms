@@ -7,7 +7,8 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
-namespace MonoTouch.Dialog
+using MonoTouch.Dialog;
+namespace MonoTouch.Forms
 {
 	public class ActionElement : StringElement {
 		static NSString skey = new NSString("ActionElement");
@@ -36,4 +37,5 @@ namespace MonoTouch.Dialog
 			return cell;
 		}
 	}
+
 }

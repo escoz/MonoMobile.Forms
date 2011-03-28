@@ -7,7 +7,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
-namespace MonoTouch.Dialog
+namespace MonoTouch.Forms
 {
 	public class EmptyListElement : ActionElement {
 		public EmptyListElement(string message):base(message, null){}

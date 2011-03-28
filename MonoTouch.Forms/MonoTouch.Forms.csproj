@@ -74,7 +74,6 @@
     <Compile Include="JsonDialogViewController.cs" />
     <Compile Include="JsonDialogViewControllerActions.cs" />
     <Compile Include="JsonObjectExtensions.cs" />
-    <Compile Include="Elements\ActivityElement.cs" />
     <Compile Include="Elements\LRUCache.cs" />
     <Compile Include="Elements\ImageStore.cs" />
     <Compile Include="Elements\ImageStringElement.cs" />
@@ -85,9 +84,15 @@
     <Compile Include="ElementFetchers.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="UrlConnection.cs" />
+    <Compile Include="Elements\ActionElement.cs" />
+    <Compile Include="Elements\ActivityOldElement.cs" />
+    <Compile Include="Elements\ActivityElement.cs" />
+    <Compile Include="Activities\Activity.cs" />
+    <Compile Include="Activities\ShowValuesInConsole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />
+    <Folder Include="Activities\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
