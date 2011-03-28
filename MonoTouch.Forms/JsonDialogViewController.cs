@@ -18,7 +18,7 @@ namespace MonoTouch.Forms
 	{
 		protected JsonBindingContext Context;
 		protected ActionElement rightBarItem, leftBarItem;
-		Dictionary<string, string> _hiddenElements = new Dictionary<string, string>();
+		Dictionary<string, string> _elementValues = new Dictionary<string, string>();
 		private string _url;
 		string _file, _values;
 		public string DataRootName;
@@ -39,8 +39,13 @@ namespace MonoTouch.Forms
 		}
 		
 		
-		public virtual void NetworkFailed(){
+		public virtual void NetworkFailed(NSError error){
 			Loading(false);
+			InvokeOnMainThread(()=>{
+				using (var popup = new UIAlertView("Error", error.LocalizedDescription, null, "OK")){
+					popup.Show();
+				}
+			});
 		}
 		
 		protected virtual void Loading(bool isLoading){
@@ -68,23 +73,31 @@ namespace MonoTouch.Forms
 		}
 		
 		public void SetValue(string key, string value){
-			if (_hiddenElements.ContainsKey(key))
-				_hiddenElements.Remove(key);
-			_hiddenElements.Add(key, value);
+			if (_elementValues.ContainsKey(key))
+				_elementValues.Remove(key);
+			_elementValues.Add(key, value);
 		}
 		
 		public string GetValue(string key){
-			if (_hiddenElements.ContainsKey(key))
-				return _hiddenElements[key];
+			if (_elementValues.ContainsKey(key))
+				return _elementValues[key];
 			
 			return null;
 		}
 		
 		public Dictionary<string, string> GetAllValues(){
+			_fetch();
+			return new Dictionary<string, string>(_elementValues);
+		}
+		
+		private void _fetch(){
 			var formValues = Context.Fetch();
-			foreach (var v in _hiddenElements)
-				formValues.Add(v.Key, v.Value);
-			return formValues;
+			foreach (var v in formValues) {
+				if (_elementValues.ContainsKey(v.Key))
+					_elementValues.Remove(v.Key);
+			
+				_elementValues.Add(v.Key, v.Value);
+			}
 		}
 		
 		public virtual NSMutableUrlRequest CreateRequestForUrl(string url) {
@@ -110,7 +123,7 @@ namespace MonoTouch.Forms
 						Loading(false);
 						
 					});
-				}, (error)=>{ NetworkFailed(); });
+				}, (error)=>{ NetworkFailed(error); });
 			} else {
 				_processContentOfFile(File.ReadAllText(file), values);
 			}
@@ -150,7 +163,7 @@ namespace MonoTouch.Forms
 							Loading(false);
 							
 						});
-					}, (error)=>{ NetworkFailed(); });
+					}, (error)=>{ NetworkFailed(error); });
 					
 				} else {
 					var datavalue = JsonObject.Parse(File.ReadAllText(values));
