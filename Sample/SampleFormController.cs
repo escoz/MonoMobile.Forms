@@ -2,15 +2,15 @@ using System;
 using MonoTouch.Forms;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+
 namespace Sample
 {
 	public class SampleFormController : JsonDialogViewController
 	{
-		public SampleFormController () : base("js/sample.js", false)
-		{
-		}
-		
+		public SampleFormController () : base("js/sample.js", true){}
+		public SampleFormController(RootElement root):base(root){}
 		public SampleFormController(string url, bool pushing):base(url, pushing){}
+		
 		
 		public void ShowPopup(Element element){
 			InvokeOnMainThread(()=>{

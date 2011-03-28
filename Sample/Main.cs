@@ -21,9 +21,14 @@ namespace Sample
 		{
 			CustomElements.RegisterAll();
 			
-			window.AddSubview(new UINavigationController(new SampleFormController()).View);
-			window.MakeKeyAndVisible ();
+			InvokeOnMainThread(()=>{
+				
+				var sampleForm = new SampleFormController();
+				var navigation = new UINavigationController(sampleForm);
+				window.AddSubview(navigation.View);
+				window.MakeKeyAndVisible ();
 			
+			});
 			return true;
 		}
 

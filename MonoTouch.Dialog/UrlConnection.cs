@@ -2,9 +2,9 @@ using System;
 using MonoTouch.Foundation;
 using System.Collections.Generic;
 using MonoTouch.UIKit;
-namespace MonoTouch.Forms
+namespace MonoTouch.Dialog
 {
-
+	
 	public class UrlConnection:NSUrlConnection {
 		
 		private static Dictionary<string, UrlConnection> Connections = new Dictionary<string, UrlConnection>();
@@ -18,10 +18,7 @@ namespace MonoTouch.Forms
 			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 		}
 		
-		public static void KillConnection(string name) {
-			if (!Connections.ContainsKey(name))
-				return;
-			
+		protected static void KillConnection(string name) {
 			Connections[name].Cancel();
 			Connections.Remove(name);
 			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = Connections.Count>0;
@@ -48,7 +45,7 @@ namespace MonoTouch.Forms
 			StartedDownloading(name, this);
 		}
 		
-		public UrlConnection(string name, NSUrlRequest request, Action<string> success, Action<NSError> failure):base(request, new UrlDelegate(name, success, failure), true) {
+		public UrlConnection(string name, NSUrlRequest request, Action<string> success, Action failure):base(request, new UrlDelegate(name, success, failure), true) {
 			if (Connections.ContainsKey(name)) {
 				KillConnection(name);
 			}
@@ -62,7 +59,7 @@ namespace MonoTouch.Forms
 			StartedDownloading(name, this);
 		}
 		
-		public UrlConnection(string name, NSUrlRequest request, Action<UIImage> success, Action<NSError> failure):base(request, new UrlDelegate(name, success, failure), true) {
+		public UrlConnection(string name, NSUrlRequest request, Action<UIImage> success, Action failure):base(request, new UrlDelegate(name, success, failure), true) {
 			if (Connections.ContainsKey(name)) {
 				KillConnection(name);
 			}
@@ -73,7 +70,7 @@ namespace MonoTouch.Forms
 	public class UrlDelegate : NSUrlConnectionDelegate {
 		Action<string> strCallback;
 		Action<UIImage> imgCallback;
-		Action<NSError> _failure;
+		Action _failure;
 		NSMutableData data;
 		NSUrlCredential _credential;
 		string _name;
@@ -90,25 +87,25 @@ namespace MonoTouch.Forms
 			data = new NSMutableData();
 		}
 		
-		public UrlDelegate(string name, Action<string> success,  Action<NSError> failure) {
+		public UrlDelegate(string name, Action<string> success, Action failure) {
 			_name = name;
 			strCallback = success;
 			_failure = failure;
 			data = new NSMutableData();
 		}
 		
-		public UrlDelegate(string name, Action<UIImage> success,  Action<NSError> failure) {
+		public UrlDelegate(string name, Action<UIImage> success, Action failure) {
 			_name = name;
 			imgCallback = success;
 			_failure = failure;
 			data = new NSMutableData();
 		}
 		
-		public UrlDelegate(string name, Action<UIImage> success, Action<NSError> failure, NSUrlCredential credential) {
+		public UrlDelegate(string name, Action<UIImage> success, Action failure, NSUrlCredential credential) {
 			_name = name;
 			imgCallback = success;
-			_credential = credential;
 			_failure = failure;
+			_credential = credential;
 			data = new NSMutableData();
 		}
 		
@@ -154,7 +151,7 @@ namespace MonoTouch.Forms
 				//Application.ShowNetworkError(error.LocalizedDescription);
 			
 			if (_failure!=null)
-				_failure(error);
+				_failure();
 		}
 		
 		public override void FinishedLoading (NSUrlConnection connection)

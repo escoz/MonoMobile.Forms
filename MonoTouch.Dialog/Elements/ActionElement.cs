@@ -7,9 +7,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
-using MonoTouch.Dialog;
-using MonoTouch.MVVM;
-namespace MonoTouch.Forms.Elements
+namespace MonoTouch.Dialog
 {
 	public class ActionElement : StringElement {
 		static NSString skey = new NSString("ActionElement");
@@ -17,16 +15,17 @@ namespace MonoTouch.Forms.Elements
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		public ActionElement(string caption, string action, Action tapped) : base(caption) { 
+		public ActionElement(string caption, Action tapped) : base (caption, tapped) {}
+		
+		public ActionElement(string caption, string action, Action tapped) : base (caption, tapped) {
 			Action = action;
-			this.Command = new ActionCommand(tapped);
 		}
 		
-		public override UITableViewElementCell GetCell (UITableView tv)
+		public override UITableViewCell GetCell (UITableView tv)
 		{
-			var cell = (UITableViewElementCell) tv.DequeueReusableCell (skey);
+			var cell = tv.DequeueReusableCell (skey);
 			if (cell == null){
-				cell = new UITableViewElementCell (UITableViewCellStyle.Default, skey);
+				cell = new UITableViewCell (UITableViewCellStyle.Default, skey);
 			}
 			
 			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
@@ -37,8 +36,4 @@ namespace MonoTouch.Forms.Elements
 			return cell;
 		}
 	}
-	
-
-	
-
 }

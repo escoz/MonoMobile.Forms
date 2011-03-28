@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</ProjectGuid>
+    <ProjectTypeGuids>{E613F3A2-FE9C-494F-B74E-F63BCB86FEA6};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MonoTouch.Dialog</RootNamespace>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <MtouchMinimumOS>3.0</MtouchMinimumOS>
+    <MtouchSdkVersion>3.0</MtouchSdkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>True</MtouchDebug>
+    <AssemblyName>MonoTouch.Dialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>False</MtouchDebug>
+    <MtouchLink>None</MtouchLink>
+    <AssemblyName>MonoTouch.Dialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>True</MtouchDebug>
+    <AssemblyName>MonoTouch.Dialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>False</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>MonoTouch.Dialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\AdHoc</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>False</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>MonoTouchDialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <MtouchDebug>False</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <AssemblyName>MonoTouchDialog</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+    <Reference Include="System.Json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties InternalTargetFrameworkVersion="IPhone" />
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Compile Include="DialogViewController.cs" />
+    <Compile Include="Elements\ActionElement.cs" />
+    <Compile Include="Elements\ActivityElement.cs" />
+    <Compile Include="Elements\LoadMoreElement.cs" />
+    <Compile Include="Elements\SimpleImageElement.cs" />
+    <Compile Include="Elements\MapElement.cs" />
+    <Compile Include="Elements\MultilineEntryElement.cs" />
+    <Compile Include="Elements\OwnerDrawnElement.cs" />
+    <Compile Include="Elements\RefreshTableHeaderView.cs" />
+    <Compile Include="Elements\RefreshViewStatus.cs" />
+    <Compile Include="Elements\SearchChangedEventArgs.cs" />
+    <Compile Include="Reflection\EntryAttribute.cs" />
+    <Compile Include="Reflection\DateAttribute.cs" />
+    <Compile Include="Reflection\TimeAttribute.cs" />
+    <Compile Include="Reflection\CheckboxAttribute.cs" />
+    <Compile Include="Reflection\MultilineAttribute.cs" />
+    <Compile Include="Reflection\HtmlAttribute.cs" />
+    <Compile Include="Reflection\SkipAttribute.cs" />
+    <Compile Include="Reflection\PasswordAttribute.cs" />
+    <Compile Include="Reflection\AlignmentAttribute.cs" />
+    <Compile Include="Reflection\RadioSelectionAttribute.cs" />
+    <Compile Include="Reflection\OnTapAttribute.cs" />
+    <Compile Include="Reflection\CaptionAttribute.cs" />
+    <Compile Include="Reflection\SectionAttribute.cs" />
+    <Compile Include="Reflection\RangeAttribute.cs" />
+    <Compile Include="Reflection\BindingContext.cs" />
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\BoolElement.cs" />
+    <Compile Include="Elements\BooleanElement.cs" />
+    <Compile Include="Elements\BaseBooleanImageElement.cs" />
+    <Compile Include="Elements\BooleanImageElement.cs" />
+    <Compile Include="Elements\FloatElement.cs" />
+    <Compile Include="Elements\WebElement.cs" />
+    <Compile Include="Elements\StringElement.cs" />
+    <Compile Include="Elements\StyledStringElement.cs" />
+    <Compile Include="Elements\StyledMultilineElement.cs" />
+    <Compile Include="Elements\IElementSizing.cs" />
+    <Compile Include="Elements\MultilineElement.cs" />
+    <Compile Include="Elements\RadioElement.cs" />
+    <Compile Include="Elements\CheckboxElement.cs" />
+    <Compile Include="Elements\EntryElement.cs" />
+    <Compile Include="Elements\DateTimeElement.cs" />
+    <Compile Include="Elements\DateElement.cs" />
+    <Compile Include="Elements\TimeElement.cs" />
+    <Compile Include="Elements\UIViewElement.cs" />
+    <Compile Include="Elements\Section.cs" />
+    <Compile Include="Elements\Group.cs" />
+    <Compile Include="Elements\RadioGroup.cs" />
+    <Compile Include="Elements\RootElement.cs" />
+    <Compile Include="Elements\RefreshHeaderUtil.cs" />
+    <Compile Include="Elements\ImagePickerElement.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Elements\" />
+    <Folder Include="Reflection\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\arrow.png">
+      <LogicalName>arrow.png</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

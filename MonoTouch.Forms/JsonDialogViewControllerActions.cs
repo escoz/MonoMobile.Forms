@@ -6,7 +6,6 @@ using System.Reflection;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
-using MonoTouch.Forms.Elements;
 namespace MonoTouch.Forms
 {
 	public partial class JsonDialogViewController
@@ -64,7 +63,7 @@ namespace MonoTouch.Forms
 		}
 		
 		public void Reload(Element el){
-			PrepareRoot(new RootElement<int>(Title));
+			PrepareRoot(new RootElement(Title));
 			ReloadData();
 			_processFile(Url, null);
 		}

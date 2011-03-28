@@ -10,7 +10,6 @@ using MonoTouch.Foundation;
 using System.Drawing;
 using System.Reflection;
 using System.Collections.Generic;
-using MonoTouch.Forms.Elements;
 
 namespace MonoTouch.Forms
 {
@@ -20,11 +19,12 @@ namespace MonoTouch.Forms
 		public JsonBindingContext Context;
 		private ActionElement rightBarItem, leftBarItem;
 		private string _url;
+		string _file, _values;
 		public string DataRootName;
 		
 		public string Url {get {return _url;}}
 		
-		//public JsonDialogViewController(IntPtr ptr):base(ptr){}
+		public JsonDialogViewController(IntPtr ptr):base(ptr){}
 		
 		public JsonDialogViewController(string file, bool pushing) : this(file, null, pushing) {}
 		
@@ -33,11 +33,8 @@ namespace MonoTouch.Forms
 			_values = values;
 		}
 		
-		string _file, _values;
-		
-		public JsonDialogViewController(IRoot root):base(root) {
+		public JsonDialogViewController(RootElement root):base(root) {
 			Loading(false);
-			
 		}
 		
 		private Dictionary<string, string> BindingValues = new Dictionary<string, string>();
@@ -152,6 +149,9 @@ namespace MonoTouch.Forms
 		
 		
 		private void _configureDialog(JsonValue json, JsonObject valuesJson){
+			
+			Console.WriteLine("Nav configDialog " + this.NavigationController);
+			
 			if (json.ContainsKey("grouped")) {
 				Style = bool.Parse(json["grouped"].ToString()) ? UITableViewStyle.Grouped : UITableViewStyle.Plain;
 			}
@@ -171,7 +171,7 @@ namespace MonoTouch.Forms
 					
 				if (item.ContainsKey("action")) {
 						rightBarItem = new ActionElement(item.asString("caption"), datavalue ?? item.asString("action"), null);
-						rightBarItem.Id = new NSString(id);
+						rightBarItem.ID = new NSString(id);
 				}	
 				if (item.ContainsKey("image")){
 					NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIImage.FromBundle(item.asString("image")), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
@@ -187,12 +187,15 @@ namespace MonoTouch.Forms
 				var item = (JsonObject)json["leftbaritem"];
 				if (item.ContainsKey("action")) {
 						leftBarItem = new ActionElement(item.asString("caption"), item.asString("action"), null);
-						leftBarItem.Id = new NSString(item.asString("id"));
+						leftBarItem.ID = new NSString(item.asString("id"));
 				}	
 				NavigationItem.LeftBarButtonItem = new UIBarButtonItem(item.asString("caption"), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
 					InvokeAction(this.leftBarItem);
 				});
 			}
+			
+			
+			Console.WriteLine("Nav configDialog " + this.NavigationController);
 			
 		}
 		
@@ -225,6 +228,7 @@ namespace MonoTouch.Forms
 		{
 			base.ViewWillAppear (animated);
 			
+			Console.WriteLine("Nav willappear " + this.NavigationController);
 			Loading(_shouldbeLoading);
 		}
 		
@@ -241,26 +245,5 @@ namespace MonoTouch.Forms
 		
 	}
 	
-	public class UIIndicatorView : UIView {
-		private UIActivityIndicatorView _ind = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray) { Frame = new RectangleF(148,12,24,24) };
-		
-		public UIIndicatorView(){
-			Frame = new RectangleF(0,0,800,800);
-			this.UserInteractionEnabled = true;
-		}
-		
-		public override void LayoutSubviews ()
-		{
-			this.AddSubview(_ind);
-		}
-		
-		public void StartAnimating(){
-			_ind.StartAnimating();
-		}
-		
-		public void StopAnimating(){
-			_ind.StopAnimating();	
-		}
-		
-	}
+
 }

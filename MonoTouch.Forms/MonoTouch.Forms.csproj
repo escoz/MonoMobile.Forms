@@ -70,25 +70,26 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <ProjectReference Include="..\..\MonoTouch.MVVM\MonoTouch.MVVM.csproj">
-      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
-      <Name>MonoTouch.MVVM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ImageStore.cs" />
     <Compile Include="JsonBindingContext.cs" />
     <Compile Include="JsonDialogViewController.cs" />
     <Compile Include="JsonDialogViewControllerActions.cs" />
     <Compile Include="JsonObjectExtensions.cs" />
-    <Compile Include="LRUCache.cs" />
-    <Compile Include="UrlConnection.cs" />
     <Compile Include="Elements\ActivityElement.cs" />
-    <Compile Include="Elements\ActionElement.cs" />
+    <Compile Include="Elements\UrlConnection.cs" />
+    <Compile Include="Elements\LRUCache.cs" />
+    <Compile Include="Elements\ImageStore.cs" />
+    <Compile Include="Elements\ImageStringElement.cs" />
+    <Compile Include="UIIndicatorView.cs" />
     <Compile Include="Elements\EmptyListElement.cs" />
-    <Compile Include="ActionCommand.cs" />
+    <Compile Include="DefaultElementsParsers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
+      <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
+      <Name>MonoTouch.Dialog</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -90,9 +90,9 @@
       <Project>{757A59B0-C988-4F09-BA4F-078E2D5B686D}</Project>
       <Name>MonoTouch.Forms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MonoTouch.MVVM\MonoTouch.MVVM.csproj">
+    <ProjectReference Include="..\MonoTouch.Dialog\MonoTouch.Dialog.csproj">
       <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
-      <Name>MonoTouch.MVVM</Name>
+      <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

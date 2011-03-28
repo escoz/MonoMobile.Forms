@@ -13,9 +13,7 @@ namespace Sample
 			JsonBindingContext.RegisterParser("KeyValueElement", (json, dvc, data)=>{
 				var obj = ((JsonObject)data);
 				var name = obj.Keys.First();
-				return new StringElement(name.ToString(), obj[name].CleanString() ){
-					Command = new ActionCommand(json.asAction(dvc))
-				};
+				return new StringElement(name.ToString(), obj[name].CleanString(), json.asAction(dvc));
 			});
 		}
 	}

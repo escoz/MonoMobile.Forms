@@ -9,7 +9,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch;
 
-namespace MonoTouch.Forms
+namespace MonoTouch.Forms.Elements
 {
 	public interface IImageUpdated {
 		void UpdatedImage (string url, UIImage image);

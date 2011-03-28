@@ -1,60 +1,60 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Sample/js/login.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoTouch.Forms/DefaultElementsRegistrar.cs">
     <Files>
-      <File FileName="../../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="115" Column="3" />
-      <File FileName="../../../Projects/github/MonoTouch.Dialog/Sample/js/form.js" Line="9" Column="54" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Services/AuthService.cs" Line="30" Column="31" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Services/ClubTixService.cs" Line="180" Column="3" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/AppDelegate.cs" Line="81" Column="29" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Main.cs" Line="20" Column="82" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/MainWindow.xib.designer.cs" Line="34" Column="1" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Domain/EventStats.cs" Line="32" Column="3" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Domain/Event.cs" Line="11" Column="14" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Domain/Ticket.cs" Line="1" Column="1" />
-      <File FileName="../../../Projects/ClubTix/MonoTouch.Dialog/Elements.cs" Line="180" Column="7" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Services/SystemStatusService.cs" Line="13" Column="4" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Util/UIViewExtensions.cs" Line="8" Column="23" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Util/Colors.cs" Line="8" Column="23" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Util/LoadingHUDView.cs" Line="7" Column="23" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/Util/Reachability.cs" Line="10" Column="20" />
-      <File FileName="../../../Projects/ClubTix/ClubTix/ScanTicketViewController.xib.cs" Line="141" Column="3" />
-      <File FileName="MonoTouch.Forms/JsonBindingContext.cs" Line="112" Column="21" />
-      <File FileName="Sample/js/login.js" Line="21" Column="3" />
-      <File FileName="Sample/js/form.js" Line="1" Column="1" />
-      <File FileName="Sample/js/custom.js" Line="22" Column="5" />
-      <File FileName="Sample/js/countries.js" Line="1" Column="1" />
-      <File FileName="Sample/js/another.js" Line="1" Column="1" />
-      <File FileName="Sample/js/sample.js" Line="11" Column="102" />
-      <File FileName="../MonoTouch.MVVM/Dialog/Elements/MapViewElement.cs" Line="39" Column="3" />
-      <File FileName="../MonoTouch.MVVM/Dialog/Elements/StringElement.cs" Line="95" Column="50" />
-      <File FileName="../MonoTouch.MVVM/Dialog/Elements/RootElement.cs" Line="423" Column="14" />
-      <File FileName="../MonoTouch.MVVM/Dialog/Elements/Element.cs" Line="44" Column="1" />
-      <File FileName="Sample/js/person.js" Line="13" Column="30" />
-      <File FileName="MonoTouch.Forms/JsonDialogViewController.cs" Line="189" Column="21" />
-      <File FileName="Sample/Main.cs" Line="22" Column="30" />
-      <File FileName="Sample/CustomElements.cs" Line="16" Column="1" />
-      <File FileName="Sample/js/personnodata.js" Line="11" Column="4" />
+      <File FileName="MonoTouch.Dialog/DialogViewController.cs" Line="27" Column="16" />
+      <File FileName="MonoTouch.Forms/JsonBindingContext.cs" Line="223" Column="3" />
+      <File FileName="MonoTouch.Forms/JsonDialogViewController.cs" Line="220" Column="3" />
+      <File FileName="MonoTouch.Dialog/Elements/ActionElement.cs" Line="36" Column="16" />
+      <File FileName="MonoTouch.Forms/JsonObjectExtensions.cs" Line="92" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RootElement.cs" Line="138" Column="5" />
+      <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="197" Column="43" />
+      <File FileName="MonoTouch.Forms/JsonDialogViewControllerActions.cs" Line="56" Column="1" />
+      <File FileName="Sample/SampleFormController.cs" Line="10" Column="61" />
+      <File FileName="Sample/CustomElements.cs" Line="16" Column="92" />
+      <File FileName="Sample/Main.cs" Line="24" Column="40" />
+      <File FileName="MonoTouch.Dialog/Elements/SimpleImageElement.cs" Line="17" Column="54" />
       <File FileName="MonoTouch.Forms/Elements/ActivityElement.cs" Line="1" Column="1" />
-      <File FileName="MonoTouch.Forms/Elements/EmptyListElement.cs" Line="6" Column="23" />
-      <File FileName="MonoTouch.Forms/ActionCommand.cs" Line="1" Column="1" />
-      <File FileName="MonoTouch.Forms/ImageStore.cs" Line="11" Column="1" />
-      <File FileName="MonoTouch.Forms/JsonDialogViewControllerActions.cs" Line="82" Column="6" />
+      <File FileName="MonoTouch.Forms/Elements/ImageStore.cs" Line="42" Column="29" />
+      <File FileName="MonoTouch.Forms/Elements/ImageStringElement.cs" Line="14" Column="39" />
+      <File FileName="MonoTouch.Forms/Elements/UrlConnection.cs" Line="20" Column="3" />
+      <File FileName="MonoTouch.Dialog/Elements/RefreshTableHeaderView.cs" Line="14" Column="43" />
+      <File FileName="MonoTouch.Dialog/Reflection/SectionAttribute.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/Element.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="19" Column="89" />
+      <File FileName="MonoTouch.Dialog/Elements/BooleanImageElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/BoolElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/DateElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/DateTimeElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/EntryElement.cs" Line="88" Column="3" />
+      <File FileName="MonoTouch.Dialog/Elements/Group.cs" Line="13" Column="2" />
+      <File FileName="MonoTouch.Dialog/Elements/IElementSizing.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/ImageElement.cs" Line="85" Column="23" />
+      <File FileName="MonoTouch.Dialog/Elements/LoadMoreElement.cs" Line="14" Column="3" />
+      <File FileName="MonoTouch.Dialog/Elements/MapElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/MultilineElement.cs" Line="14" Column="3" />
+      <File FileName="MonoTouch.Dialog/Elements/MultilineEntryElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/OwnerDrawnElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RadioElement.cs" Line="42" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RadioGroup.cs" Line="13" Column="2" />
+      <File FileName="MonoTouch.Dialog/Elements/RefreshViewStatus.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RefreshHeaderUtil.cs" Line="13" Column="41" />
+      <File FileName="MonoTouch.Dialog/Elements/FloatElement.cs" Line="22" Column="16" />
+      <File FileName="MonoTouch.Forms/DefaultElementsRegistrar.cs" Line="4" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MonoTouch.Forms" expanded="True">
+          <Node name="MonoTouch.Dialog" expanded="True">
+            <Node name="Elements" expanded="True" />
+            <Node name="Images" expanded="True" />
+            <Node name="Reflection" expanded="True" />
+          </Node>
+          <Node name="MonoTouch.Forms" expanded="True" selected="True">
             <Node name="Elements" expanded="True" />
           </Node>
-          <Node name="MonoTouch.MVVM" expanded="True">
-            <Node name="Dialog" expanded="True" />
-          </Node>
-          <Node name="Sample" expanded="True">
-            <Node name="js" expanded="True">
-              <Node name="login.js" selected="True" />
-            </Node>
-          </Node>
+          <Node name="Sample" expanded="True" />
         </State>
       </Pad>
       <Pad Id="ClassPad">
@@ -62,13 +62,8 @@
       </Pad>
       <Pad Id="MonoDevelop.Debugger.WatchPad">
         <State>
-          <Value>NSUserDefaults.StandardUserDefaults.StringForKey("URL")</Value>
-          <Value>NSUserDefaults.StandardUserDefaults["URL"]</Value>
-          <Value>NSUserDefaults.StandardUserDefaults.length</Value>
-          <Value>_customer.Guests[0]</Value>
           <Value>this</Value>
-          <Value>TableView</Value>
-          <Value>NavigationController</Value>
+          <Value>dialog</Value>
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">
