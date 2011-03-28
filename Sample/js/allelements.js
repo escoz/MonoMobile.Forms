@@ -4,8 +4,7 @@
 	
 	"root": [
 		
-		{ "caption":"No data bound", "elements":[
-		
+		{ "caption":"Sample of all elements", "elements":[
 				{ "type":"StringElement", "caption":"StringElement", "value":"Some Value" },
 				{ "type":"EntryElement", "caption":"EntryElement", "value":"Some Value" },
 				{ "type":"BooleanElement", "caption":"BooleanElement", "value":true },
