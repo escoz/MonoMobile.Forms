@@ -34,10 +34,6 @@ namespace MonoTouch.Forms
 			}
 		}
 		
-		public void DismissModal(Element el){
-			this.DismissModalViewControllerAnimated(true);	
-		}
-		
 		public void NavigateTo(string file, IDictionary<string, string> hiddenfields){
 			var dialog = this;
 			UrlConnection.KillAllConnections();
