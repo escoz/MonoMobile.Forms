@@ -75,6 +75,7 @@
     <Compile Include="SampleFormController.cs" />
     <Compile Include="CustomElements.cs" />
     <Compile Include="activities\ShowValuesInConsole.cs" />
+    <Compile Include="activities\ShowWeatherInChicago.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />
@@ -108,5 +109,7 @@
     <Content Include="js\person.js" />
     <Content Include="js\personnodata.js" />
     <Content Include="js\allelements.js" />
+    <Content Include="js\weather.js" />
+    <Content Include="js\weatherbind.js" />
   </ItemGroup>
 </Project>

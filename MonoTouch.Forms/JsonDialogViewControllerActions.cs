@@ -60,6 +60,9 @@ namespace MonoTouch.Forms
 		}
 		
 		public void Reload(Element el){
+			Reload();
+		}
+		public void Reload(){
 			PrepareRoot(new RootElement(Title));
 			ReloadData();
 			_processFile(Url, null);
