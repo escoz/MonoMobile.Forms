@@ -32,12 +32,13 @@ namespace MonoTouch.Forms
 			Animating = true;
 			
 			var activity = ActivityFactory.Create(_commandName);
-			
+			dvc.View.UserInteractionEnabled = false;
 			var t = new Thread(()=>activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;
 					updateCell(cell);
+					dvc.View.UserInteractionEnabled = true;
 				});
 			}));
 			t.Start();
