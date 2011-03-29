@@ -9,6 +9,7 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
 using MonoTouch.Forms.Activities;
+using System.Threading;
 namespace MonoTouch.Forms
 {
 	public class ActivityElement : UIViewElement, IElementSizing {
@@ -32,26 +33,31 @@ namespace MonoTouch.Forms
 			
 			var activity = ActivityFactory.Create(_commandName);
 			
-			activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
+			var t = new Thread(()=>activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;
+					updateCell(cell);
 				});
-			; });
+			}));
+			t.Start();
 		}
 		
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			var cell = base.GetCell(tv);
+			updateCell(cell);
+			return cell;
+		}
+		
+		private void updateCell(UITableViewCell cell){
 			
 			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 			cell.TextLabel.Text = Caption;
 			cell.Accessory = UITableViewCellAccessory.None;
 			cell.TextLabel.TextAlignment = UITextAlignment.Center;
 			cell.TextLabel.TextColor = actionTextColor;
-			return cell;
 		}
-		
 		
 		public void Initialize()
 		{

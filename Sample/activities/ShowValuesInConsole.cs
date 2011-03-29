@@ -18,6 +18,7 @@ namespace Sample.Activities
 				Console.WriteLine("Value => {0} - {1}", v.Key, v.Value);	
 			}
 			System.Threading.Thread.Sleep(2000);
+			element.Caption = "Action completed!";
 			completed();
 		}	
 	}
