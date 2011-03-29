@@ -90,7 +90,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <Compile Include="DialogViewController.cs" />
-    <Compile Include="Elements\ActivityElement.cs" />
     <Compile Include="Elements\LoadMoreElement.cs" />
     <Compile Include="Elements\SimpleImageElement.cs" />
     <Compile Include="Elements\MapElement.cs" />

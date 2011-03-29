@@ -74,6 +74,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="SampleFormController.cs" />
     <Compile Include="CustomElements.cs" />
+    <Compile Include="activities\ShowValuesInConsole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainWindow.xib" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />
+    <Folder Include="activities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="js\sample.js" />

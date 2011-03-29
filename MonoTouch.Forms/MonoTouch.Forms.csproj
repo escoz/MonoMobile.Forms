@@ -85,10 +85,9 @@
     <Compile Include="Constants.cs" />
     <Compile Include="UrlConnection.cs" />
     <Compile Include="Elements\ActionElement.cs" />
-    <Compile Include="Elements\ActivityOldElement.cs" />
     <Compile Include="Elements\ActivityElement.cs" />
     <Compile Include="Activities\Activity.cs" />
-    <Compile Include="Activities\ShowValuesInConsole.cs" />
+    <Compile Include="Activities\ActivityFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

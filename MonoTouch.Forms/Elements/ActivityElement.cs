@@ -29,10 +29,10 @@ namespace MonoTouch.Forms
 			cell.TextLabel.Hidden = true;
 			
 			Animating = true;
-			Type t = Type.GetType(_commandName); 
-			Activity c = Activator.CreateInstance(t) as Activity;
 			
-			c.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
+			var activity = ActivityFactory.Create(_commandName);
+			
+			activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;

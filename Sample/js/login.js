@@ -11,8 +11,8 @@
 			]
 		},
 		{ "elements":[
-				{ "id":"login", "type":"ActionElement", "caption":"Login", "action":"ShowValues" },
-				{ "id":"login", "type":"ActivityElement", "caption":"Login Activity", "activity":"MonoTouch.Forms.Activities.ShowValuesInConsole" }
+				{ "id":"login", "type":"ActionElement", "caption":"Login", "action":"ShowPopup" },
+				{ "id":"login", "type":"ActivityElement", "caption":"Login Activity", "activity":"Sample.Activities.ShowValuesInConsole" }
 			]
 		}
 	]
