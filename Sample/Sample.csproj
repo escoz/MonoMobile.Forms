@@ -91,9 +91,9 @@
       <Project>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</Project>
       <Name>MonoTouch.Dialog</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Escoz.Forms\Escoz.Forms.csproj">
+    <ProjectReference Include="..\MonoMobile.Forms\MonoMobile.Forms.csproj">
       <Project>{757A59B0-C988-4F09-BA4F-078E2D5B686D}</Project>
-      <Name>Escoz.Forms</Name>
+      <Name>MonoMobile.Forms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
