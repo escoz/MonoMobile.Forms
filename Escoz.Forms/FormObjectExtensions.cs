@@ -39,7 +39,8 @@ using MonoTouch.Foundation;
 using System.Json;
 using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
-namespace MonoTouch.Forms
+
+namespace Escoz.Forms
 {
 	public static class FormObjectExtensions {
 	

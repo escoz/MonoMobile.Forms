@@ -35,7 +35,8 @@ using MonoTouch.UIKit;
 using System.Linq;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
-namespace MonoTouch.Forms
+
+namespace Escoz.Forms
 {
 	public class FormSectionBuilder
 	{

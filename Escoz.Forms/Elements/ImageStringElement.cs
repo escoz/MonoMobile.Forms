@@ -36,7 +36,8 @@ using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-namespace MonoTouch.Forms.Elements
+using Escoz.Forms.Util;
+namespace Escoz.Forms.Elements
 {
 	
 	public class ImageStringElement : StringElement, IElementSizing {

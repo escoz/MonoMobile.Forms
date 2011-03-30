@@ -27,18 +27,12 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-using MonoTouch.Forms.Activities;
-using System.Threading;
-namespace MonoTouch.Forms
+using Escoz.Forms.Activities;
+namespace Escoz.Forms
 {
 	public class ActivityElement : UIViewElement, IElementSizing {
 		

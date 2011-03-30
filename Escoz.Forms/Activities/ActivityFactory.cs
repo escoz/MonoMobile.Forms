@@ -1,5 +1,5 @@
 //
-// EmptyListElement.cs
+// ActivityFactory.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -27,24 +27,36 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using System.Drawing;
-using MonoTouch.Foundation;
-namespace MonoTouch.Forms
+using System.Reflection;
+namespace Escoz.Forms.Activities
 {
-	public class EmptyListElement : ActionElement {
-		public EmptyListElement(string message):base(message, null){}
+	public static class ActivityFactory {
+		private static Dictionary<string, Type> typeCache = new Dictionary<string, Type>();
 		
-		public override UITableViewCell GetCell (UITableView tv)
-		{
-			var cell= base.GetCell (tv);
-			cell.TextLabel.TextColor = UIColor.LightGray;
-			return cell;
+		private static bool tryFindType(string typeName, out Type t) {
+		    lock (typeCache) {
+		        if (!typeCache.TryGetValue(typeName, out t)) {
+		            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies()) {
+		                t = a.GetType(typeName);
+		                if (t != null)
+		                    break;
+		            }
+		            typeCache[typeName] = t;
+		        }
+		    }
+		    return t != null;
 		}
+	
+		public static Activity Create(string name){
+			Type t;
+			if (tryFindType(name, out t)){
+				return Activator.CreateInstance(t) as Activity;
+			}
+			throw new Exception(string.Format("Activity type not found. Type {0} does not exist in the application", name));
+		}
+		
 	}
 }

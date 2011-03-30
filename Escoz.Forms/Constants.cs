@@ -29,7 +29,7 @@
 //
 
 using System;
-namespace MonoTouch.Forms
+namespace Escoz.Forms
 {
 	public static class Constants
 	{

@@ -28,10 +28,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using MonoTouch.Forms;
-using MonoTouch.UIKit;
-using MonoTouch.Dialog;
 using System.Collections.Generic;
+using Escoz.Forms;
+using MonoTouch.Dialog;
+using MonoTouch.UIKit;
 
 namespace Sample
 {

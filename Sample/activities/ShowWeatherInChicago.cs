@@ -28,18 +28,20 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using MonoTouch.Forms.Activities;
-using MonoTouch.Foundation;
-using MonoTouch;
 using System.Json;
-using MonoTouch.Forms;
+using Escoz.Forms.Activities;
+using MonoTouch.Foundation;
+using Escoz.Forms;
+using Escoz;
+using Escoz.Util;
+
 namespace Sample.Activities
 {
 	
 	[Preserve(AllMembers=true)]
 	public class ShowWeatherInChicago : Activity
 	{
-		public override void Execute (MonoTouch.Forms.ActivityElement element, MonoTouch.Forms.FormDialogViewController controller, Action completed)
+		public override void Execute (ActivityElement element, FormDialogViewController controller, Action completed)
 		{
 			controller.SetValue("temperature", "");
 			controller.SetValue("humidity", "");

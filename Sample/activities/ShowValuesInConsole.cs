@@ -28,11 +28,10 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using MonoTouch.Forms.Activities;
-using MonoTouch.Dialog;
-using MonoTouch.Forms;
-using MonoTouch.Foundation;
 using System.Threading;
+using MonoTouch.Foundation;
+using Escoz.Forms.Activities;
+using Escoz.Forms;
 
 namespace Sample.Activities
 {

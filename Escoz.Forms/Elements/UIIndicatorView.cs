@@ -1,5 +1,5 @@
 //
-// ActionElement.cs
+// UIIndicatorView.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -28,42 +28,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Net;
 using System.Linq;
 using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using System.Drawing;
-using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-namespace MonoTouch.Forms
+using System.Json;
+using System.IO;
+using MonoTouch.Foundation;
+using System.Drawing;
+using System.Reflection;
+using System.Collections.Generic;
+namespace Escoz.Forms
 {
-	public class ActionElement : StringElement {
-		static NSString skey = new NSString("ActionElement");
-		public string Action;
+	public class UIIndicatorView : UIView {
+		private UIActivityIndicatorView _ind = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray) { Frame = new RectangleF(148,12,24,24) };
 		
-		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
-		
-		public ActionElement(string caption, Action tapped) : base (caption, tapped) {}
-		
-		public ActionElement(string caption, string action, Action tapped) : base (caption, tapped) {
-			Action = action;
+		public UIIndicatorView(){
+			Frame = new RectangleF(0,0,800,800);
+			this.UserInteractionEnabled = true;
 		}
 		
-		public override UITableViewCell GetCell (UITableView tv)
+		public override void LayoutSubviews ()
 		{
-			var cell = tv.DequeueReusableCell (skey);
-			if (cell == null){
-				cell = new UITableViewCell (UITableViewCellStyle.Default, skey);
-			}
-			
-			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
-			cell.TextLabel.Text = Caption;
-			cell.Accessory = UITableViewCellAccessory.None;
-			cell.TextLabel.TextAlignment = UITextAlignment.Center;
-			cell.TextLabel.TextColor = actionTextColor;
-			return cell;
+			this.AddSubview(_ind);
 		}
+		
+		public void StartAnimating(){
+			_ind.StartAnimating();
+		}
+		
+		public void StopAnimating(){
+			_ind.StopAnimating();	
+		}
+		
 	}
-
 }

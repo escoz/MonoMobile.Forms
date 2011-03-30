@@ -28,18 +28,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Net;
-using System.Linq;
-using MonoTouch.UIKit;
-using MonoTouch.Dialog;
-using System.Json;
-using System.IO;
-using MonoTouch.Foundation;
-using System.Drawing;
-using System.Reflection;
 using System.Collections.Generic;
+using System.IO;
+using System.Json;
+using MonoTouch.Dialog;
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using Escoz.Forms;
+using System.Linq;
+using Escoz.Util;
 
-namespace MonoTouch.Forms
+namespace Escoz.Forms
 {
 	
 	public partial class FormDialogViewController : DialogViewController 

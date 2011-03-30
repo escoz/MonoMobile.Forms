@@ -40,7 +40,7 @@ using System.Linq;
 using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
 
-namespace MonoTouch.Forms
+namespace Escoz.Forms
 {
 	public partial class FormBindingContext : IDisposable {
 		public RootElement Root;

@@ -1,5 +1,5 @@
 //
-// UIIndicatorView.cs
+// EmptyListElement.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -28,38 +28,23 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.Net;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.UIKit;
-using MonoTouch.Dialog;
-using System.Json;
-using System.IO;
-using MonoTouch.Foundation;
+using MonoTouch.CoreGraphics;
 using System.Drawing;
-using System.Reflection;
-using System.Collections.Generic;
-namespace MonoTouch.Forms
+using MonoTouch.Foundation;
+namespace Escoz.Forms
 {
-	public class UIIndicatorView : UIView {
-		private UIActivityIndicatorView _ind = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray) { Frame = new RectangleF(148,12,24,24) };
+	public class EmptyListElement : ActionElement {
+		public EmptyListElement(string message):base(message, null){}
 		
-		public UIIndicatorView(){
-			Frame = new RectangleF(0,0,800,800);
-			this.UserInteractionEnabled = true;
-		}
-		
-		public override void LayoutSubviews ()
+		public override UITableViewCell GetCell (UITableView tv)
 		{
-			this.AddSubview(_ind);
+			var cell= base.GetCell (tv);
+			cell.TextLabel.TextColor = UIColor.LightGray;
+			return cell;
 		}
-		
-		public void StartAnimating(){
-			_ind.StartAnimating();
-		}
-		
-		public void StopAnimating(){
-			_ind.StopAnimating();	
-		}
-		
 	}
 }

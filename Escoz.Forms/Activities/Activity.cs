@@ -1,5 +1,5 @@
 //
-// ActivityFactory.cs
+// Activity.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -27,36 +27,16 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-namespace MonoTouch.Forms.Activities
+namespace Escoz.Forms.Activities
 {
-	public static class ActivityFactory {
-		private static Dictionary<string, Type> typeCache = new Dictionary<string, Type>();
+	public abstract class Activity
+	{
+		public Activity () {}
 		
-		private static bool tryFindType(string typeName, out Type t) {
-		    lock (typeCache) {
-		        if (!typeCache.TryGetValue(typeName, out t)) {
-		            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies()) {
-		                t = a.GetType(typeName);
-		                if (t != null)
-		                    break;
-		            }
-		            typeCache[typeName] = t;
-		        }
-		    }
-		    return t != null;
-		}
-	
-		public static Activity Create(string name){
-			Type t;
-			if (tryFindType(name, out t)){
-				return Activator.CreateInstance(t) as Activity;
-			}
-			throw new Exception(string.Format("Activity type not found. Type {0} does not exist in the application", name));
-		}
-		
+		public abstract void Execute(ActivityElement element, FormDialogViewController controller, Action completed);
 	}
 }
+
