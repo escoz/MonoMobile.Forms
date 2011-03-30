@@ -22,7 +22,7 @@
 		}
 	],
 	
-	"leftbaritem":{ "caption":"Details", "id":"details", "action":"ShowPopup"},
-	"rightbaritem":{ "caption":"More Info", "id":"reload", "action":"ShowPopup" }
+	"leftbaritem":{ "caption":"Left", "id":"details", "action":"ShowPopup"},
+	"rightbaritem":{ "caption":"Right", "id":"reload", "action":"ShowPopup" }
 
 }

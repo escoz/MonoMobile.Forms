@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Sample/activities/ShowValuesInConsole.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Sample/js/sample.js">
     <Files>
       <File FileName="../../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="115" Column="3" />
       <File FileName="../../../Projects/github/MonoTouch.Dialog/Sample/js/form.js" Line="9" Column="54" />
@@ -21,17 +21,15 @@
       <File FileName="../../../Projects/ClubTix/ClubTix/ScanTicketViewController.xib.cs" Line="141" Column="3" />
       <File FileName="MonoTouch.Dialog/DialogViewController.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Forms/JsonBindingContext.cs" Line="48" Column="95" />
-      <File FileName="MonoTouch.Forms/JsonDialogViewController.cs" Line="214" Column="21" />
+      <File FileName="MonoTouch.Forms/JsonDialogViewController.cs" Line="10" Column="25" />
       <File FileName="MonoTouch.Forms/JsonObjectExtensions.cs" Line="20" Column="68" />
       <File FileName="MonoTouch.Dialog/Elements/RootElement.cs" Line="393" Column="30" />
       <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="205" Column="8" />
       <File FileName="MonoTouch.Forms/JsonDialogViewControllerActions.cs" Line="36" Column="3" />
       <File FileName="Sample/SampleFormController.cs" Line="30" Column="27" />
       <File FileName="Sample/CustomElements.cs" Line="16" Column="92" />
-      <File FileName="Sample/Main.cs" Line="29" Column="23" />
+      <File FileName="Sample/Main.cs" Line="33" Column="4" />
       <File FileName="MonoTouch.Dialog/Elements/SimpleImageElement.cs" Line="17" Column="54" />
-      <File FileName="MonoTouch.Forms/Elements/ActivityOldElement.cs" Line="8" Column="65" />
-      <File FileName="MonoTouch.Forms/Elements/ImageStore.cs" Line="42" Column="29" />
       <File FileName="MonoTouch.Forms/Elements/ImageStringElement.cs" Line="14" Column="39" />
       <File FileName="MonoTouch.Dialog/Elements/RefreshTableHeaderView.cs" Line="14" Column="43" />
       <File FileName="MonoTouch.Dialog/Reflection/SectionAttribute.cs" Line="1" Column="1" />
@@ -56,13 +54,13 @@
       <File FileName="MonoTouch.Dialog/Elements/RefreshViewStatus.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/RefreshHeaderUtil.cs" Line="13" Column="41" />
       <File FileName="MonoTouch.Dialog/Elements/FloatElement.cs" Line="14" Column="22" />
-      <File FileName="Sample/js/sample.js" Line="23" Column="74" />
+      <File FileName="Sample/js/sample.js" Line="26" Column="35" />
       <File FileName="MonoTouch.Dialog/Elements/StyledMultilineElement.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/StyledStringElement.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/WebElement.cs" Line="42" Column="69" />
       <File FileName="Sample/js/allelements.js" Line="10" Column="75" />
       <File FileName="Sample/js/person.js" Line="15" Column="54" />
-      <File FileName="Sample/js/login.js" Line="15" Column="124" />
+      <File FileName="Sample/js/login.js" Line="16" Column="4" />
       <File FileName="MonoTouch.Forms/JsonSectionBuilder.cs" Line="99" Column="18" />
       <File FileName="MonoTouch.Forms/Constants.cs" Line="16" Column="46" />
       <File FileName="MonoTouch.Forms/ElementFetchers.cs" Line="1" Column="1" />
@@ -71,10 +69,15 @@
       <File FileName="Sample/js/countries.js" Line="1" Column="1" />
       <File FileName="MonoTouch.Forms/Elements/ActionElement.cs" Line="16" Column="3" />
       <File FileName="MonoTouch.Forms/Elements/EmptyListElement.cs" Line="10" Column="26" />
-      <File FileName="MonoTouch.Forms/Activities/Activity.cs" Line="10" Column="94" />
-      <File FileName="MonoTouch.Forms/Elements/ActivityElement.cs" Line="57" Column="4" />
+      <File FileName="MonoTouch.Forms/Activities/Activity.cs" Line="8" Column="23" />
+      <File FileName="MonoTouch.Forms/Elements/ActivityElement.cs" Line="20" Column="150" />
       <File FileName="MonoTouch.Dialog/Elements/UIViewElement.cs" Line="13" Column="35" />
-      <File FileName="Sample/activities/ShowValuesInConsole.cs" Line="8" Column="2" />
+      <File FileName="Sample/activities/ShowValuesInConsole.cs" Line="16" Column="42" />
+      <File FileName="MonoTouch.Forms/Activities/ActivityFactory.cs" Line="25" Column="11" />
+      <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="27" Column="72" />
+      <File FileName="Sample/js/weather.js" Line="9" Column="70" />
+      <File FileName="Sample/js/weatherbind.js" Line="8" Column="76" />
+      <File FileName="MonoTouch.Forms/Elements/UIIndicatorView.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -85,12 +88,13 @@
           <Node name="MonoTouch.Forms" expanded="True">
             <Node name="Activities" expanded="True" />
             <Node name="Elements" expanded="True" />
+            <Node name="Util" expanded="True" />
           </Node>
           <Node name="Sample" expanded="True">
-            <Node name="activities" expanded="True">
-              <Node name="ShowValuesInConsole.cs" selected="True" />
+            <Node name="activities" expanded="True" />
+            <Node name="js" expanded="True">
+              <Node name="sample.js" selected="True" />
             </Node>
-            <Node name="js" expanded="True" />
           </Node>
         </State>
       </Pad>
@@ -101,6 +105,7 @@
         <State>
           <Value>this</Value>
           <Value>dialog</Value>
+          <Value>weather[0]</Value>
         </State>
       </Pad>
       <Pad Id="ConnectionManagerPad">

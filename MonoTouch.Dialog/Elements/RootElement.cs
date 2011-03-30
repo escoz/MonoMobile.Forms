@@ -1,5 +1,5 @@
 //
-// Elements.cs: defines the various components of our view
+// RootElement.cs
 //
 // Author:
 //   Miguel de Icaza (miguel@gnome.org)

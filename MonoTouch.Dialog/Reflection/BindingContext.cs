@@ -1,5 +1,5 @@
 //
-// Reflect.cs: Creates Element classes from an instance
+// BindingContext.cs
 //
 // Author:
 //   Miguel de Icaza (miguel@gnome.org)
@@ -8,6 +8,10 @@
 //
 // Code licensed under the MIT X11 license
 //
+// Original code created by Miguel de Icaza for the MonoTouch.Dialog library available at
+// https://github.com/migueldeicaza/MonoTouch.Dialog
+//
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

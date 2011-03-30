@@ -1,14 +1,17 @@
 //
-// DialogViewController.cs: drives MonoTouch.Dialog
+// DialogViewController.cs
 //
 // Author:
-//   Miguel de Icaza
+//   Miguel de Icaza (miguel@gnome.org)
 //
-// Code to support pull-to-refresh based on Martin Bowling's TweetTableView
-// which is based in turn in EGOTableViewPullRefresh code which was created
-// by Devin Doty and is Copyrighted 2009 enormego and released under the
-// MIT X11 license
+// Copyright 2010, Novell, Inc.
 //
+// Code licensed under the MIT X11 license
+//
+// Original code created by Miguel de Icaza for the MonoTouch.Dialog library available at
+// https://github.com/migueldeicaza/MonoTouch.Dialog
+//
+
 using System;
 using MonoTouch.UIKit;
 using System.Drawing;
