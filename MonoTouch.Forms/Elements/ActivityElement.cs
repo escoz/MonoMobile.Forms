@@ -16,28 +16,28 @@ namespace MonoTouch.Forms
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		private string _commandName;
-		public ActivityElement(string caption, string commandName, string value) :base(caption, new UIActivityIndicatorView (UIActivityIndicatorViewStyle.Gray), false)
+		private string _activityName;
+		public ActivityElement(string caption, string activity, string value) :base(caption, new UIActivityIndicatorView (UIActivityIndicatorViewStyle.White), false)
 		{
-			_commandName = commandName;
+			_activityName = activity;
 			Initialize();
 		}
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			tableView.DeselectRow(path, true);
 			var cell = tableView.CellAt(path);
 			cell.TextLabel.Hidden = true;
 			
 			Animating = true;
 			
-			var activity = ActivityFactory.Create(_commandName);
+			var activity = ActivityFactory.Create(_activityName);
 			dvc.View.UserInteractionEnabled = false;
 			activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;
 					updateCell(cell);
+					tableView.DeselectRow(path, true);
 					dvc.View.UserInteractionEnabled = true;
 				});
 			});

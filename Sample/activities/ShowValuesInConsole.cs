@@ -3,6 +3,7 @@ using MonoTouch.Forms.Activities;
 using MonoTouch.Dialog;
 using MonoTouch.Forms;
 using MonoTouch.Foundation;
+using System.Threading;
 
 namespace Sample.Activities
 {
@@ -12,14 +13,19 @@ namespace Sample.Activities
 		
 		public override void Execute (ActivityElement element, JsonDialogViewController controller, Action completed)
 		{
-			Console.WriteLine("ShowValuesInConsoleActivity");
-			var values = controller.GetAllValues();
-			foreach (var v in values){
-				Console.WriteLine("Value => {0} - {1}", v.Key, v.Value);	
-			}
-			System.Threading.Thread.Sleep(2000);
-			element.Caption = "Action completed!";
-			completed();
+			Console.WriteLine("ShowValuesInConsole");
+			ThreadPool.QueueUserWorkItem( delegate { 
+				
+				System.Threading.Thread.Sleep(2000);
+				var values = controller.GetAllValues();
+				foreach (var v in values){
+					Console.WriteLine("Value => {0} - {1}", v.Key, v.Value);	
+				}
+				
+				element.Caption = "Action completed!";
+				completed();
+			} );
+			
 		}	
 	}
 }
