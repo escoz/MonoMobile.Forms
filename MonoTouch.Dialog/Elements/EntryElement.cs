@@ -23,10 +23,7 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
-	public class Fonts {
-		public static UIFont EntryFont = UIFont.BoldSystemFontOfSize (17);	
-	}
-	
+
 	public class EntryElement : Element {
 		
 		public string Value, Placeholder;
@@ -71,6 +68,8 @@ namespace MonoTouch.Dialog
 			((EntryElementCell)tableView.CellAt(path)).BecomeFirstResponder();
 		}
 	}
+	
+	
 	
 	public class EntryElementCell : UITableViewCell {
 		

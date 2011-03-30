@@ -26,63 +26,77 @@ namespace MonoTouch.Dialog
 {
 	public class FloatElement : Element {
 		public float Value;
-		public float MinValue, MaxValue;
-		static NSString skey = new NSString ("FloatElement");
-		UISlider slider;
+		public float MinValue = 0, MaxValue = 1;
 		
-		public FloatElement (string caption, float value) : base (null)
+		public FloatElement (string caption, float value) : base(caption)
 		{
-			Caption = caption;
-			MinValue = 0;
-			MaxValue = 1;
 			Value = value;
 		}
 		
 		public override UITableViewCell GetCell (UITableView tv)
 		{
-			var cell = tv.DequeueReusableCell (skey);
+			FloatElementCell cell = (FloatElementCell)tv.DequeueReusableCell (FloatElementCell.KEY);
 			if (cell == null){
-				cell = new UITableViewCell (UITableViewCellStyle.Default, skey);
-				cell.SelectionStyle = UITableViewCellSelectionStyle.None;
-			} else
-				RemoveTag (cell, 1);
-
-			SizeF captionSize = new SizeF (0, 0);
-			if (Caption != null){
-				cell.TextLabel.Text = Caption;
-				captionSize = cell.TextLabel.StringSize (Caption, UIFont.FromName (cell.TextLabel.Font.Name, UIFont.LabelFontSize));
-				captionSize.Width += 10; // Spacing
-			}
-
-			if (slider == null){
-				slider = new UISlider (new RectangleF (10f + captionSize.Width, 12f, 280f - captionSize.Width, 7f)){
-					BackgroundColor = UIColor.Clear,
-					MinValue = this.MinValue,
-					MaxValue = this.MaxValue,
-					Continuous = true,
-					Value = this.Value,
-					Tag = 1
-				};
-				slider.ValueChanged += delegate {
-					Value = slider.Value;
-				};
-			}
+				cell = new FloatElementCell();
+			} 
+			cell.Update(this);
 			
-			cell.ContentView.AddSubview (slider);
 			return cell;
 		}
 
 		public override string Summary ()
 		{
 			return Value.ToString ();
+		}	
+	}
+	
+	public class FloatElementCell : UITableViewCell {
+		public static NSString KEY = new NSString ("FloatElement");
+		
+		private UISlider _slider;
+		private FloatElement _element;
+		
+		public FloatElementCell():base(UITableViewCellStyle.Default, KEY){
+			SelectionStyle = UITableViewCellSelectionStyle.None;
 		}
 		
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing){
-				slider.Dispose ();
-				slider = null;
+		public void Update(FloatElement element){
+			_element = element;
+			if (_slider==null) 
+				prepareCell();
+			
+			TextLabel.BackgroundColor = UIColor.Clear;
+			SizeF captionSize = new SizeF (0, 0);
+			if (element.Caption != null){
+				TextLabel.Text = element.Caption;
+				captionSize = TextLabel.StringSize (element.Caption, Fonts.CaptionFont);
+				captionSize.Width += 8; // Spacing
 			}
-		}		
+			
+			_slider.Frame = new RectangleF (10f + captionSize.Width, 20f, 280f - captionSize.Width, 7f);
+			_slider.MinValue = element.MinValue;
+			_slider.MaxValue = element.MaxValue;
+			_slider.Value =element.Value;
+		}
+		
+		public override void PrepareForReuse ()
+		{
+			base.PrepareForReuse ();
+			_element = null;
+		}
+		
+		private void prepareCell(){
+			_slider = new UISlider (){
+				BackgroundColor = UIColor.Clear,
+				Continuous = true,
+				Tag = 1
+			};
+			_slider.ValueChanged += delegate {
+				_element.Value = _slider.Value;
+			};
+			
+			ContentView.AddSubview (_slider);
+		}
+		
 	}
 }

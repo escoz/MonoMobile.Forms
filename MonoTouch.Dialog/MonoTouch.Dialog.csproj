@@ -138,6 +138,7 @@
     <Compile Include="Elements\RootElement.cs" />
     <Compile Include="Elements\RefreshHeaderUtil.cs" />
     <Compile Include="Elements\ImagePickerElement.cs" />
+    <Compile Include="Fonts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

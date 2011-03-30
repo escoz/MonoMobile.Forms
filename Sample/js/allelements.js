@@ -9,6 +9,7 @@
 				{ "type":"EntryElement", "caption":"EntryElement", "value":"Some Value" },
 				{ "type":"BooleanElement", "caption":"BooleanElement", "value":true },
 				{ "type":"FloatElement", "caption":"FloatElement", "value":0.33 },
+				{ "type":"FloatElement", "value":99, "minvalue":1, "maxvalue":100 },
 				{ "type":"CheckboxElement", "caption":"CheckboxElement", "value":true },
 				{ "type":"DateElement", "caption":"DateElement", "value":"4/10/2011" },
 				{ "type":"TimeElement", "caption":"TimeElement", "value":"22:30" },
