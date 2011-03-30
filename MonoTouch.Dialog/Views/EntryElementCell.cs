@@ -72,16 +72,18 @@ namespace MonoTouch.Dialog
 				}, UIControlEvent.EditingChanged);
 				
 			_entry.ShouldReturn += delegate {
-				UITableViewCell cellToFocusOn = null;
+				Element elementToFocusOn = null;
 				
-				foreach (var c in tableview.VisibleCells){
-					if (c == this)
-						cellToFocusOn = c;
-					else if (cellToFocusOn != null && c is EntryElementCell)
-						cellToFocusOn = c as EntryElementCell;
+				foreach (var c in ((Section)_element.Parent).Elements){
+					if (c == _element)
+						elementToFocusOn = c;
+					else if (elementToFocusOn != null && c is EntryElement)
+						elementToFocusOn = c as EntryElement;
 				}
-				if (cellToFocusOn != this && cellToFocusOn!=null)
-					cellToFocusOn.BecomeFirstResponder();
+				if (elementToFocusOn != _element && elementToFocusOn!=null) {
+					var cell = tableview.CellAt(elementToFocusOn.GetIndexPath());
+					cell.BecomeFirstResponder();
+				}
 				else 
 					_entry.ResignFirstResponder();
 				
