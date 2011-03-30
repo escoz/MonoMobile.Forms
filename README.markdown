@@ -1,5 +1,5 @@
-MonoTouch.Forms
-================
+Json Forms for MonoTouch
+========================
 
 MonoTouch.Forms allows you to easily define iOS dialogs using json and C#. MonoTouch.Forms also simplifies
 the display of data from json REST services, by directly binding values in json to fields in forms.
