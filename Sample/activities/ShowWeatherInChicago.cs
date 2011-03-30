@@ -39,7 +39,7 @@ namespace Sample.Activities
 	[Preserve(AllMembers=true)]
 	public class ShowWeatherInChicago : Activity
 	{
-		public override void Execute (MonoTouch.Forms.ActivityElement element, MonoTouch.Forms.JsonDialogViewController controller, Action completed)
+		public override void Execute (MonoTouch.Forms.ActivityElement element, MonoTouch.Forms.FormDialogViewController controller, Action completed)
 		{
 			controller.SetValue("temperature", "");
 			controller.SetValue("humidity", "");

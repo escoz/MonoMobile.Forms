@@ -61,7 +61,7 @@ namespace MonoTouch.Forms
 			
 			var activity = ActivityFactory.Create(_activityName);
 			dvc.View.UserInteractionEnabled = false;
-			activity.Execute(this, (JsonDialogViewController)dvc, ()=>{ 
+			activity.Execute(this, (FormDialogViewController)dvc, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;

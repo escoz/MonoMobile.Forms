@@ -1,5 +1,5 @@
 //
-// JsonSectionBuilder.cs
+// FormSectionBuilder.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -37,11 +37,11 @@ using System.Collections.Generic;
 using MonoTouch.Foundation;
 namespace MonoTouch.Forms
 {
-	public class JsonSectionBuilder
+	public class FormSectionBuilder
 	{
-		JsonDialogViewController _controller;
+		FormDialogViewController _controller;
 		
-		public JsonSectionBuilder (JsonDialogViewController controller)
+		public FormSectionBuilder (FormDialogViewController controller)
 		{
 			_controller = controller;
 		}

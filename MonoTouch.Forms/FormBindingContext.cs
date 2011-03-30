@@ -1,5 +1,5 @@
 //
-// JsonBindingContext.cs
+// FormBindingContext.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -42,12 +42,12 @@ using MonoTouch.Dialog;
 
 namespace MonoTouch.Forms
 {
-	public partial class JsonBindingContext : IDisposable {
+	public partial class FormBindingContext : IDisposable {
 		public RootElement Root;
 		Dictionary<string, Element> _elements;
-		public JsonDialogViewController _controller;
+		public FormDialogViewController _controller;
 
-		public JsonBindingContext (JsonDialogViewController controller, JsonValue json, string title)
+		public FormBindingContext (FormDialogViewController controller, JsonValue json, string title)
 		{
 			_controller = controller;
 			_elements = new Dictionary<string, Element>();
@@ -64,7 +64,7 @@ namespace MonoTouch.Forms
 			}
 		}
 		
-		public JsonBindingContext(JsonDialogViewController callbacks, JsonValue json, JsonValue data, string title) {
+		public FormBindingContext(FormDialogViewController callbacks, JsonValue json, JsonValue data, string title) {
 			_controller = callbacks;
 			_elements = new Dictionary<string, Element>();
 			
@@ -93,7 +93,7 @@ namespace MonoTouch.Forms
 			}
 			
 			foreach (JsonObject section in jsonRoot){
-				var sec = new JsonSectionBuilder(this._controller).Build(section, data);
+				var sec = new FormSectionBuilder(this._controller).Build(section, data);
 				foreach (var el in sec.Elements) {
 					if (!string.IsNullOrEmpty(el.ID) && !_elements.ContainsKey(el.ID)) _elements.Add(el.ID, el);
 				}

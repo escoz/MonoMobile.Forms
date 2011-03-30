@@ -35,7 +35,7 @@ using System.Collections.Generic;
 
 namespace Sample
 {
-	public class SampleFormController : JsonDialogViewController
+	public class SampleFormController : FormDialogViewController
 	{
 		public SampleFormController () : base("js/sample.js", true){}
 		public SampleFormController(RootElement root):base(root){}

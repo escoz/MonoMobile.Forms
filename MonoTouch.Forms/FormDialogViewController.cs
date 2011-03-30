@@ -1,5 +1,5 @@
 //
-// JsonDialogViewController.cs
+// FormDialogViewController.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -42,9 +42,9 @@ using System.Collections.Generic;
 namespace MonoTouch.Forms
 {
 	
-	public partial class JsonDialogViewController : DialogViewController 
+	public partial class FormDialogViewController : DialogViewController 
 	{
-		protected JsonBindingContext Context;
+		protected FormBindingContext Context;
 		protected ActionElement rightBarItem, leftBarItem;
 		Dictionary<string, string> _elementValues = new Dictionary<string, string>();
 		private string _url;
@@ -53,16 +53,16 @@ namespace MonoTouch.Forms
 		
 		public string Url {get {return _url;}}
 		
-		public JsonDialogViewController(IntPtr ptr):base(ptr){}
+		public FormDialogViewController(IntPtr ptr):base(ptr){}
 		
-		public JsonDialogViewController(string file, bool pushing) : this(file, null, pushing) {}
+		public FormDialogViewController(string file, bool pushing) : this(file, null, pushing) {}
 		
-		public JsonDialogViewController(string file, string values, bool pushing) : base(pushing) {
+		public FormDialogViewController(string file, string values, bool pushing) : base(pushing) {
 			_file = file;
 			_values = values;
 		}
 		
-		public JsonDialogViewController(RootElement root):base(root) {
+		public FormDialogViewController(RootElement root):base(root) {
 			Loading(false);
 		}
 		
@@ -162,7 +162,7 @@ namespace MonoTouch.Forms
 			
 			if (!string.IsNullOrEmpty(values)){
 				if (values.StartsWith(Constants.Http)){
-					Context = new JsonBindingContext(this, json, Title);
+					Context = new FormBindingContext(this, json, Title);
 					Loading(true);
 					var req = CreateRequestForUrl(values);
 					new UrlConnection(Constants.UrlConnectionNameData, req, (string result)=>{
@@ -183,7 +183,7 @@ namespace MonoTouch.Forms
 								resultValue = ((JsonObject)resultValue).asJsonValue(DataRootName);
 							}
 							
-							Context = new JsonBindingContext(this, json,  resultValue, Title);
+							Context = new FormBindingContext(this, json,  resultValue, Title);
 							_configureDialog(json, valueJson);
 							PrepareRoot(Context.Root);
 							ReloadData();
@@ -194,11 +194,11 @@ namespace MonoTouch.Forms
 					
 				} else {
 					var datavalue = JsonObject.Parse(File.ReadAllText(values));
-					Context = new JsonBindingContext(this, json, datavalue, Title);
+					Context = new FormBindingContext(this, json, datavalue, Title);
 				}
 					
 			} else {
-				Context = new JsonBindingContext(this, json, Title);
+				Context = new FormBindingContext(this, json, Title);
 				Loading(false);
 			}
 			_configureDialog(json, valueJson);

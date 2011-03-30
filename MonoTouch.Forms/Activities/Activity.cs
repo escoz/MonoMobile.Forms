@@ -36,7 +36,7 @@ namespace MonoTouch.Forms.Activities
 	{
 		public Activity () {}
 		
-		public abstract void Execute(ActivityElement element, JsonDialogViewController controller, Action completed);
+		public abstract void Execute(ActivityElement element, FormDialogViewController controller, Action completed);
 	}
 }
 

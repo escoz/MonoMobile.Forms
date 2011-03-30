@@ -40,7 +40,7 @@ namespace Sample.Activities
 	[Preserve(AllMembers=true)]
 	public class ShowValuesInConsole : Activity {
 		
-		public override void Execute (ActivityElement element, JsonDialogViewController controller, Action completed)
+		public override void Execute (ActivityElement element, FormDialogViewController controller, Action completed)
 		{
 			Console.WriteLine("ShowValuesInConsole");
 			ThreadPool.QueueUserWorkItem( delegate { 

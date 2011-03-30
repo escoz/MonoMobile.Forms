@@ -1,6 +1,6 @@
 
 //
-// JsonDialogViewControllerActions.cs
+// FormDialogViewControllerActions.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -39,7 +39,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 namespace MonoTouch.Forms
 {
-	public partial class JsonDialogViewController
+	public partial class FormDialogViewController
 	{
 		public void InvokeAction(string action , params object[] parameters){
 			this.GetType().InvokeMember(action,
@@ -69,7 +69,7 @@ namespace MonoTouch.Forms
 			var dialog = this;
 			UrlConnection.KillAllConnections();
 			InvokeOnMainThread(()=>{
-				var newcontroller = (JsonDialogViewController)Activator.CreateInstance(this.GetType(), file, true);
+				var newcontroller = (FormDialogViewController)Activator.CreateInstance(this.GetType(), file, true);
 				foreach (var v in hiddenfields)
 					newcontroller.SetValue(v.Key, v.Value);
 				
@@ -81,7 +81,7 @@ namespace MonoTouch.Forms
 			var dialog = this;
 			UrlConnection.KillAllConnections();
 			InvokeOnMainThread(()=>{
-				var controller = (JsonDialogViewController)Activator.CreateInstance(this.GetType(), file, true);
+				var controller = (FormDialogViewController)Activator.CreateInstance(this.GetType(), file, true);
 				dialog.NavigationController.PushViewController(controller, true);
 			});
 		}

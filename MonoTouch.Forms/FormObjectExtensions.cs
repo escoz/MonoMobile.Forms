@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 //
-// JsonObjectExtensions.cs
+// FormObjectExtensions.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -41,7 +41,7 @@ using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
 namespace MonoTouch.Forms
 {
-	public static class JsonObjectExtensions {
+	public static class FormObjectExtensions {
 	
 		public static List<string> sl(this JsonObject json, string name){
 			var result = new List<string>();
@@ -106,7 +106,7 @@ namespace MonoTouch.Forms
 			return null;
 		}	
 		
-		public static Action asAction(this JsonObject json, JsonDialogViewController dvc){
+		public static Action asAction(this JsonObject json, FormDialogViewController dvc){
 			if (json!=null && json.ContainsKey(Constants.NavigateTo) && json.ContainsKey(Constants.Action)) {
 				string file = json[Constants.NavigateTo];
 				string action = json[Constants.Action];

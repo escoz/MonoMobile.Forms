@@ -70,14 +70,9 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <Compile Include="JsonBindingContext.cs" />
-    <Compile Include="JsonDialogViewController.cs" />
-    <Compile Include="JsonDialogViewControllerActions.cs" />
-    <Compile Include="JsonObjectExtensions.cs" />
     <Compile Include="Elements\ImageStringElement.cs" />
     <Compile Include="Elements\EmptyListElement.cs" />
     <Compile Include="Elements\UIIndicatorView.cs" />
-    <Compile Include="JsonSectionBuilder.cs" />
     <Compile Include="ElementParsers.cs" />
     <Compile Include="ElementFetchers.cs" />
     <Compile Include="Constants.cs" />
@@ -88,6 +83,11 @@
     <Compile Include="Util\LRUCache.cs" />
     <Compile Include="Util\ImageStore.cs" />
     <Compile Include="Util\UrlConnection.cs" />
+    <Compile Include="FormDialogViewController.cs" />
+    <Compile Include="FormBindingContext.cs" />
+    <Compile Include="FormDialogViewControllerActions.cs" />
+    <Compile Include="FormObjectExtensions.cs" />
+    <Compile Include="FormSectionBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Elements\" />

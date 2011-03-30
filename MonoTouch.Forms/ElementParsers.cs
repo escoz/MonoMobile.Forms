@@ -42,13 +42,13 @@ namespace MonoTouch.Forms
 	public class ElementParsers
 	{
 		
-		public static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> Parsers = 
+		public static Dictionary<string, Func<JsonObject, FormDialogViewController, JsonValue, Element>> Parsers = 
 			ElementParsers.CreateDefaultParsers();
 		
 		
-		private static Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>> CreateDefaultParsers()
+		private static Dictionary<string, Func<JsonObject, FormDialogViewController, JsonValue, Element>> CreateDefaultParsers()
 		{
-			var result = new Dictionary<string, Func<JsonObject, JsonDialogViewController, JsonValue, Element>>();
+			var result = new Dictionary<string, Func<JsonObject, FormDialogViewController, JsonValue, Element>>();
 			
 			result.Add("StringElement", (json, dvc, data)=>{
 					string v = "";
