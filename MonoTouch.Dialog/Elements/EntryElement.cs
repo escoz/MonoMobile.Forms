@@ -23,164 +23,42 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
+	public class Fonts {
+		public static UIFont EntryFont = UIFont.BoldSystemFontOfSize (17);	
+	}
+	
 	public class EntryElement : Element {
 		
-		public string Value { 
-			get {
-				return val;
-			}
-			set {
-				val = value;
-				if (entry != null)
-					entry.Text = value;
-			}
-		}
-		string val;
+		public string Value, Placeholder;
+		public bool IsPassword = false;
 		
 		public UIKeyboardType KeyboardType = UIKeyboardType.Default;
-		
-		static NSString ekey = new NSString ("EntryElement");
-		bool isPassword;
 		public UITextAutocapitalizationType AutoCapitalize = UITextAutocapitalizationType.Sentences;
-		UITextField entry;
-		string placeholder;
-		static UIFont font = UIFont.BoldSystemFontOfSize (17);
-
-		public event EventHandler Changed;
 		
-		public EntryElement (string caption, string placeholder, string value) : base (caption)
-		{
-			Value = value;
-			this.placeholder = placeholder;
-		}
+		public EntryElement (string caption, string placeholder, string value) : this (caption, placeholder, value, false){}
 		
 		public EntryElement (string caption, string placeholder, string value, bool isPassword) : base (caption)
 		{
 			Value = value;
-			this.isPassword = isPassword;
-			this.placeholder = placeholder;
+			IsPassword = isPassword;
+			Placeholder = placeholder;
 		}
-
+		
 		public override string Summary ()
 		{
 			return Value;
 		}
-
-		SizeF ComputeEntryPosition (UITableView tv, UITableViewCell cell)
-		{
-			Section s = Parent as Section;
-			if (s.EntryAlignment.Width != 0)
-				return s.EntryAlignment;
-			
-			SizeF max = new SizeF (-1, -1);
-			foreach (var e in s.Elements){
-				var ee = e as EntryElement;
-				if (ee == null)
-					continue;
-				
-				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, font);
-				if (size.Width > max.Width)
-					max = size;				
-			}
-			s.EntryAlignment = new SizeF (16 + Math.Min (max.Width, 160), max.Height);
-			return s.EntryAlignment;
-		}
 		
 		public override UITableViewCell GetCell (UITableView tv)
 		{
-			var cell = tv.DequeueReusableCell (ekey);
+			EntryElementCell cell = (EntryElementCell)tv.DequeueReusableCell(EntryElementCell.KEY);
 			if (cell == null){
-				cell = new UITableViewCell (UITableViewCellStyle.Default, ekey);
-				cell.SelectionStyle = UITableViewCellSelectionStyle.None;
-			} else 
-				RemoveTag (cell, 1);
+				cell = new EntryElementCell();
+			} 
 			
-			if (entry == null){
-				SizeF size = ComputeEntryPosition (tv, cell);
-				var _entry = new UITextField (new RectangleF (size.Width+10, (cell.ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width, size.Height)){
-					Tag = 1,
-					Placeholder = placeholder ?? "",
-					SecureTextEntry = isPassword,
-					AutocapitalizationType = AutoCapitalize
-				};
-				_entry.Text = Value ?? "";
-				entry = _entry;
+			cell.Update(this, tv);
 				
-				entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
-					UIViewAutoresizing.FlexibleLeftMargin;
-				
-				entry.ValueChanged += delegate {
-					FetchValue ();
-				};
-				entry.Ended += delegate {
-					FetchValue ();
-				};
-				entry.AddTarget((object o, EventArgs r)=>{
-					FetchValue(false);
-				}, UIControlEvent.EditingChanged);
-				entry.ShouldReturn += delegate {
-					EntryElement focus = null;
-					foreach (var e in (Parent as Section).Elements){
-						if (e == this)
-							focus = this;
-						else if (focus != null && e is EntryElement)
-							focus = e as EntryElement;
-					}
-					if (focus != this)
-						focus.entry.BecomeFirstResponder ();
-					else 
-						focus.entry.ResignFirstResponder ();
-					
-					return true;
-				};
-				entry.Started += delegate {
-					EntryElement self = null;
-					var returnType = UIReturnKeyType.Default;
-					
-					foreach (var e in (Parent as Section).Elements){
-						if (e == this)
-							self = this;
-						else if (self != null && e is EntryElement)
-							returnType = UIReturnKeyType.Next;
-					}
-					entry.ReturnKeyType = returnType;
-				};
-			}
-			entry.KeyboardType = KeyboardType;
-			
-			cell.TextLabel.Text = Caption;
-			cell.ContentView.AddSubview (entry);
 			return cell;
-		}
-		
-		public void FetchValue ()
-		{
-			FetchValue(false);
-		}
-		
-		public void FetchValue(bool setEntry)
-		{
-			if (entry == null)
-				return;
-
-			var newValue = entry.Text;
-			var diff = newValue != Value;
-			if (setEntry)
-			Value = newValue;
-			else 
-				val = newValue;
-			if (diff){
-				if (Changed != null)
-					Changed (this, EventArgs.Empty);
-			}
-		}
-		
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing){
-				entry.Dispose ();
-				entry = null;
-			}
 		}
 		
 		public override bool Matches (string text)
@@ -190,7 +68,123 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			entry.BecomeFirstResponder();
+			((EntryElementCell)tableView.CellAt(path)).BecomeFirstResponder();
 		}
+	}
+	
+	public class EntryElementCell : UITableViewCell {
+		
+		public static NSString KEY = new NSString ("EntryElement");
+			
+		private UITextField _entry;
+		private EntryElement _element;
+		
+		public EntryElementCell():base(UITableViewCellStyle.Default, KEY){
+			SelectionStyle = UITableViewCellSelectionStyle.None;
+				
+		}
+		
+		public void Update(EntryElement element, UITableView tableView){
+			_element = element;
+			
+			if (_entry==null){
+				_prepareEntry(tableView);
+			}
+			
+			_entry.Text = element.Value ?? "";
+			_entry.Placeholder = element.Placeholder ?? "";
+			_entry.SecureTextEntry = element.IsPassword;
+			_entry.AutocapitalizationType = element.AutoCapitalize;
+			_entry.KeyboardType = element.KeyboardType;
+			TextLabel.Text = element.Caption;
+		}
+			
+		public override bool BecomeFirstResponder ()
+		{
+			return _entry.BecomeFirstResponder();
+		}
+		
+		public override void PrepareForReuse ()
+		{
+			base.PrepareForReuse ();
+			_element = null;
+		}
+			
+		private void _prepareEntry(UITableView tableview){
+			SizeF size = _computeEntryPosition(tableview);
+			
+			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width, size.Height));
+			
+			TextLabel.BackgroundColor = UIColor.Clear;
+			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
+				UIViewAutoresizing.FlexibleLeftMargin;
+			
+			_entry.ValueChanged += delegate {
+				if (_element != null)
+					_element.Value = _entry.Text;
+			};
+			_entry.Ended += delegate {
+				if (_element != null)
+					_element.Value = _entry.Text;
+			};
+			
+			_entry.AddTarget((object o, EventArgs r)=>{
+				if (_element != null)
+					_element.Value = _entry.Text;
+				}, UIControlEvent.EditingChanged);
+				
+			_entry.ShouldReturn += delegate {
+				UITableViewCell cellToFocusOn = null;
+				
+				foreach (var c in tableview.VisibleCells){
+					if (c == this)
+						cellToFocusOn = c;
+					else if (cellToFocusOn != null && c is EntryElementCell)
+						cellToFocusOn = c as EntryElementCell;
+				}
+				if (cellToFocusOn != this && cellToFocusOn!=null)
+					cellToFocusOn.BecomeFirstResponder();
+				else 
+					_entry.ResignFirstResponder();
+				
+				return true;
+			};
+			_entry.Started += delegate {
+				EntryElement self = null;
+				var returnType = UIReturnKeyType.Default;
+				
+				foreach (var e in (_element.Parent as Section).Elements){
+					if (e == _element)
+						self = _element;
+					else if (self != null && e is EntryElement)
+						returnType = UIReturnKeyType.Next;
+				}
+				_entry.ReturnKeyType = returnType;
+			};
+				
+			ContentView.AddSubview (_entry);
+		}
+		
+		private SizeF _computeEntryPosition (UITableView tv)
+		{
+			var section = _element.Parent as Section;
+			if (section.EntryAlignment.Width != 0)
+				return section.EntryAlignment;
+			
+			SizeF max = new SizeF (-1, -1);
+			foreach (var e in section.Elements){
+				var ee = e as EntryElement;
+				if (ee == null)
+					continue;
+				
+				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, Fonts.EntryFont);
+				if (size.Width > max.Width)
+					max = size;				
+			}
+			section.EntryAlignment = new SizeF (16 + Math.Min (max.Width, 160), max.Height);
+			return section.EntryAlignment;
+		}
+		
+		
 	}
 }

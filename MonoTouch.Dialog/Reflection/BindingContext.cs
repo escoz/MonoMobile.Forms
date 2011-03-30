@@ -335,7 +335,6 @@ namespace MonoTouch.Dialog
 					SetValue (mi, obj, ((CheckboxElement) element).Value);
 				else if (element is EntryElement){
 					var entry = (EntryElement) element;
-					entry.FetchValue ();
 					SetValue (mi, obj, entry.Value);
 				} else if (element is ImagePickerElement)
 					SetValue (mi, obj, ((ImagePickerElement) element).Value);
