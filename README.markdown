@@ -8,5 +8,15 @@ This library is not intented to replace C#, MonoTouch, or  the Apple SDK. Instea
 the amount of boilerplate code necessary to display simple forms of data, letting you focusing on actual
 business logic.
 
+If you would like to see an application that uses this library in action, download the app GitHubby from the
+AppStore. The entire application is written using this library plus a very small portion of C# code. I 
+also develop a few other apps using this library, like [Quicklytics](http://itunes.apple.com/us/app/quicklytics-google-analytics/id354890919?mt=8)
 
-a LOT more documentation will come.
+I hope you enjoy this project.
+
+Eduardo Scoz
+
+
+
+
+OBS: a LOT more documentation will come.
