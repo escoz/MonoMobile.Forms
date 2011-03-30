@@ -114,10 +114,7 @@
     <Compile Include="Reflection\RangeAttribute.cs" />
     <Compile Include="Reflection\BindingContext.cs" />
     <Compile Include="Elements\Element.cs" />
-    <Compile Include="Elements\BoolElement.cs" />
     <Compile Include="Elements\BooleanElement.cs" />
-    <Compile Include="Elements\BaseBooleanImageElement.cs" />
-    <Compile Include="Elements\BooleanImageElement.cs" />
     <Compile Include="Elements\FloatElement.cs" />
     <Compile Include="Elements\WebElement.cs" />
     <Compile Include="Elements\StringElement.cs" />

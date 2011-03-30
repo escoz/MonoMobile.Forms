@@ -346,7 +346,7 @@ namespace MonoTouch.Dialog
 								count++;
 							continue;
 						}
-						var be = e as BoolElement;
+						var be = e as BooleanElement;
 						if (be != null){
 							if (be.Value)
 								count++;
