@@ -39,7 +39,6 @@ namespace MonoTouch.Dialog
 			Tapped += tapped;
 			this.Value = value;
 			this.Image = image;
-			CellId = new NSString(Value==null ? "dialog.StringElement" : "dialog.StringElementValue");
 		
 		}
 		
@@ -54,20 +53,18 @@ namespace MonoTouch.Dialog
 				
 		public override UITableViewCell GetCell (UITableView tv)
 		{
-			var cell = tv.DequeueReusableCell (CellId);
+			var cellid = new NSString(Value==null ? "dialog.StringElement" : "dialog.StringElementValue");
+			var cell = tv.DequeueReusableCell (cellid);
 			if (cell == null){
 				if (Value==null) 
-					cell = new UITableViewCell (UITableViewCellStyle.Default, CellId);
+					cell = new UITableViewCell (UITableViewCellStyle.Default, cellid);
 				else
-					cell = new UITableViewCell (UITableViewCellStyle.Value1, CellId);
+					cell = new UITableViewCell (UITableViewCellStyle.Value1, cellid);
 			}
 			
 			cell.SelectionStyle = (Tapped != null) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
-			
 			cell.Accessory = Tapped == null? UITableViewCellAccessory.None : UITableViewCellAccessory.DisclosureIndicator;
-			
 			cell.ImageView.Image = Image;
-			
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.TextAlignment = Alignment;
 			

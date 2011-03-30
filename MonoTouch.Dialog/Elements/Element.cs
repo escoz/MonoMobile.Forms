@@ -23,11 +23,10 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
-	public class Element : IDisposable {
+	public abstract class Element : IDisposable {
 		public Element Parent;
-		public string ID;
-		public NSString CellId = new NSString("dialog.element");
 		
+		public string ID;
 		public string Caption;
 		
 		public Element (string caption)
@@ -44,17 +43,7 @@ namespace MonoTouch.Dialog
 		{
 		}
 		
-		public virtual UITableViewCell GetCell (UITableView tv)
-		{
-			return new UITableViewCell (UITableViewCellStyle.Default, CellId);
-		}
-		
-		static protected void RemoveTag (UITableViewCell cell, int tag)
-		{
-			var viewToRemove = cell.ContentView.ViewWithTag (tag);
-			if (viewToRemove != null)
-				viewToRemove.RemoveFromSuperview ();
-		}
+		public abstract UITableViewCell GetCell (UITableView tv);
 		
 		public virtual string Summary ()
 		{
@@ -66,30 +55,28 @@ namespace MonoTouch.Dialog
 			tableView.CellAt(path).BecomeFirstResponder();
 		}
 		
-		public NSIndexPath IndexPath { 
-			get {
-				var section = Parent as Section;
-				if (section == null)
-					return null;
-				var root = section.Parent as RootElement;
-				if (root == null)
-					return null;
-				
-				int row = 0;
-				foreach (var element in section.Elements){
-					if (element == this){
-						int nsect = 0;
-						foreach (var sect in root.Sections){
-							if (section == sect){
-								return NSIndexPath.FromRowSection (row, nsect);
-							}
-							nsect++;
-						}
-					}
-					row++;
-				}
+		public NSIndexPath GetIndexPath() { 
+			var section = Parent as Section;
+			if (section == null)
 				return null;
+			var root = section.Parent as RootElement;
+			if (root == null)
+				return null;
+			
+			int row = 0;
+			foreach (var element in section.Elements){
+				if (element == this){
+					int nsect = 0;
+					foreach (var sect in root.Sections){
+						if (section == sect){
+							return NSIndexPath.FromRowSection (row, nsect);
+						}
+						nsect++;
+					}
+				}
+				row++;
 			}
+			return null;
 		}
 		
 		public virtual bool Matches (string text)

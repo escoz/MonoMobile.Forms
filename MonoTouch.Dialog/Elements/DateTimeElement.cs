@@ -91,11 +91,27 @@ namespace MonoTouch.Dialog
 			
 			return new RectangleF (fX, fY, size.Width, size.Height);
 		}                                                                                                                                    
-
-		class MyViewController : UIViewController {
+		
+		
+		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+		{
+			var vc = new DateTimeElementController (this) {
+				Autorotate = dvc.Autorotate
+			};
+			datePicker = CreatePicker ();
+			datePicker.Frame = PickerFrameWithSize (datePicker.SizeThatFits (SizeF.Empty));
+			                            
+			vc.View.BackgroundColor = UIColor.Black;
+			vc.View.AddSubview (datePicker);
+			dvc.ActivateController (vc, dvc);
+		}
+		
+		
+		
+		class DateTimeElementController : UIViewController {
 			DateTimeElement container;
 			
-			public MyViewController (DateTimeElement container)
+			public DateTimeElementController (DateTimeElement container)
 			{
 				this.container = container;
 			}
@@ -118,19 +134,6 @@ namespace MonoTouch.Dialog
 			{
 				return Autorotate;
 			}
-		}
-		
-		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
-		{
-			var vc = new MyViewController (this) {
-				Autorotate = dvc.Autorotate
-			};
-			datePicker = CreatePicker ();
-			datePicker.Frame = PickerFrameWithSize (datePicker.SizeThatFits (SizeF.Empty));
-			                            
-			vc.View.BackgroundColor = UIColor.Black;
-			vc.View.AddSubview (datePicker);
-			dvc.ActivateController (vc, dvc);
 		}
 	}
 }

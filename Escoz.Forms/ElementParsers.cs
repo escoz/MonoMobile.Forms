@@ -112,7 +112,12 @@ namespace Escoz.Forms
 			);
 			
 			result.Add("FloatElement", (json, dvc, data)=>{
-					return new FloatElement(json.asString(Constants.Caption), (float)json.asDouble(Constants.Value)) ;
+					var minValue = json.asDouble("minvalue");
+					var maxValue = json.asDouble("maxvalue");
+					return new FloatElement(json.asString(Constants.Caption), (float)json.asDouble(Constants.Value)) 
+						{ MinValue = minValue.HasValue? (float)minValue.Value : 0f, 
+						  MaxValue = maxValue.HasValue? (float)maxValue.Value : 1f
+					    };
 				}
 			);
 				

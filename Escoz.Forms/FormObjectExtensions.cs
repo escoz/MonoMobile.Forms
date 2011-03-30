@@ -125,7 +125,7 @@ namespace Escoz.Forms
 			
 			if (json.ContainsKey(Constants.Action)) {
 				return ()=>{
-					dvc.InvokeAction(json[Constants.Action], new Element(""));
+					dvc.InvokeAction(json[Constants.Action], new StringElement(json[Constants.Action]));
 				};
 			}
 			

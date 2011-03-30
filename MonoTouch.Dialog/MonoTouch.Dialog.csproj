@@ -136,11 +136,14 @@
     <Compile Include="Elements\RefreshHeaderUtil.cs" />
     <Compile Include="Elements\ImagePickerElement.cs" />
     <Compile Include="Fonts.cs" />
+    <Compile Include="Views\BooleanElementCell.cs" />
+    <Compile Include="Views\EntryElementCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
     <Folder Include="Elements\" />
     <Folder Include="Reflection\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\arrow.png">

@@ -38,15 +38,16 @@ namespace MonoTouch.Dialog
 			Group = group;
 		}
 		
+		public override UITableViewCell GetCell (UITableView tv)
+		{
+			return  ConfigCell (base.GetCell (tv));
+		}
+		
+		
 		UITableViewCell ConfigCell (UITableViewCell cell)
 		{
 			cell.Accessory = Value ? UITableViewCellAccessory.Checkmark : UITableViewCellAccessory.None;
 			return cell;
-		}
-		
-		public override UITableViewCell GetCell (UITableView tv)
-		{
-			return  ConfigCell (base.GetCell (tv));
 		}
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)

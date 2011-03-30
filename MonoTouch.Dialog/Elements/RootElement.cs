@@ -420,7 +420,7 @@ namespace MonoTouch.Dialog
 			var root = section.Parent as RootElement;
 			if (root == null)
 				throw new ArgumentException ("Element is not attached to this root");
-			var path = element.IndexPath;
+			var path = element.GetIndexPath();
 			if (path == null)
 				return;
 			TableView.ReloadRows (new NSIndexPath [] { path }, animation);

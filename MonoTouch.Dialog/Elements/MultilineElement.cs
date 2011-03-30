@@ -31,7 +31,6 @@ namespace MonoTouch.Dialog
 		
 		public MultilineElement (string caption, string value, Action tapped) : base (caption, value, tapped)
 		{
-			CellId = new NSString("dialog.multilineelement");
 		}
 		
 		public override UITableViewCell GetCell (UITableView tv)

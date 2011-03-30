@@ -76,7 +76,7 @@ namespace MonoTouch.Dialog
 			_slider.Frame = new RectangleF (10f + captionSize.Width, 20f, 280f - captionSize.Width, 7f);
 			_slider.MinValue = element.MinValue;
 			_slider.MaxValue = element.MaxValue;
-			_slider.Value =element.Value;
+			_slider.Value = element.Value;
 		}
 		
 		public override void PrepareForReuse ()

@@ -75,9 +75,7 @@ namespace MonoTouch.Dialog
 			if (cell == null){
 				cell = new UITableViewCell (UITableViewCellStyle.Default, ekey);
 				cell.SelectionStyle = UITableViewCellSelectionStyle.None;
-			} else 
-				RemoveTag (cell, 1);
-			
+			} 
 			if (entry == null){
 				SizeF size = ComputeEntryPosition (tv, cell);
 				var _entry = new UITextView (new RectangleF (size.Width, (cell.ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width, size.Height)){
