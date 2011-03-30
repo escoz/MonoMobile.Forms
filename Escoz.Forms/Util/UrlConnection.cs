@@ -31,7 +31,7 @@ using System;
 using MonoTouch.Foundation;
 using System.Collections.Generic;
 using MonoTouch.UIKit;
-namespace Escoz.Util
+namespace MonoMobile.Util
 {
 
 	public class UrlConnection:NSUrlConnection {

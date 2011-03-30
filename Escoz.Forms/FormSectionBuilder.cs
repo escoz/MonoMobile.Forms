@@ -36,7 +36,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public class FormSectionBuilder
 	{

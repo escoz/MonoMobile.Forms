@@ -38,7 +38,8 @@ using MonoTouch.Foundation;
 using System.Drawing;
 using System.Reflection;
 using System.Collections.Generic;
-namespace Escoz.Forms
+
+namespace MonoMobile.Forms
 {
 	public class UIIndicatorView : UIView {
 		private UIActivityIndicatorView _ind = new UIActivityIndicatorView(UIActivityIndicatorViewStyle.Gray) { Frame = new RectangleF(148,12,24,24) };

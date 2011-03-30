@@ -36,7 +36,8 @@ using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-namespace Escoz.Forms
+
+namespace MonoMobile.Forms
 {
 	public class ActionElement : StringElement {
 		static NSString skey = new NSString("ActionElement");

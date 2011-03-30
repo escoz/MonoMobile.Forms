@@ -30,8 +30,8 @@
 using System;
 using System.Threading;
 using MonoTouch.Foundation;
-using Escoz.Forms.Activities;
-using Escoz.Forms;
+using MonoMobile.Forms.Activities;
+using MonoMobile.Forms;
 
 namespace Sample.Activities
 {

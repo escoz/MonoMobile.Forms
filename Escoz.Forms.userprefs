@@ -1,0 +1,32 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Sample/activities/ShowWeatherInChicago.cs">
+    <Files>
+      <File FileName="Sample/CustomElements.cs" Line="33" Column="19" />
+      <File FileName="MonoTouch.Dialog/Elements/EntryElement.cs" Line="26" Column="2" />
+      <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="221" Column="71" />
+      <File FileName="MonoTouch.Dialog/Elements/Element.cs" Line="82" Column="26" />
+      <File FileName="MonoTouch.Dialog/Elements/FloatElement.cs" Line="80" Column="4" />
+      <File FileName="MonoTouch.Dialog/Fonts.cs" Line="15" Column="88" />
+      <File FileName="Sample/js/allelements.js" Line="12" Column="54" />
+      <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="41" Column="22" />
+      <File FileName="MonoTouch.Dialog/Elements/RootElement.cs" Line="423" Column="37" />
+      <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="22" Column="23" />
+      <File FileName="MonoTouch.Dialog/Elements/StringElement.cs" Line="67" Column="33" />
+      <File FileName="MonoTouch.Dialog/Elements/DateElement.cs" Line="34" Column="31" />
+      <File FileName="MonoTouch.Dialog/Elements/DateTimeElement.cs" Line="138" Column="3" />
+      <File FileName="MonoTouch.Dialog/DialogViewController.cs" Line="236" Column="26" />
+      <File FileName="MonoTouch.Dialog/Elements/MultilineEntryElement.cs" Line="78" Column="6" />
+      <File FileName="MonoTouch.Dialog/Elements/MultilineElement.cs" Line="34" Column="4" />
+      <File FileName="Escoz.Forms/FormObjectExtensions.cs" Line="120" Column="46" />
+      <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="62" Column="16" />
+      <File FileName="Escoz.Forms/ElementParsers.cs" Line="119" Column="65" />
+      <File FileName="MonoTouch.Dialog/Elements/WebElement.cs" Line="22" Column="28" />
+      <File FileName="Sample/Main.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

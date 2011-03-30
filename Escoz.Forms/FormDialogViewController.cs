@@ -34,11 +34,11 @@ using System.Json;
 using MonoTouch.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Escoz.Forms;
+using MonoMobile.Forms;
 using System.Linq;
-using Escoz.Util;
+using MonoMobile.Util;
 
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	
 	public partial class FormDialogViewController : DialogViewController 

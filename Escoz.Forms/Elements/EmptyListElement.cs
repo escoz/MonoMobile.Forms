@@ -35,7 +35,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public class EmptyListElement : ActionElement {
 		public EmptyListElement(string message):base(message, null){}

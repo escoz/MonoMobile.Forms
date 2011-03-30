@@ -31,8 +31,9 @@ using MonoTouch.UIKit;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-using Escoz.Forms.Activities;
-namespace Escoz.Forms
+using MonoMobile.Forms.Activities;
+
+namespace MonoMobile.Forms
 {
 	public class ActivityElement : UIViewElement, IElementSizing {
 		

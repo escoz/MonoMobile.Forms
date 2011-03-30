@@ -37,9 +37,9 @@ using System.Reflection;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
-using Escoz.Util;
+using MonoMobile.Util;
 
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public partial class FormDialogViewController
 	{

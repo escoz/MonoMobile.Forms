@@ -34,10 +34,10 @@ using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Escoz.Forms;
-using Escoz.Forms.Elements;
+using MonoMobile.Forms;
+using MonoMobile.Forms.Elements;
 
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	
 	[Preserve(AllMembers=true)]

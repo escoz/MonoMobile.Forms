@@ -31,7 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-namespace Escoz.Forms.Activities
+namespace MonoMobile.Forms.Activities
 {
 	public static class ActivityFactory {
 		private static Dictionary<string, Type> typeCache = new Dictionary<string, Type>();

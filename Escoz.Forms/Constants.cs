@@ -29,7 +29,7 @@
 //
 
 using System;
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public static class Constants
 	{
@@ -56,8 +56,8 @@ namespace Escoz.Forms
 		
 		public static string Http = "http";
 		
-		public static string UrlConnectionNameForm = "JsonDialogUrlConnectionNameForm";
-		public static string UrlConnectionNameData = "JsonDialogUrlConnectionNameForm";
+		public static string UrlConnectionNameForm = "FormDialogUrlConnectionNameForm";
+		public static string UrlConnectionNameData = "FormDialogUrlConnectionNameForm";
 	}
 }
 

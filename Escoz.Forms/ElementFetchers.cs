@@ -30,7 +30,7 @@
 using System;
 using System.Collections.Generic;
 using MonoTouch.Dialog;
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public class ElementFetchers
 	{

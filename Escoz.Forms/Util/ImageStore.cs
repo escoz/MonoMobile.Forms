@@ -37,9 +37,9 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch;
-using Escoz.Util;
+using MonoMobile.Util;
 
-namespace Escoz.Forms.Util
+namespace MonoMobile.Util
 {
 	public interface IImageUpdated {
 		void UpdatedImage (string url, UIImage image);

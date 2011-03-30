@@ -29,11 +29,11 @@
 //
 using System;
 using System.Json;
-using Escoz.Forms.Activities;
+using MonoMobile.Forms.Activities;
 using MonoTouch.Foundation;
-using Escoz.Forms;
-using Escoz;
-using Escoz.Util;
+using MonoMobile.Forms;
+using MonoMobile.Util;
+using MonoTouch.Dialog;
 
 namespace Sample.Activities
 {

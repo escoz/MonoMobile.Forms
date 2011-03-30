@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 //
 // FormObjectExtensions.cs
 //
@@ -31,6 +28,10 @@ using System.Collections.Generic;
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
 using System.Reflection;
 using System.Text;
 using MonoTouch.UIKit;
@@ -40,7 +41,7 @@ using System.Json;
 using MonoTouch.CoreLocation;
 using MonoTouch.Dialog;
 
-namespace Escoz.Forms
+namespace MonoMobile.Forms
 {
 	public static class FormObjectExtensions {
 	
@@ -134,7 +135,7 @@ namespace Escoz.Forms
 		
 		public static DateTime asDateTime(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
-				return DateTime.Parse(json.asString(name));//json[name];
+				return DateTime.Parse(json.asString(name));
 			
 			return DateTime.MinValue;
 		}
