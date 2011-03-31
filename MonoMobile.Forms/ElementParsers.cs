@@ -68,17 +68,17 @@ namespace MonoMobile.Forms
 			);
 			
 			result.Add("MultilineElement", (json, dvc, data)=>{
-					string v = "";
+					string caption = "";
 					if (data==null)
-						v = json.asString(Constants.Value);
+						caption = json.asString(Constants.Caption);
 					else if (string.IsNullOrEmpty(json.asString(Constants.Bind)))
-						v = "";
+						caption = "";
 					else if (data.GetType()==typeof(JsonPrimitive))
-						v = data.CleanString();
+						caption = data.CleanString();
 					else if (data.GetType()==typeof(JsonObject))
-						v = ((JsonObject)data).asString(json.asString(Constants.Bind));
+						caption = ((JsonObject)data).asString(json.asString(Constants.Bind));
 					
-					return new MultilineElement(json.asString(Constants.Caption), v, json.asAction(dvc));
+					return new MultilineElement(caption, json.asString(Constants.Value), json.asAction(dvc));
 				}
 			);
 			
@@ -127,8 +127,12 @@ namespace MonoMobile.Forms
 			);
 			
 			result.Add("MapElement", (json, dvc, data)=>{
-					return new MapElement(json.asString(Constants.Caption), json.asString(Constants.Value), 
-				                      new CLLocationCoordinate2D(json.asDouble("lat").Value, json.asDouble("lng").Value));
+					JsonArray position = data==null? null : (JsonArray)data;
+					double lat = position==null? json.asDouble("lat").Value : (double)position[0];
+					double lng = position==null? json.asDouble("lng").Value : (double)position[1];
+					string value = position==null? json.asString(Constants.Value) : position.Count > 2 ? (string)position[2] : "";
+					return new MapElement(json.asString(Constants.Caption), value, 
+				                      new CLLocationCoordinate2D(lat, lng));
 				}
 			);
 

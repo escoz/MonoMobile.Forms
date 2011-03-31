@@ -84,6 +84,11 @@ namespace MonoMobile.Forms
 			if (json.ContainsKey(Constants.Title))
 				root.Caption = json[Constants.Title];
 			
+			if (json.ContainsKey(Constants.DataRoot)){
+				var dataroot = json[Constants.DataRoot].CleanString();
+				data = data[dataroot];
+			}			
+			
 			JsonValue jsonRoot = null;
 			try {
 				jsonRoot = json[Constants.Root];

@@ -83,6 +83,7 @@ namespace MonoMobile.Forms
 				} else if (section.ContainsKey("iterate") && data != null){
 					string iterationname = section["iterate"];	
 					string emptyMessage = section.ContainsKey("empty") ? section["empty"].CleanString() : "Empty";
+					
 					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonArray)data : (JsonArray)data[iterationname];
 					var template = (JsonObject)section["template"];
 					

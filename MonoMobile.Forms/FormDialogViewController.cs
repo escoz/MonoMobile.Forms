@@ -44,7 +44,6 @@ namespace MonoMobile.Forms
 	public partial class FormDialogViewController : DialogViewController 
 	{
 		protected FormBindingContext Context;
-		protected ActionElement rightBarItem, leftBarItem;
 		Dictionary<string, string> _elementValues = new Dictionary<string, string>();
 		private string _url;
 		string _file, _values;
@@ -156,6 +155,7 @@ namespace MonoMobile.Forms
 		}
 		
 		private void _processContentOfFile(string file, string values){
+			
 			var json = _parse(file);
 			JsonObject valueJson = null;
 			
@@ -200,6 +200,7 @@ namespace MonoMobile.Forms
 				Context = new FormBindingContext(this, json, Title);
 				Loading(false);
 			}
+			
 			_configureDialog(json, valueJson);
 			PrepareRoot(Context.Root);
 			LoadView();
@@ -228,29 +229,29 @@ namespace MonoMobile.Forms
 		}
 		
 		private UIBarButtonItem _createButtonItemFor(string property, JsonValue json, JsonObject valuesJson){
-			UIBarButtonItem result = null;
 			var item = (JsonObject)json[property];
 			string datavalue = null, id = null;
 			id = item.asString(Constants.Id);
-			
+			ActionElement action = null;
+			UIBarButtonItem button;
 			if (valuesJson!=null && !string.IsNullOrEmpty(id)){
 				datavalue = valuesJson.asString(id);
 			}
 				
 			if (item.ContainsKey(Constants.Action)) {
-					rightBarItem = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
-					rightBarItem.ID = new NSString(id);
-			}	
+					action = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
+			}
+			
 			if (item.ContainsKey(Constants.Image)){
-				result = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(this.rightBarItem);
+				button = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+					InvokeAction(action);
 				});
 			} else {
-				result = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(this.rightBarItem);
+				button = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
+					InvokeAction(action);
 				});
 			}	
-			return result;
+			return button;
 		}
 		
 		private bool _shouldbeLoading = false;
