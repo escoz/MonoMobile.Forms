@@ -64,7 +64,6 @@ namespace MonoTouch.Dialog
 			_entry.ScrollEnabled = false;
 			_entry.Bounces = false;
 			_entry.ContentMode = UIViewContentMode.TopLeft;
-			_entry.BackgroundColor = UIColor.Yellow;
 			_entry.EnablesReturnKeyAutomatically = true;
 			_entry.Changed += delegate {
 				if (_element != null)
