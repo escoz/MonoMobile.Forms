@@ -84,7 +84,7 @@ namespace MonoMobile.Forms
 			
 			
 			result.Add("MultilineEntryElement", (json, dvc, data)=>{
-					return new MultilineEntryElement(json.asString("placeholder"), 
+					return new MultilineEntryElement(json.asString("caption"), json.asString("placeholder"), 
 				            data==null? json.asString(Constants.Value) : data.CleanString()){
 							KeyboardType = (UIKeyboardType)Enum.Parse(typeof(UIKeyboardType), json.asString("keyboard") ?? "Default"),
 						}; 

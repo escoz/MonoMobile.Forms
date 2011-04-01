@@ -26,7 +26,7 @@ namespace MonoTouch.Dialog
 	public class MultilineEntryElement : EntryElement, IElementSizing {
 		
 		
-		public MultilineEntryElement (string placeholder, string value) : base (null, placeholder, value, false)
+		public MultilineEntryElement (string caption, string placeholder, string value) : base (caption, placeholder, value, false)
 		{
 			Value = value;
 			Placeholder = placeholder;
@@ -70,9 +70,12 @@ namespace MonoTouch.Dialog
 		{
 			SizeF size = new SizeF (320, float.MaxValue);
 			
+			var extraCaptionSpace = string.IsNullOrEmpty(Caption)? 0 : 20;
+			
 			if (string.IsNullOrEmpty(Value)) 
-				return new SizeF(320, Font.LineHeight+25);
-			return new SizeF(320, tableView.StringSize (Value, Font, size, UILineBreakMode.WordWrap).Height + 35);
+				return new SizeF(320, Font.LineHeight+25+extraCaptionSpace);
+			
+			return new SizeF(320, tableView.StringSize (Value, Font, size, UILineBreakMode.WordWrap).Height + 35 + extraCaptionSpace);
 		}
 		
 		

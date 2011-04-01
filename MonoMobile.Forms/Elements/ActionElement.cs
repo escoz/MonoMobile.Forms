@@ -51,6 +51,12 @@ namespace MonoMobile.Forms
 			Action = action;
 		}
 		
+		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+		{
+			base.Selected (dvc, tableView, path);
+			Console.WriteLine("Selected");
+			
+		}
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			var cell = tv.DequeueReusableCell (skey);

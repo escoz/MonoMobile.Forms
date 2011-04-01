@@ -54,9 +54,12 @@ namespace MonoTouch.Dialog
 		protected virtual void PrepareEntry(UITableView tableview){
 			
 			var size = _element.ComputeEntrySize(tableview);
-			_entry = new UITextView(new RectangleF(0,0,size.Width, size.Height));
+			var topspace = string.IsNullOrEmpty(_element.Caption)? 0 : 20;
+			_entry = new UITextView(new RectangleF(0,topspace,size.Width, size.Height-topspace));
 			
 			TextLabel.BackgroundColor = UIColor.Clear;
+			TextLabel.TextColor = UIColor.Gray;
+			TextLabel.Font = UIFont.SystemFontOfSize(14);
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
 			_entry.Editable = true;
@@ -71,7 +74,7 @@ namespace MonoTouch.Dialog
 				
 				tableview.BeginUpdates();
 				tableview.EndUpdates();
-				_entry.Frame = new RectangleF(0,0,Frame.Width, Frame.Height);
+				_entry.Frame = new RectangleF(0,topspace,Frame.Width, Frame.Height-topspace);
 			};
 			_entry.Ended += delegate {
 				if (_element != null)
@@ -79,7 +82,7 @@ namespace MonoTouch.Dialog
 				
 				tableview.BeginUpdates();
 				tableview.EndUpdates();
-				_entry.Frame = new RectangleF(0,0,Frame.Width, Frame.Height);
+				_entry.Frame = new RectangleF(0,topspace,Frame.Width, Frame.Height-topspace);
 			};
 
 			_entry.Started += delegate {
@@ -96,6 +99,14 @@ namespace MonoTouch.Dialog
 			};
 				
 			ContentView.AddSubview (_entry);
+			ContentView.BringSubviewToFront(TextLabel);
+		}
+		
+		public override void LayoutSubviews ()
+		{
+			base.LayoutSubviews ();
+			
+			TextLabel.Frame = new RectangleF(8,0,300,30);
 		}
 		
 		public UIFont Font = UIFont.SystemFontOfSize(UIFont.LabelFontSize);
