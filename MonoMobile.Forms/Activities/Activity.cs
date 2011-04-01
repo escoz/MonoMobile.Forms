@@ -30,13 +30,14 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using MonoTouch.Dialog;
 namespace MonoMobile.Forms.Activities
 {
 	public abstract class Activity
 	{
 		public Activity () {}
 		
-		public abstract void Execute(ActivityElement element, FormDialogViewController controller, Action completed);
+		public abstract void Execute(Element element, FormDialogViewController controller, Action completed);
 	}
 }
 

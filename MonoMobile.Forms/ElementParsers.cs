@@ -101,7 +101,7 @@ namespace MonoMobile.Forms
 			
 			result.Add("ActionElement", (json, dvc, data)=>{ 
 					ActionElement el = null;
-					el = new ActionElement(json.asString(Constants.Caption), json.asString(Constants.Action));
+					el = new ActionElement(json.asString(Constants.Caption), new ControllerAction(json.asString(Constants.Action)));
 					return el;
 				}
 			);

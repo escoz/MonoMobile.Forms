@@ -37,30 +37,45 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
 using System.Reflection;
+using MonoMobile.Forms.Activities;
 
 namespace MonoMobile.Forms
 {
+	public class ControllerAction : Activity {
+		
+		public string ActionName;
+		
+		public ControllerAction(string actionName) : base(){
+			ActionName = actionName;	
+		}
+		
+		public override void Execute (Element element, FormDialogViewController controller, Action completed)
+		{
+			try {
+				controller.GetType().InvokeMember(this.ActionName,
+				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public,
+				    null, controller, new object[]{element});
+				
+			} catch (Exception e){
+				Console.WriteLine("Could not invoke action '{0}' on dialog '{1}'. {2}", ActionName, controller.GetType().Name, e.ToString());
+			}
+		}
+	}
+	
 	public class ActionElement : StringElement {
 		static NSString skey = new NSString("ActionElement");
-		public string Action;
+		public ControllerAction Action;
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		public ActionElement(string caption, string action) : base (caption) {
+		public ActionElement(string caption, ControllerAction action) : base (caption) {
 			Action = action;
 		}
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			try {
-				dvc.GetType().InvokeMember(this.Action,
-				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public,
-				    null, dvc, new object[]{this});
-			} catch (Exception e){
-				Console.WriteLine("Could not invoke action '{0}' on dialog '{1}'. {2}", Action, dvc.GetType().Name, e.ToString());
-			}
+			Action.Execute(this, (FormDialogViewController)dvc, ()=>{}) ;	
 		}
-		
 		
 		public override UITableViewCell GetCell (UITableView tv)
 		{

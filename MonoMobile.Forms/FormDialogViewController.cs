@@ -239,7 +239,7 @@ namespace MonoMobile.Forms
 			}
 				
 			if (item.ContainsKey(Constants.Action)) {
-					action = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action));
+					action = new ActionElement(item.asString(Constants.Caption), new ControllerAction(datavalue ?? item.asString(Constants.Action)));
 			}
 			
 			if (item.ContainsKey(Constants.Image)){
