@@ -53,9 +53,8 @@ namespace MonoTouch.Dialog
 			
 		protected virtual void PrepareEntry(UITableView tableview){
 			
-			var size = _element.ComputeEntrySize(tableview);
 			var topspace = string.IsNullOrEmpty(_element.Caption)? 0 : 20;
-			_entry = new UITextView(new RectangleF(0,topspace,size.Width, size.Height-topspace));
+			_entry = new UITextView(new RectangleF(0,topspace,Frame.Width, Frame.Height-topspace));
 			
 			TextLabel.BackgroundColor = UIColor.Clear;
 			TextLabel.TextColor = UIColor.Gray;
@@ -73,8 +72,8 @@ namespace MonoTouch.Dialog
 					_element.Value = _entry.Text;
 				
 				tableview.BeginUpdates();
-				tableview.EndUpdates();
 				_entry.Frame = new RectangleF(0,topspace,Frame.Width, Frame.Height-topspace);
+				tableview.EndUpdates();
 			};
 			_entry.Ended += delegate {
 				if (_element != null)
@@ -107,6 +106,9 @@ namespace MonoTouch.Dialog
 			base.LayoutSubviews ();
 			
 			TextLabel.Frame = new RectangleF(8,0,300,30);
+			
+			var topspace = string.IsNullOrEmpty(_element.Caption)? 0 : 20;
+			_entry.Frame = new RectangleF(0,topspace,Frame.Width, Frame.Height-topspace);
 		}
 		
 		public UIFont Font = UIFont.SystemFontOfSize(UIFont.LabelFontSize);
