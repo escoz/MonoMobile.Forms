@@ -239,16 +239,16 @@ namespace MonoMobile.Forms
 			}
 				
 			if (item.ContainsKey(Constants.Action)) {
-					action = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action), null);
+					action = new ActionElement(item.asString(Constants.Caption), datavalue ?? item.asString(Constants.Action));
 			}
 			
 			if (item.ContainsKey(Constants.Image)){
 				button = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(action);
+					action.Selected(this, TableView, action.GetIndexPath());
 				});
 			} else {
 				button = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					InvokeAction(action);
+					action.Selected(this, TableView, action.GetIndexPath());
 				});
 			}	
 			return button;

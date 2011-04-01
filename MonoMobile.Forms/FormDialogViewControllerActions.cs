@@ -43,30 +43,6 @@ namespace MonoMobile.Forms
 {
 	public partial class FormDialogViewController
 	{
-		public void InvokeAction(string action , params object[] parameters){
-			this.GetType().InvokeMember(action,
-				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public, 
-				    null, this, parameters);
-		}
-		
-		public void InvokeAction(ActionElement action){
-			_invokeAction(action.Action, action);
-		}
-		
-		public void InvokeAction(string action, Element element){
-			_invokeAction(action, element);
-		}
-		
-		private void _invokeAction(string action, Element element){
-			try {
-			this.GetType().InvokeMember(action,
-				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public,
-				    null, this, new object[]{element});
-			} catch (Exception e){
-				Console.WriteLine("Could not invoke action '{0}' on dialog '{1}'. {2}", action, this.GetType().Name, e.ToString());
-			}
-		}
-		
 		public void NavigateTo(string file, IDictionary<string, string> hiddenfields){
 			var dialog = this;
 			UrlConnection.KillAllConnections();

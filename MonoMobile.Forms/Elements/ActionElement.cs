@@ -36,6 +36,7 @@ using MonoTouch.CoreGraphics;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.Dialog;
+using System.Reflection;
 
 namespace MonoMobile.Forms
 {
@@ -45,18 +46,22 @@ namespace MonoMobile.Forms
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		public ActionElement(string caption, Action tapped) : base (caption, tapped) {}
-		
-		public ActionElement(string caption, string action, Action tapped) : base (caption, tapped) {
+		public ActionElement(string caption, string action) : base (caption) {
 			Action = action;
 		}
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			base.Selected (dvc, tableView, path);
-			Console.WriteLine("Selected");
-			
+			try {
+				dvc.GetType().InvokeMember(this.Action,
+				    BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public,
+				    null, dvc, new object[]{this});
+			} catch (Exception e){
+				Console.WriteLine("Could not invoke action '{0}' on dialog '{1}'. {2}", Action, dvc.GetType().Name, e.ToString());
+			}
 		}
+		
+		
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			var cell = tv.DequeueReusableCell (skey);

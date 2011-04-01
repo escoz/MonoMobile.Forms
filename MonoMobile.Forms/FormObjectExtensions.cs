@@ -109,24 +109,11 @@ namespace MonoMobile.Forms
 		}	
 		
 		public static Action asAction(this JsonObject json, FormDialogViewController dvc){
-			if (json!=null && json.ContainsKey(Constants.NavigateTo) && json.ContainsKey(Constants.Action)) {
-				string file = json[Constants.NavigateTo];
-				string action = json[Constants.Action];
-				return ()=>{
-					dvc.InvokeAction(action, new object[]{file});
-				};
-			}
 			
 			if (json.ContainsKey(Constants.NavigateTo)) {
 				string file = json[Constants.NavigateTo];
 				return ()=>{
 					dvc.NavigateTo(file);
-				};
-			}
-			
-			if (json.ContainsKey(Constants.Action)) {
-				return ()=>{
-					dvc.InvokeAction(json[Constants.Action], new StringElement(json[Constants.Action]));
 				};
 			}
 			
