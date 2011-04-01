@@ -82,6 +82,15 @@ namespace MonoMobile.Forms
 				}
 			);
 			
+			
+			result.Add("MultilineEntryElement", (json, dvc, data)=>{
+					return new MultilineEntryElement(json.asString("placeholder"), 
+				            data==null? json.asString(Constants.Value) : data.CleanString()){
+							KeyboardType = (UIKeyboardType)Enum.Parse(typeof(UIKeyboardType), json.asString("keyboard") ?? "Default"),
+						}; 
+				}
+			);
+			
 			result.Add("EntryElement", (json, dvc, data)=>{
 					return new EntryElement(json.asString(Constants.Caption), json.asString("placeholder"), 
 				            data==null? json.asString(Constants.Value) : data.CleanString(), json.asBoolean("ispassword")){

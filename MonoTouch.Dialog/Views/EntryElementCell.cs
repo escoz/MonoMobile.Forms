@@ -14,8 +14,8 @@ namespace MonoTouch.Dialog
 		
 		public static NSString KEY = new NSString ("EntryElement");
 			
-		private UITextField _entry;
-		private EntryElement _element;
+		protected UITextField _entry;
+		protected EntryElement _element;
 		
 		public EntryElementCell():base(UITableViewCellStyle.Default, KEY){
 			SelectionStyle = UITableViewCellSelectionStyle.None;
@@ -26,7 +26,7 @@ namespace MonoTouch.Dialog
 			_element = element;
 			
 			if (_entry==null){
-				_prepareEntry(tableView);
+				PrepareEntry(tableView);
 			}
 			
 			_entry.Text = element.Value ?? "";
@@ -48,7 +48,7 @@ namespace MonoTouch.Dialog
 			_element = null;
 		}
 			
-		private void _prepareEntry(UITableView tableview){
+		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
 			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width, size.Height));
@@ -127,4 +127,8 @@ namespace MonoTouch.Dialog
 		
 		
 	}
+	
+	
+	
+
 }

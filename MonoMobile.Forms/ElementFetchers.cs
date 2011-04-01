@@ -41,6 +41,7 @@ namespace MonoMobile.Forms
 		private static Dictionary<Type, Func<Element, string>> CreateDefaultFetchers(){
 			var result = new Dictionary<Type, Func<Element, string>>(){
 					{typeof(EntryElement), (e)=>{return ((EntryElement)e).Value; } },
+					{typeof(MultilineEntryElement), (e)=>{return ((MultilineEntryElement)e).Value; } },
 					{typeof(BooleanElement), (e)=>{return ((BooleanElement)e).Value ? "1" : "0";}},
 					{typeof(RadioElement), (e)=>{return ((RadioElement)e).Value;}},
 					//{typeof(RootElement), (e)=>{return ((RootElement)e).RadioSelected.ToString();}},
