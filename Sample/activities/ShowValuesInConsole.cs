@@ -32,6 +32,7 @@ using System.Threading;
 using MonoTouch.Foundation;
 using MonoMobile.Forms.Activities;
 using MonoMobile.Forms;
+using MonoTouch.Dialog;
 
 namespace Sample.Activities
 {
@@ -39,7 +40,7 @@ namespace Sample.Activities
 	[Preserve(AllMembers=true)]
 	public class ShowValuesInConsole : Activity {
 		
-		public override void Execute (ActivityElement element, FormDialogViewController controller, Action completed)
+		public override void Execute (FormDialogViewController controller, Element element, Action completed)
 		{
 			Console.WriteLine("ShowValuesInConsole");
 			ThreadPool.QueueUserWorkItem( delegate { 

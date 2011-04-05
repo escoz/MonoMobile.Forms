@@ -31,13 +31,17 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using MonoTouch.Dialog;
+
 namespace MonoMobile.Forms.Activities
 {
-	public abstract class Activity
+	public abstract class BaseActivity
 	{
-		public Activity () {}
+	    public abstract void Execute(Element el, Action completed);
 		
-		public abstract void Execute(FormDialogViewController controller, Element element, Action completed);
+		public FormDialogViewController Controller {get;set;}
+		public Element Element {get;set;}
 	}
+	
+	
 }
 

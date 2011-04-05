@@ -49,7 +49,7 @@ namespace MonoMobile.Forms
 			ActionName = actionName;	
 		}
 		
-		public override void Execute (Element element, FormDialogViewController controller, Action completed)
+		public override void Execute (FormDialogViewController controller,Element element,  Action completed)
 		{
 			try {
 				controller.GetType().InvokeMember(this.ActionName,
@@ -74,7 +74,9 @@ namespace MonoMobile.Forms
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			Action.Execute(this, (FormDialogViewController)dvc, ()=>{}) ;	
+			base.Selected(dvc, tableView, path);
+			Action.Execute((FormDialogViewController)dvc, this,  ()=>{}) ;	
+			
 		}
 		
 		public override UITableViewCell GetCell (UITableView tv)

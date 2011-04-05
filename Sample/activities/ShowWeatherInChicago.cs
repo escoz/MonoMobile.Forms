@@ -41,7 +41,7 @@ namespace Sample.Activities
 	[Preserve(AllMembers=true)]
 	public class ShowWeatherInChicago : Activity
 	{
-		public override void Execute (ActivityElement element, FormDialogViewController controller, Action completed)
+		public override void Execute (FormDialogViewController controller, Element element, Action completed)
 		{
 			controller.SetValue("temperature", "");
 			controller.SetValue("humidity", "");

@@ -1,5 +1,5 @@
 //
-// Activity.cs
+// ActionElement.cs
 //
 // Author:
 //   Eduardo Scoz (contact@escoz.com)
@@ -28,16 +28,48 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
+using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
+using System.Drawing;
+using MonoTouch.Foundation;
 using MonoTouch.Dialog;
-namespace MonoMobile.Forms.Activities
-{
-	public abstract class Activity
-	{
-		public Activity () {}
-		
-		public abstract void Execute(FormDialogViewController controller, Element element, Action completed);
-	}
-}
+using System.Reflection;
+using MonoMobile.Forms.Activities;
 
+namespace MonoMobile.Forms
+{
+	public class ButtonElement : StringElement {
+		static NSString skey = new NSString("ActionElement");
+		public Action action;
+		
+		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
+		
+		public ButtonElement(string caption, Action act) : base (caption) {
+			action = act;
+		}
+		
+		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+		{
+			action();	
+		}
+		
+		public override UITableViewCell GetCell (UITableView tv)
+		{
+			var cell = tv.DequeueReusableCell (skey);
+			if (cell == null){
+				cell = new UITableViewCell (UITableViewCellStyle.Default, skey);
+			}
+			
+			cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
+			cell.TextLabel.Text = Caption;
+			cell.Accessory = UITableViewCellAccessory.None;
+			cell.TextLabel.TextAlignment = UITextAlignment.Center;
+			cell.TextLabel.TextColor = actionTextColor;
+			return cell;
+		}
+	}
+
+}

@@ -56,7 +56,7 @@ namespace MonoMobile.Forms
 			
 			var activity = ActivityFactory.Create(_activityName);
 			dvc.View.UserInteractionEnabled = false;
-			activity.Execute(this, (FormDialogViewController)dvc, ()=>{ 
+			activity.Execute((FormDialogViewController)dvc, this, ()=>{ 
 				View.InvokeOnMainThread(()=>{
 					Animating = false;	
 					cell.TextLabel.Hidden = false;
