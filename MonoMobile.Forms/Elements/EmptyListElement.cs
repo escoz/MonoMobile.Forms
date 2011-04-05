@@ -37,7 +37,7 @@ using System.Drawing;
 using MonoTouch.Foundation;
 namespace MonoMobile.Forms
 {
-	public class EmptyListElement : ActionElement {
+	public class EmptyListElement : ButtonElement {
 		public EmptyListElement(string message):base(message, null){}
 		
 		public override UITableViewCell GetCell (UITableView tv)

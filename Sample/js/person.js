@@ -21,7 +21,6 @@
 		}
 	],
 	
-	
 	"rightbaritem":{ "caption":"Reload", "id":"reload", "action":"Reload" }
 
 }

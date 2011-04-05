@@ -24,10 +24,21 @@ using MonoTouch.ObjCRuntime;
 
 namespace MonoTouch.Dialog
 {
-	public class BooleanElement : Element {
+	public abstract class BooleanElement : Element {
 		public bool Value;
 		
-		public BooleanElement (string caption, bool value) : base(caption)
+		public BooleanElement(string caption):base(caption){}
+
+		public override string Summary ()
+		{
+			return Value.ToString ();
+		}	
+	}
+	
+	public class iPhoneBooleanElement : BooleanElement {
+		
+		
+		public iPhoneBooleanElement (string caption, bool value) : base(caption)
 		{
 			Value = value;
 		}
@@ -41,11 +52,6 @@ namespace MonoTouch.Dialog
 			cell.Update(this);
 			
 			return cell;
-		}
-
-		public override string Summary ()
-		{
-			return Value.ToString ();
 		}	
 	}
 	

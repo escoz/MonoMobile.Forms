@@ -41,19 +41,21 @@ using MonoMobile.Forms.Activities;
 
 namespace MonoMobile.Forms
 {
+
 	public class ButtonElement : StringElement {
 		static NSString skey = new NSString("ActionElement");
-		public Action action;
+		public ControllerAction Action;
 		
 		static UIColor actionTextColor = UIColor.FromRGB(50.0f/255.0f, 79.0f/255.0f, 133.0f/255.0f);
 		
-		public ButtonElement(string caption, Action act) : base (caption) {
-			action = act;
+		public ButtonElement(string caption, ControllerAction action) : base (caption) {
+			Action = action;
 		}
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			action();	
+			tableView.DeselectRow(path, true);
+			Action.Execute((FormDialogViewController)dvc, this,  ()=>{}) ;
 		}
 		
 		public override UITableViewCell GetCell (UITableView tv)

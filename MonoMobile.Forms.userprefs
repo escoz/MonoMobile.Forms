@@ -1,6 +1,26 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoTouch.Dialog/Elements/SimpleImageElement.cs">
+    <Files>
+      <File FileName="Sample/activities/ShowValuesInConsole.cs" Line="43" Column="70" />
+      <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="44" Column="70" />
+      <File FileName="MonoMobile.Forms/Elements/ActionElement.cs" Line="77" Column="40" />
+      <File FileName="MonoMobile.Forms/Elements/ActivityElement.cs" Line="59" Column="52" />
+      <File FileName="MonoMobile.Forms/Activities/Activity.cs" Line="40" Column="69" />
+      <File FileName="Sample/js/login.js" Line="1" Column="1" />
+      <File FileName="Sample/js/person.js" Line="12" Column="54" />
+      <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="20" Column="25" />
+      <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="221" Column="27" />
+      <File FileName="MonoMobile.Forms/ElementParsers.cs" Line="116" Column="23" />
+      <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="24" Column="27" />
+      <File FileName="MonoTouch.Dialog/Elements/RadioGroup.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RadioElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RefreshTableHeaderView.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/RefreshViewStatus.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/SearchChangedEventArgs.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/Section.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/SimpleImageElement.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
@@ -8,13 +28,9 @@
             <Node name="Activities" expanded="True" />
             <Node name="Elements" expanded="True" />
           </Node>
-          <Node name="MonoTouch.Dialog" expanded="True">
-            <Node name="Elements" expanded="True" />
-          </Node>
           <Node name="Sample" expanded="True">
-            <Node name="activities" expanded="True">
-              <Node name="ShowValuesInConsole.cs" selected="True" />
-            </Node>
+            <Node name="activities" expanded="True" />
+            <Node name="js" expanded="True" />
           </Node>
         </State>
       </Pad>

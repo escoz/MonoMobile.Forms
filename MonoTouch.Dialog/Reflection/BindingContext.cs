@@ -218,7 +218,7 @@ namespace MonoTouch.Dialog
 					if (checkbox)
 						element = new CheckboxElement (caption, (bool) GetValue (mi, o));
 					else
-						element = new BooleanElement (caption, (bool) GetValue (mi, o));
+						element = new iPhoneBooleanElement (caption, (bool) GetValue (mi, o));
 				} else if (mType == typeof (DateTime)){
 					var dateTime = (DateTime) GetValue (mi, o);
 					bool asDate = false, asTime = false;

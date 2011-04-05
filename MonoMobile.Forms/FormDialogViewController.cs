@@ -37,6 +37,7 @@ using MonoTouch.UIKit;
 using MonoMobile.Forms;
 using System.Linq;
 using MonoMobile.Util;
+using MonoMobile.Forms.Activities;
 
 namespace MonoMobile.Forms
 {
@@ -61,11 +62,11 @@ namespace MonoMobile.Forms
 		}
 		
 		public FormDialogViewController(RootElement root):base(root) {
-			Loading(false);
+			Loading = false;
 		}
 		
 		public virtual void NetworkFailed(NSError error){
-			Loading(false);
+			Loading = false;
 			InvokeOnMainThread(()=>{
 				using (var popup = new UIAlertView("Error", error.LocalizedDescription, null, "OK")){
 					popup.Show();
@@ -73,22 +74,24 @@ namespace MonoMobile.Forms
 			});
 		}
 		
-		protected virtual void Loading(bool isLoading){
-			InvokeOnMainThread(()=>{
-				_shouldbeLoading = isLoading;
-				if (isLoading) {
-					if (string.IsNullOrEmpty(Title))
-						Title = Constants.LoadingTitle;
-					indicator.StartAnimating();
-					this.indicator.Hidden = false;
-					_shouldbeLoading = true;
-				} else {
-					if (string.IsNullOrEmpty(Title))
-						Title = Constants.DefaultTitle;
-					indicator.StopAnimating();
-					this.indicator.Hidden = true;
-				}
-			});
+		public virtual bool Loading {
+			set {
+				InvokeOnMainThread(()=>{
+					_shouldbeLoading = value;
+					if (value) {
+						if (string.IsNullOrEmpty(Title))
+							Title = Constants.LoadingTitle;
+						indicator.StartAnimating();
+						this.indicator.Hidden = false;
+						_shouldbeLoading = true;
+					} else {
+						if (string.IsNullOrEmpty(Title))
+							Title = Constants.DefaultTitle;
+						indicator.StopAnimating();
+						this.indicator.Hidden = true;
+					}
+				});
+			}
 		}
 		
 		public override void ViewDidLoad ()
@@ -139,13 +142,13 @@ namespace MonoMobile.Forms
 			_url = file + " " + values;
 			
 			if (file.StartsWith(Constants.Http)){
-				Loading(true);
+				Loading = true;
 				var req = CreateRequestForUrl(file);
 				new UrlConnection(Constants.UrlConnectionNameForm, req, (string result)=>{
 					InvokeOnMainThread(()=>{
 						_processContentOfFile(result, values);	
 						LoadView();
-						Loading(false);
+						Loading = false;
 						
 					});
 				}, (error)=>{ NetworkFailed(error); });
@@ -162,7 +165,7 @@ namespace MonoMobile.Forms
 			if (!string.IsNullOrEmpty(values)){
 				if (values.StartsWith(Constants.Http)){
 					Context = new FormBindingContext(this, json, Title);
-					Loading(true);
+					Loading = true;
 					var req = CreateRequestForUrl(values);
 					new UrlConnection(Constants.UrlConnectionNameData, req, (string result)=>{
 						InvokeOnMainThread(()=>{
@@ -186,7 +189,7 @@ namespace MonoMobile.Forms
 							_configureDialog(json, valueJson);
 							PrepareRoot(Context.Root);
 							ReloadData();
-							Loading(false);
+							Loading = false;
 							
 						});
 					}, (error)=>{ NetworkFailed(error); });
@@ -198,7 +201,7 @@ namespace MonoMobile.Forms
 					
 			} else {
 				Context = new FormBindingContext(this, json, Title);
-				Loading(false);
+				Loading = false;
 			}
 			
 			_configureDialog(json, valueJson);
@@ -232,23 +235,28 @@ namespace MonoMobile.Forms
 			var item = (JsonObject)json[property];
 			string datavalue = null, id = null;
 			id = item.asString(Constants.Id);
-			ActionElement action = null;
+			Activity action = null;
 			UIBarButtonItem button;
 			if (valuesJson!=null && !string.IsNullOrEmpty(id)){
 				datavalue = valuesJson.asString(id);
 			}
 				
 			if (item.ContainsKey(Constants.Action)) {
-					action = new ActionElement(item.asString(Constants.Caption), new ControllerAction(datavalue ?? item.asString(Constants.Action)));
+				action = new ControllerAction(datavalue ?? item.asString(Constants.Action));
+			} else if (item.ContainsKey(Constants.Activity)) {
+				action = ActivityFactory.Create(item.asString(Constants.Activity));
 			}
+			
+			if (action==null)
+				return null;
 			
 			if (item.ContainsKey(Constants.Image)){
 				button = new UIBarButtonItem(UIImage.FromBundle(item.asString(Constants.Image)), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					action.Selected(this, TableView, action.GetIndexPath());
+					action.Execute(this, null, null);
 				});
 			} else {
 				button = new UIBarButtonItem(item.asString(Constants.Caption), UIBarButtonItemStyle.Plain, (object o, EventArgs a)=>{
-					action.Selected(this, TableView, action.GetIndexPath());
+					action.Execute(this, null, null);
 				});
 			}	
 			return button;
@@ -268,7 +276,7 @@ namespace MonoMobile.Forms
 			
 			string forceNavControllerToStaySeemsToBeABug = "getalinktotheTNC" + this.NavigationController;
 			forceNavControllerToStaySeemsToBeABug = forceNavControllerToStaySeemsToBeABug+"removeWarning";
-			Loading(_shouldbeLoading);
+			Loading = _shouldbeLoading;
 		}
 		
 		private JsonValue _parse(string str){

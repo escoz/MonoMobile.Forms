@@ -99,9 +99,9 @@ namespace MonoMobile.Forms
 				}
 			);
 			
-			result.Add("ActionElement", (json, dvc, data)=>{ 
-					ActionElement el = null;
-					el = new ActionElement(json.asString(Constants.Caption), new ControllerAction(json.asString(Constants.Action)));
+			result.Add("ButtonElement", (json, dvc, data)=>{ 
+					ButtonElement el = null;
+					el = new ButtonElement(json.asString(Constants.Caption), new ControllerAction(json.asString(Constants.Action)));
 					return el;
 				}
 			);
@@ -113,7 +113,7 @@ namespace MonoMobile.Forms
 			);
 			
 			result.Add("BooleanElement", (json, dvc, data)=>{
-					return new BooleanElement(json.asString(Constants.Caption), 
+					return new iPhoneBooleanElement(json.asString(Constants.Caption), 
 				                          string.IsNullOrEmpty(data)? json.asBoolean(Constants.Value) : bool.Parse(data.CleanString())) ;
 				}
 			);
