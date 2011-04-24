@@ -23,6 +23,6 @@
 	],
 	
 	"leftbaritem":{ "caption":"Left", "id":"details", "action":"ShowPopup"},
-	"rightbaritem":{ "caption":"Right", "id":"reload", "navitateto":"login.js" }
+	"rightbaritem":{ "caption":"Right", "id":"reload", "action":"ShowPopup"}
 
 }
