@@ -94,7 +94,7 @@ namespace MonoMobile.Forms
 			View.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin;
 		}
 		
-		public bool Animating {
+		public virtual bool Animating {
 			get {
 				return ((UIActivityIndicatorView) View).IsAnimating;
 			}

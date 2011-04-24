@@ -11,7 +11,7 @@
 			]
 		},
 		{ "elements":[
-				{ "id":"login", "type":"ActionElement", "caption":"Login", "action":"ShowPopup" },
+				{ "id":"login", "type":"ButtonElement", "caption":"Login", "action":"ShowPopup" },
 				{ "id":"login", "type":"ActivityElement", "caption":"Login Activity", "activity":"Sample.Activities.ShowValuesInConsole" }
 			]
 		}

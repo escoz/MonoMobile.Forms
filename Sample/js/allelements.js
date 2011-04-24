@@ -23,7 +23,7 @@
 			]
 		}, 
 		{ "elements":[
-				{ "type":"ActionElement", "caption":"ActionElement", "action":"ShowPopup" }
+				{ "type":"ButtonElement", "caption":"ButtonElement", "action":"ShowPopup" }
 			]
 		}
 				

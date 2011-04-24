@@ -44,10 +44,11 @@ namespace MonoMobile.Forms
 					{typeof(MultilineEntryElement), (e)=>{return ((MultilineEntryElement)e).Value; } },
 					{typeof(BooleanElement), (e)=>{return ((BooleanElement)e).Value ? "1" : "0";}},
 					{typeof(RadioElement), (e)=>{return ((RadioElement)e).Value;}},
-					//{typeof(RootElement), (e)=>{return ((RootElement)e).RadioSelected.ToString();}},
+					{typeof(RootElement), (e)=>{return ((RootElement)e).RadioSelected.ToString();}},
 					{typeof(DateElement), (e)=>{return ((DateElement)e).Value; }},
 					{typeof(TimeElement), (e)=>{return ((TimeElement)e).Value; }},
-					{typeof(DateTimeElement), (e)=>{return ((DateTimeElement)e).Value; }}				
+					{typeof(DateTimeElement), (e)=>{return ((DateTimeElement)e).Value; }},
+					{typeof(ActivityElement), (e)=>{return null; }}
 			};	
 				
 			return result;
