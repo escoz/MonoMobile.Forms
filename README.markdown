@@ -210,6 +210,11 @@ If you need to get extra data out of the JSON data, you can also define your own
 will map to a custom function. That way, you can really touch the data as you would like, without having
 to worry about navigating thru the JSON data or the creation of the form.
 
+Notes
+==================
+
+For more examples on how to use the app, read the code available in the Samples app. There's a lot of really
+useful information there.
 
 Hope this quick tutorial will be useful to you. This doc is not supposed to explain all the functionality
 in the framework, just like the framework is not supposed to be the final solution for all development. My suggestion

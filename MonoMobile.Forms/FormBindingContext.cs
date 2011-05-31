@@ -71,11 +71,6 @@ namespace MonoMobile.Forms
 			if (json.ContainsKey(Constants.Title))
 				root.Caption = json[Constants.Title];
 			
-			if (json.ContainsKey(Constants.DataRoot)){
-				var dataroot = json[Constants.DataRoot].CleanString();
-				data = data[dataroot];
-			}			
-			
 			JsonValue jsonRoot = null;
 			try {
 				jsonRoot = json[Constants.Root];
@@ -83,6 +78,13 @@ namespace MonoMobile.Forms
 				Console.WriteLine("Bad JSON: could not find the root element - "+json.ToString()) ;	
 				return;
 			}
+			
+			if (json.ContainsKey(Constants.DataRoot)){
+				var dataroot = json[Constants.DataRoot].CleanString();
+				if (data!=null && data.ContainsKey(dataroot))
+					data = data[dataroot];
+			}			
+			
 			
 			foreach (JsonObject section in jsonRoot){
 				var sec = new FormSectionBuilder(this._controller).Build(section, data);

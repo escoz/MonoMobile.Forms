@@ -11,7 +11,7 @@
 			]
 		} , 
 		{ "elements":[ 
-				{ "type":"ActionElement", "caption":"Update Weather", "action":"Reload" }
+				{ "type":"ButtonElement", "caption":"Update Weather", "action":"Reload" }
 			]
 		}
 	]
