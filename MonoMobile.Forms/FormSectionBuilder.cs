@@ -81,10 +81,18 @@ namespace MonoMobile.Forms
 					}
 					
 				} else if (section.ContainsKey("iterate") && data != null){
-					string iterationname = section["iterate"];	
+					string iterationname = section["iterate"];
+					JsonArray iterationdata = null;	
+					if (iterationname.Contains("#")){ // for when list is in member of object
+						var splittedName = iterationname.Split('#');
+						var obj = (JsonObject)data[splittedName[0]];
+					    iterationdata = (JsonArray)obj[splittedName[1]];           
+					} else {
+						iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonArray)data : (JsonArray)data[iterationname];
+					
+					}
 					string emptyMessage = section.ContainsKey("empty") ? section["empty"].CleanString() : "Empty";
 					
-					var iterationdata = string.IsNullOrEmpty(iterationname) ? (JsonArray)data : (JsonArray)data[iterationname];
 					var template = (JsonObject)section["template"];
 					
 					var items = iterationdata.ToList();

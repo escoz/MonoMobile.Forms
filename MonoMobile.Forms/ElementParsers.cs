@@ -133,6 +133,11 @@ namespace MonoMobile.Forms
 				}
 			);
 			
+			result.Add("SimpleImageElement", (json, dvc, data)=>{
+					return new SimpleImageElement(json.asUIImage("url"));
+				}
+			);
+			
 			result.Add("MapElement", (json, dvc, data)=>{
 					JsonArray position = data==null? null : (JsonArray)data;
 					double lat = position==null? json.asDouble("lat").Value : (double)position[0];

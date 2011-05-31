@@ -59,7 +59,7 @@ namespace MonoMobile.Forms
 			return json.ToString().Clean();
 		}
 		
-		private static string Clean(this string str){
+		public static string Clean(this string str){
 			if (str==null)
 				return "";
 			if (str.Length>2)
@@ -89,7 +89,7 @@ namespace MonoMobile.Forms
 		
 		public static UIImage asUIImage(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
-				return UIImage.FromBundle(json[Constants.Image]);
+				return UIImage.FromBundle(json[name]);
 			
 			return null;
 		}
@@ -101,6 +101,12 @@ namespace MonoMobile.Forms
 			return null;
 		}	
 		
+		public static JsonObject asJsonObject(this JsonObject json, string name){
+			if (json != null && json.ContainsKey(name))
+				return (JsonObject)json[name];
+			return null;
+		}
+		
 		public static JsonValue asJsonValue(this JsonObject json, string name){
 			if (json!=null && json.ContainsKey(name))
 				return json[name];
@@ -109,6 +115,18 @@ namespace MonoMobile.Forms
 		}	
 		
 		public static Action asAction(this JsonObject json, FormDialogViewController dvc){
+			
+			if (json.ContainsKey(Constants.Action)) {
+				string actionName = json[Constants.Action];
+				return ()=>{
+					ControllerAction act;
+					if (json.ContainsKey(Constants.NavigateTo))
+						act = new ControllerAction(actionName, json[Constants.NavigateTo]);
+					else
+						act = new ControllerAction(actionName);
+					dvc.Execute(act, null, ()=>{});
+				};
+			}
 			
 			if (json.ContainsKey(Constants.NavigateTo)) {
 				string file = json[Constants.NavigateTo];

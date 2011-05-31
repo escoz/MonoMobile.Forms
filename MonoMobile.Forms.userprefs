@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonoTouch.Dialog/Elements/SimpleImageElement.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonoMobile.Forms/FormDialogViewController.cs">
     <Files>
-      <File FileName="../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="115" Column="3" />
+      <File FileName="../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="82" Column="4" />
       <File FileName="../ClubTix/ClubTix/Util/LoadingHUDView.cs" Line="7" Column="23" />
       <File FileName="../ClubTix/ClubTix/Domain/Ticket.cs" Line="1" Column="1" />
       <File FileName="../ClubTix/ClubTix/Util/Reachability.cs" Line="10" Column="20" />
@@ -20,13 +20,13 @@
       <File FileName="../ClubTix/ClubTix/Util/Colors.cs" Line="8" Column="23" />
       <File FileName="Sample/activities/ShowValuesInConsole.cs" Line="43" Column="70" />
       <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="44" Column="70" />
-      <File FileName="MonoMobile.Forms/Elements/ActivityElement.cs" Line="59" Column="52" />
+      <File FileName="MonoMobile.Forms/Elements/ActivityElement.cs" Line="97" Column="18" />
       <File FileName="MonoMobile.Forms/Activities/Activity.cs" Line="40" Column="69" />
-      <File FileName="Sample/js/login.js" Line="1" Column="1" />
+      <File FileName="Sample/js/login.js" Line="14" Column="42" />
       <File FileName="Sample/js/person.js" Line="12" Column="54" />
       <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="20" Column="25" />
       <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="221" Column="27" />
-      <File FileName="MonoMobile.Forms/ElementParsers.cs" Line="116" Column="23" />
+      <File FileName="MonoMobile.Forms/ElementParsers.cs" Line="104" Column="83" />
       <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="24" Column="27" />
       <File FileName="MonoTouch.Dialog/Elements/RadioGroup.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/RadioElement.cs" Line="1" Column="1" />
@@ -35,13 +35,26 @@
       <File FileName="MonoTouch.Dialog/Elements/SearchChangedEventArgs.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/Section.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/SimpleImageElement.cs" Line="1" Column="1" />
+      <File FileName="Sample/js/allelements.js" Line="26" Column="55" />
+      <File FileName="Sample/js/sample.js" Line="28" Column="2" />
+      <File FileName="MonoMobile.Forms/Activities/ActivityFactory.cs" Line="1" Column="1" />
+      <File FileName="Sample/SampleFormController.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/Elements/ControllerAction.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/Elements/ButtonElement.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/ElementFetchers.cs" Line="51" Column="53" />
+      <File FileName="MonoMobile.Forms/FormDialogViewController.cs" Line="38" Column="19" />
+      <File FileName="MonoMobile.Forms/FormBindingContext.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/FormDialogViewControllerActions.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/FormObjectExtensions.cs" Line="1" Column="1" />
+      <File FileName="MonoMobile.Forms/FormSectionBuilder.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True">
+        <State expanded="True">
           <Node name="MonoMobile.Forms" expanded="True">
             <Node name="Activities" expanded="True" />
             <Node name="Elements" expanded="True" />
+            <Node name="FormDialogViewController.cs" selected="True" />
           </Node>
           <Node name="Sample" expanded="True">
             <Node name="activities" expanded="True" />

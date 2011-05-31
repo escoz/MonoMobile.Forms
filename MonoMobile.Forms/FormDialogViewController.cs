@@ -96,7 +96,7 @@ namespace MonoMobile.Forms
 		
 		public override void ViewDidLoad ()
 		{
-			if (_file != null)
+			if (!string.IsNullOrEmpty(_file))
 				_processFile(_file, _values);
 		}
 		
@@ -153,6 +153,7 @@ namespace MonoMobile.Forms
 					});
 				}, (error)=>{ NetworkFailed(error); });
 			} else {
+				
 				_processContentOfFile(File.ReadAllText(file), values);
 			}
 		}
@@ -163,7 +164,9 @@ namespace MonoMobile.Forms
 			JsonObject valueJson = null;
 			
 			if (!string.IsNullOrEmpty(values)){
+				
 				if (values.StartsWith(Constants.Http)){
+					
 					Context = new FormBindingContext(this, json, Title);
 					Loading = true;
 					var req = CreateRequestForUrl(values);
@@ -178,13 +181,10 @@ namespace MonoMobile.Forms
 								return;
 								
 							}
+							
 							if (resultValue.JsonType==JsonType.Object)
 								valueJson = (JsonObject)resultValue;
 						
-							if (!string.IsNullOrEmpty(DataRootName)) {
-								resultValue = ((JsonObject)resultValue).asJsonValue(DataRootName);
-							}
-							
 							Context = new FormBindingContext(this, json,  resultValue, Title);
 							_configureDialog(json, valueJson);
 							PrepareRoot(Context.Root);

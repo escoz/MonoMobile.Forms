@@ -64,6 +64,10 @@ namespace MonoMobile.Forms
 			});
 		}
 		
+		public void Execute(ControllerAction action, Element el, Action completed){
+			action.Execute(this, (ActivityElement)el, completed);	
+		}
+		
 		public void Reload(Element el){
 			Reload();
 		}

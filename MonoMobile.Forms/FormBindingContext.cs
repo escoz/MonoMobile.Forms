@@ -47,21 +47,8 @@ namespace MonoMobile.Forms
 		Dictionary<string, Element> _elements;
 		public FormDialogViewController _controller;
 
-		public FormBindingContext (FormDialogViewController controller, JsonValue json, string title)
+		public FormBindingContext (FormDialogViewController controller, JsonValue json, string title) : this(controller, json, null, title)
 		{
-			_controller = controller;
-			_elements = new Dictionary<string, Element>();
-			
-			if (json == null)
-				throw new ArgumentNullException ("json");
-			
-			Root = new RootElement(title);
-			
-			try {
-				Populate (json, Root, null);
-			} catch (Exception e) {
-				Console.WriteLine("Exception on JsonBindingContext " + e.ToString());
-			}
 		}
 		
 		public FormBindingContext(FormDialogViewController callbacks, JsonValue json, JsonValue data, string title) {
