@@ -139,4 +139,82 @@ if all you want is to display more data in a new page, you can use the "navigate
 This will automatically cause the new form to be pushed when you press the button.
 
 
+Databinding 
+===============
+
+The main idea that drove me to create MonoMobile.Forms was the being able to display data from RESTful webservices shouldn't be hard.
+Databinding is what allows that to happen. To use databinding, you need to create the FormDialogViewController passing two different
+urls, one for the form json, and one containing the data. For example:
+
+public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+	{		
+		window.AddSubview (new UINavigationController(new MyFormController("js/main.js http://www.mysite.com/users/10.json")).View);
+		window.MakeKeyAndVisible ();
+		return true;
+	}
+}
+
+When the above executes, a few things will happen: 
+1. The form will be generated based on the js/main.js, but with no data. 
+2. A loading activity view will be displayed on top of the form to prevent user input.
+3. The controller will try to download the data from the webservice
+4. When the data is downloaded, the form will reload the form, to display the data, and the loading activity view will be removed.
+
+If an error occurs while downloading the data, an error message will be displayed to the user. Notice that the data file could also be
+stored locally in the phone, although that decreases the usability of the app.
+
+A few keywords exist to make it easy to bind data to JSON:
+
+- dataroot: set in the first level of the form, this specifies the top level of the JSON data in case it exists. 
+- iterate / template: when used in a session level, this will automatically iterate over an array of JSON objects and use the template
+to render one template for each object. You can use the character # to separate objects into multiple levels.
+- iterateproperties: like the iterate functionality, but works for objects, iterating over each key-value.
+- bind: when used in an element, it'll automatically filter the data passed to the element to match the parameter. 
+
+Here's an example. Lets assume I have this simple json file:
+
+{
+    "user": {
+        "name":"Eduardo Scoz",
+        "username":"escoz",
+        "sites":["http://escoz.com", "http://twitter.com/escoz", "http://github.com/escoz"],
+        "extras":{
+            "since":"05-31-05",
+            "until":"10-30-11"
+        }
+    }
+}
+
+Here's the definition of a form that would be able to show that data:
+
+{
+	"grouped":true,
+	"title":"User",
+	"root": [
+	    {
+	      "caption":"User Info", "elements":{
+	          { "type":"StringElement", "caption":"Name", "bind":"name" },
+      	      { "type":"StringElement", "caption":"Username", "bind":"username" }
+	      }  
+	    },
+		{ "caption":"Websites", "iterate":"sites", "template":
+			{ "type":"WebElement" }
+		},
+    	{ "caption":"Websites", "iterateproperties":"extras", "template":
+    		{ "type":"StringElement", "caption":"Date" }
+    	}		
+	]
+}
+
+If you need to get extra data out of the JSON data, you can also define your own "type" strings, which
+will map to a custom function. That way, you can really touch the data as you would like, without having
+to worry about navigating thru the JSON data or the creation of the form.
+
+
+Hope this quick tutorial will be useful to you. This doc is not supposed to explain all the functionality
+in the framework, just like the framework is not supposed to be the final solution for all development. My suggestion
+is for you to use this framework as the starting point for your app, and then change things or add more functionality
+as necessary. Hope you find it useful.
+
+
 

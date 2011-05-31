@@ -151,7 +151,7 @@ namespace MonoMobile.Forms
 			result.Add("RadioElement", (json, dvc, data)=>{
 					var radios = new List<RadioElement>();
 					var popAutomatically = json.asBoolean("pop");
-					foreach (string item in json.sl("items")){
+					foreach (string item in json.asStringList("items")){
 						radios.Add(new RadioElement(item, popAutomatically));
 					}
 					int selected = 0;

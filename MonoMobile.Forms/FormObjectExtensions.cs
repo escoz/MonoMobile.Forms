@@ -45,7 +45,7 @@ namespace MonoMobile.Forms
 {
 	public static class FormObjectExtensions {
 	
-		public static List<string> sl(this JsonObject json, string name){
+		public static List<string> asStringList(this JsonObject json, string name){
 			var result = new List<string>();
 			if (json!=null && json.ContainsKey(name)) {
 				foreach (var e in json[name]){
