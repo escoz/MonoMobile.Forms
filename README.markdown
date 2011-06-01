@@ -168,7 +168,8 @@ to render one template for each object. You can use the character # to separate 
 
 Here's an example. Lets assume I have this simple json file:
 
-        { "user": {
+    { 
+        "user": {
             "name":"Eduardo Scoz",
             "username":"escoz",
             "sites":["http://escoz.com", "http://twitter.com/escoz", "http://github.com/escoz"],
@@ -176,7 +177,8 @@ Here's an example. Lets assume I have this simple json file:
                 "since":"05-31-05",
                 "until":"10-30-11"
             }
-        }}
+        }
+    }
 
 Here's the definition of a form that would be able to show that data:
 
