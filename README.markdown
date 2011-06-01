@@ -52,35 +52,35 @@ Using the FormDialogViewController
 The recommended way to use the FormDialogViewController is to create a subclass of it on your project. Here's an example 
 (make sure you add references to the MonoMobile.Forms and MonoTouch.Dialog projects from your project):
 
-namespace MyApp
-{
-	public class MyFormController : FormDialogViewController
-	{
-		public MyFormController (string url) : base(url, true)
-		{
-		}
+    namespace MyApp
+    {
+	    public class MyFormController : FormDialogViewController
+	    {
+		    public MyFormController (string url) : base(url, true)
+		    {
+		    }
 		
-		public void ShowLogin(Element el){
-			var loginForm = new MyFormController("js/login.js");
-			this.PresentModalViewController(new UINavigationController(loginForm), true);
-		}
+		    public void ShowLogin(Element el){
+			    var loginForm = new MyFormController("js/login.js");
+			    this.PresentModalViewController(new UINavigationController(loginForm), true);
+		    }
 		
-		public void Dismiss(Element el){
-			this.DismissModalViewControllerAnimated(true);
-		}
-	}
-}
+		    public void Dismiss(Element el){
+			    this.DismissModalViewControllerAnimated(true);
+		    }
+	    }
+    }
 
 In the class above, we're defining what will be the basis for our application. To use this class, you can simply do 
 the following on your AppDelegate class:
 
-public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-	{		
-		window.AddSubview (new UINavigationController(new MyFormController("js/main.js")).View);
-		window.MakeKeyAndVisible ();
-		return true;
-	}
-}
+    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+	    {		
+		    window.AddSubview (new UINavigationController(new MyFormController("js/main.js")).View);
+		    window.MakeKeyAndVisible ();
+		    return true;
+	    }
+    }
 
 This will cause the application to start up with a new MyFormController, displaying the file called js/main.js. In 
 that file, we can define the form to be displayed, like the following:
