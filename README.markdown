@@ -1,5 +1,5 @@
-Json Forms for MonoTouch
-========================
+# Json Forms for MonoTouch
+
 
 MonoMobile.Forms allows you to easily create iOS dialogs using JSON and C#. MonoTouch.Forms also simplifies
 the display of data from JSON REST services, by directly binding values in JSON to fields in forms.
@@ -16,8 +16,7 @@ I really hope you enjoy this project, and that you helps you develop apps.
 
 Eduardo Scoz
 
-How It Works?
-========================
+## How It Works?
 
 At the heart of MonoMobile.Forms, is the FormDialogViewController class. This is the main UIController class that
 you'll be using when creating forms with this control. When defining a new form, we'll need to send the address of
@@ -46,8 +45,7 @@ once editing is done.
 This is it really. The system is not very complex; the idea is to make it easy to extend so that you can adapt the framework
 to each of your applications.
 
-Using the FormDialogViewController
-========================
+## Using the FormDialogViewController
 
 The recommended way to use the FormDialogViewController is to create a subclass of it on your project. Here's an example 
 (make sure you add references to the MonoMobile.Forms and MonoTouch.Dialog projects from your project):
@@ -110,51 +108,48 @@ Be careful when defining the form: the file has to contain only correctly define
 mistakenly add an extra comma at the end of an array, or forgetting to add quotes for titles. 
 The MonoMobile.Forms framework will throw errors in that case.
 
-Controller Actions
-==================
+## Controller Actions
 In the first example above, where we defined the MyFormController class, you saw that there were two methods being defined, each
 one accepting an Element object. Those are called Actions. Actions are a simple way of executing methods directly on your controller.
 So lets define a new section, with a button that calls the ShowLogin() action. To do that, simply add this to the root
 array in your main.js file:
 
-{ "elements":[
-		{ "type":"ButtonElement", "caption":"Login", "action":"ShowLogin" }
-	]
-}
+    { "elements":[
+		    { "type":"ButtonElement", "caption":"Login", "action":"ShowLogin" }
+	    ]   
+    }
 
 Wow, that was easy! When you touch the Button element, the ShowLogin action automatically gets called from the framework. In our case,
 we'll be showing another form called js/login.js as a modal page. Actions can also be called from many other elements, like StringElements.
 
-Navigation
-==================
+## Navigation
 The JsonFormDialogController uses the UINavigationController model available in iOS. While you could create custom methods in your
 controller to do the push of a new Form for you (and this works great when you have to execute custom logic before doing the push), 
 if all you want is to display more data in a new page, you can use the "navigateto" directive, like below:
 
-{ "elements":[
-		{ "type":"ButtonElement", "caption":"Detailed Info", "navigateto":"js/details.js" }
-	]
-}
+    { "elements":[
+	        { "type":"ButtonElement", "caption":"Detailed Info", "navigateto":"js/details.js" }
+	    ]
+    }
 
 This will automatically cause the new form to be pushed when you press the button.
 
 
-Databinding 
-===============
-
+## Databinding 
 The main idea that drove me to create MonoMobile.Forms was the being able to display data from RESTful webservices shouldn't be hard.
 Databinding is what allows that to happen. To use databinding, you need to create the FormDialogViewController passing two different
 urls, one for the form json, and one containing the data. For example:
 
-public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-	{		
-		window.AddSubview (new UINavigationController(new MyFormController("js/main.js http://www.mysite.com/users/10.json")).View);
-		window.MakeKeyAndVisible ();
-		return true;
-	}
-}
+    public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+	    {		
+		    window.AddSubview (new UINavigationController(new MyFormController("js/main.js http://www.mysite.com/users/10.json")).View);
+		    window.MakeKeyAndVisible ();
+		    return true;
+	    }
+    }
 
 When the above executes, a few things will happen: 
+
 1. The form will be generated based on the js/main.js, but with no data. 
 2. A loading activity view will be displayed on top of the form to prevent user input.
 3. The controller will try to download the data from the webservice
@@ -173,46 +168,40 @@ to render one template for each object. You can use the character # to separate 
 
 Here's an example. Lets assume I have this simple json file:
 
-{
-    "user": {
-        "name":"Eduardo Scoz",
-        "username":"escoz",
-        "sites":["http://escoz.com", "http://twitter.com/escoz", "http://github.com/escoz"],
-        "extras":{
-            "since":"05-31-05",
-            "until":"10-30-11"
-        }
-    }
-}
+        { "user": {
+            "name":"Eduardo Scoz",
+            "username":"escoz",
+            "sites":["http://escoz.com", "http://twitter.com/escoz", "http://github.com/escoz"],
+            "extras":{
+                "since":"05-31-05",
+                "until":"10-30-11"
+            }
+        }}
 
 Here's the definition of a form that would be able to show that data:
 
-{
-	"grouped":true,
-	"title":"User",
-	"root": [
-	    {
-	      "caption":"User Info", "elements":{
-	          { "type":"StringElement", "caption":"Name", "bind":"name" },
-      	      { "type":"StringElement", "caption":"Username", "bind":"username" }
-	      }  
+    {   
+	    "grouped":true,
+	    "title":"User",
+	    "root": [{
+	        "caption":"User Info", "elements":{
+	            { "type":"StringElement", "caption":"Name", "bind":"name" },
+      	        { "type":"StringElement", "caption":"Username", "bind":"username" }
+	        }  
 	    },
 		{ "caption":"Websites", "iterate":"sites", "template":
 			{ "type":"WebElement" }
 		},
     	{ "caption":"Websites", "iterateproperties":"extras", "template":
     		{ "type":"StringElement", "caption":"Date" }
-    	}		
-	]
-}
+    	}]
+    }
 
 If you need to get extra data out of the JSON data, you can also define your own "type" strings, which
 will map to a custom function. That way, you can really touch the data as you would like, without having
 to worry about navigating thru the JSON data or the creation of the form.
 
-Notes
-==================
-
+## Notes
 For more examples on how to use the app, read the code available in the Samples app. There's a lot of really
 useful information there.
 
