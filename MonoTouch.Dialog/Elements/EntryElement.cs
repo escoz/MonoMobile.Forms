@@ -30,6 +30,7 @@ namespace MonoTouch.Dialog
 		
 		public UIKeyboardType KeyboardType = UIKeyboardType.Default;
 		public UITextAutocapitalizationType AutoCapitalize = UITextAutocapitalizationType.Sentences;
+        public UIReturnKeyType ReturnKeyType = UIReturnKeyType.Default;
 		
 		public EntryElement (string caption, string placeholder, string value) : this (caption, placeholder, value, false){}
 		
