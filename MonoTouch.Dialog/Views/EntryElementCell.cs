@@ -87,7 +87,11 @@ namespace MonoTouch.Dialog
 				}
 				else 
 					_entry.ResignFirstResponder();
-				
+
+                if (_entry.ReturnKeyType == UIReturnKeyType.Go) {
+                    _element.FireGo(this, EventArgs.Empty);
+                }
+
 				return true;
 			};
 			_entry.Started += delegate {

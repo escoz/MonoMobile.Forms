@@ -31,6 +31,8 @@ namespace MonoTouch.Dialog
 		public UIKeyboardType KeyboardType = UIKeyboardType.Default;
 		public UITextAutocapitalizationType AutoCapitalize = UITextAutocapitalizationType.Sentences;
         public UIReturnKeyType ReturnKeyType = UIReturnKeyType.Default;
+
+        public event EventHandler Go;
 		
 		public EntryElement (string caption, string placeholder, string value) : this (caption, placeholder, value, false){}
 		
@@ -67,5 +69,13 @@ namespace MonoTouch.Dialog
 		{
 			((EntryElementCell)tableView.CellAt(path)).BecomeFirstResponder();
 		}
+
+        public void FireGo(object sender, EventArgs e)
+        {
+            if (Go != null)
+            {
+                Go(sender, e);
+            }
+        }
 	}
 }
