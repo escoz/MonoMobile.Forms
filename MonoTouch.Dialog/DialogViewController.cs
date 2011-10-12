@@ -623,6 +623,7 @@ namespace MonoTouch.Dialog
 		public DialogViewController (UITableViewStyle style, RootElement root) : base (style)
 		{
 			this.pushing = true;
+            Style = style;
 			PrepareRoot (root);
 		}
 		
