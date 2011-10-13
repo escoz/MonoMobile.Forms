@@ -17,3 +17,4 @@ TestResults
 
 # os x system files
 .DS_Store?
+*.pidb
