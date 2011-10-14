@@ -34,6 +34,7 @@ namespace MonoTouch.Dialog
 			_entry.SecureTextEntry = element.IsPassword;
 			_entry.AutocapitalizationType = element.AutoCapitalize;
 			_entry.KeyboardType = element.KeyboardType;
+            _entry.ReturnKeyType = element.ReturnKeyType;
 			TextLabel.Text = element.Caption;
 		}
 			
@@ -86,20 +87,26 @@ namespace MonoTouch.Dialog
 				}
 				else 
 					_entry.ResignFirstResponder();
-				
+
+                if (_entry.ReturnKeyType == UIReturnKeyType.Go) {
+                    _element.FireGo(this, EventArgs.Empty);
+                }
+
 				return true;
 			};
 			_entry.Started += delegate {
 				EntryElement self = null;
-				var returnType = UIReturnKeyType.Default;
-				
-				foreach (var e in (_element.Parent as Section).Elements){
-					if (e == _element)
-						self = _element;
-					else if (self != null && e is EntryElement)
-						returnType = UIReturnKeyType.Next;
-				}
-				_entry.ReturnKeyType = returnType;
+				var returnType = _element.ReturnKeyType;
+
+                if (returnType != UIReturnKeyType.Default) {
+                    foreach (var e in (_element.Parent as Section).Elements){
+                        if (e == _element)
+                            self = _element;
+                        else if (self != null && e is EntryElement)
+                            returnType = UIReturnKeyType.Next;
+                    }
+                }
+                _entry.ReturnKeyType = returnType;
 			};
 				
 			ContentView.AddSubview (_entry);

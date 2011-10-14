@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3FFBFFF8-5560-4EDE-82E5-3FFDFBBA8A50}</ProjectGuid>
-    <ProjectTypeGuids>{E613F3A2-FE9C-494F-B74E-F63BCB86FEA6};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <RootNamespace>MonoTouch.Dialog</RootNamespace>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <MtouchMinimumOS>3.0</MtouchMinimumOS>
     <MtouchSdkVersion>3.0</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -22,12 +20,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchLink>None</MtouchLink>
-    <MtouchDebug>True</MtouchDebug>
+    <MtouchDebug>true</MtouchDebug>
     <AssemblyName>MonoTouch.Dialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -35,13 +29,8 @@
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchDebug>False</MtouchDebug>
     <MtouchLink>None</MtouchLink>
     <AssemblyName>MonoTouch.Dialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,12 +41,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>True</MtouchDebug>
+    <MtouchDebug>true</MtouchDebug>
     <AssemblyName>MonoTouch.Dialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -65,39 +50,38 @@
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <MtouchDebug>False</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
     <AssemblyName>MonoTouch.Dialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhone' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\AdHoc</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <MtouchDebug>False</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
     <AssemblyName>MonoTouchDialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\AppStore</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <MtouchDebug>False</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
     <AssemblyName>MonoTouchDialog</AssemblyName>
-    <MtouchUseLlvm>false</MtouchUseLlvm>
-    <MtouchArch>ARMv6</MtouchArch>
-    <MtouchUseThumb>false</MtouchUseThumb>
-    <MtouchUseSGen>false</MtouchUseSGen>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AdHoc</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>MonoTouchDialog</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AppStore</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>MonoTouchDialog</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -107,11 +91,6 @@
     <Reference Include="System.Json" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties InternalTargetFrameworkVersion="IPhone" />
-    </MonoDevelop>
-  </ProjectExtensions>
   <ItemGroup>
     <Compile Include="DialogViewController.cs" />
     <Compile Include="Elements\LoadMoreElement.cs" />
