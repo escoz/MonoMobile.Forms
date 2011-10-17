@@ -14,3 +14,7 @@ Thumbs.db
 
 # mstest test results
 TestResults
+
+# os x system files
+.DS_Store?
+*.pidb

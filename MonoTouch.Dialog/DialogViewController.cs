@@ -130,7 +130,7 @@ namespace MonoTouch.Dialog
 		
 		public void PushRootElement(RootElement root){
 			InvokeOnMainThread(()=>{
-				var newcontroller = (DialogViewController)Activator.CreateInstance(this.GetType(), root);
+				var newcontroller = (DialogViewController)Activator.CreateInstance(root.RootControllerType, root);
 				newcontroller.Title = "Select";
 				ActivateController(newcontroller, this);
 			});
@@ -623,6 +623,7 @@ namespace MonoTouch.Dialog
 		public DialogViewController (UITableViewStyle style, RootElement root) : base (style)
 		{
 			this.pushing = true;
+            Style = style;
 			PrepareRoot (root);
 		}
 		

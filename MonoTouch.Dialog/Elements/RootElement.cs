@@ -27,6 +27,7 @@ namespace MonoTouch.Dialog
 		public bool UnevenRows;
 		public Func<RootElement, UIViewController> createOnSelected;
 		internal UITableView TableView;
+        public Type RootControllerType = new DialogViewController(null).GetType();
 		
 		public RootElement (string caption) : base (caption)
 		{
