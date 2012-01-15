@@ -6,8 +6,8 @@ bin
 obj
 
 # user settings
-*.user
-*.suo
+**.user
+**.suo
 
 # if you have pictures, windows will likely create those annoying index files
 Thumbs.db
@@ -17,4 +17,4 @@ TestResults
 
 # os x system files
 .DS_Store?
-*.pidb
+**.pidb
