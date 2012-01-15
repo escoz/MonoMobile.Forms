@@ -173,7 +173,7 @@ namespace MonoMobile.Util
 		
 		public override void CanceledAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge)
 		{
-			Console.WriteLine("canceled");
+			//Console.WriteLine("canceled");
 		}
 		
 		public override void FailedWithError (NSUrlConnection connection, NSError error)

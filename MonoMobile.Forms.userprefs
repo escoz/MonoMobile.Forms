@@ -1,7 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MonoMobile.Forms/FormDialogViewController.cs">
     <Files>
+      <File FileName="../../Downloads/2011_2_2011_2_KeyChain_MT.cs" Line="114" Column="4" />
       <File FileName="../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="82" Column="4" />
       <File FileName="../ClubTix/ClubTix/Util/LoadingHUDView.cs" Line="7" Column="23" />
       <File FileName="../ClubTix/ClubTix/Domain/Ticket.cs" Line="1" Column="1" />

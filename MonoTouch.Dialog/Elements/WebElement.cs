@@ -99,6 +99,12 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
+			if (!Url.StartsWith("http:")){
+				tableView.DeselectRow(path, false);
+				UIApplication.SharedApplication.OpenUrl(nsUrl);
+				return;
+			}
+			
 			var vc = new WebViewController (this) {
 				Autorotate = dvc.Autorotate
 			};

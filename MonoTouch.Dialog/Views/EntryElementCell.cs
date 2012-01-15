@@ -32,7 +32,14 @@ namespace MonoTouch.Dialog
 			_entry.Text = element.Value ?? "";
 			_entry.Placeholder = element.Placeholder ?? "";
 			_entry.SecureTextEntry = element.IsPassword;
-			_entry.AutocapitalizationType = element.AutoCapitalize;
+			if (element.KeyboardType==UIKeyboardType.EmailAddress || element.IsPassword){
+				_entry.AutocorrectionType = UITextAutocorrectionType.No;
+				_entry.AutocapitalizationType = UITextAutocapitalizationType.None;
+			} else {
+				_entry.AutocorrectionType = UITextAutocorrectionType.Default;
+				_entry.AutocapitalizationType = element.AutoCapitalize;
+			}
+			
 			_entry.KeyboardType = element.KeyboardType;
 			TextLabel.Text = element.Caption;
 		}
@@ -51,7 +58,7 @@ namespace MonoTouch.Dialog
 		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
-			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width, size.Height));
+			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-10, size.Height));
 			
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
