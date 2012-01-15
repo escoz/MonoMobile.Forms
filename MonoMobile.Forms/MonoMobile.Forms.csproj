@@ -10,7 +10,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>MonoTouch.Forms</RootNamespace>
     <AssemblyName>MonoTouchForms</AssemblyName>
+<<<<<<< HEAD
     <ReleaseVersion>1</ReleaseVersion>
+=======
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+>>>>>>> a0953867309e575334ed15504f699b012d4f9eea
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
