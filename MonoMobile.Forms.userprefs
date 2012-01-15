@@ -1,34 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MonoMobile.Forms/FormDialogViewController.cs">
     <Files>
-      <File FileName="../../Downloads/2011_2_2011_2_KeyChain_MT.cs" Line="114" Column="4" />
-      <File FileName="../quicklytics/Cracklytics.Domain/Util/EscozUrlConnection.cs" Line="82" Column="4" />
-      <File FileName="../ClubTix/ClubTix/Util/LoadingHUDView.cs" Line="7" Column="23" />
-      <File FileName="../ClubTix/ClubTix/Domain/Ticket.cs" Line="1" Column="1" />
-      <File FileName="../ClubTix/ClubTix/Util/Reachability.cs" Line="10" Column="20" />
-      <File FileName="../ClubTix/ClubTix/ScanTicketViewController.xib.cs" Line="141" Column="3" />
-      <File FileName="../ClubTix/ClubTix/Services/AuthService.cs" Line="30" Column="31" />
-      <File FileName="../ClubTix/ClubTix/Services/ClubTixService.cs" Line="180" Column="3" />
-      <File FileName="../ClubTix/ClubTix/AppDelegate.cs" Line="106" Column="1" />
-      <File FileName="../ClubTix/ClubTix/Main.cs" Line="20" Column="82" />
-      <File FileName="../ClubTix/ClubTix/MainWindow.xib.designer.cs" Line="34" Column="1" />
-      <File FileName="../ClubTix/ClubTix/Domain/EventStats.cs" Line="32" Column="3" />
-      <File FileName="../ClubTix/ClubTix/Domain/Event.cs" Line="25" Column="3" />
-      <File FileName="../ClubTix/MonoTouch.Dialog/Elements.cs" Line="180" Column="7" />
-      <File FileName="../ClubTix/ClubTix/Services/SystemStatusService.cs" Line="13" Column="4" />
-      <File FileName="../ClubTix/ClubTix/Util/UIViewExtensions.cs" Line="8" Column="23" />
-      <File FileName="../ClubTix/ClubTix/Util/Colors.cs" Line="8" Column="23" />
       <File FileName="Sample/activities/ShowValuesInConsole.cs" Line="43" Column="70" />
-      <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="44" Column="70" />
+      <File FileName="Sample/activities/ShowWeatherInChicago.cs" Line="1" Column="1" />
       <File FileName="MonoMobile.Forms/Elements/ActivityElement.cs" Line="97" Column="18" />
       <File FileName="MonoMobile.Forms/Activities/Activity.cs" Line="40" Column="69" />
-      <File FileName="Sample/js/login.js" Line="14" Column="42" />
-      <File FileName="Sample/js/person.js" Line="12" Column="54" />
-      <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="20" Column="25" />
-      <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="221" Column="27" />
+      <File FileName="Sample/js/login.js" Line="1" Column="1" />
+      <File FileName="Sample/js/person.js" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Elements/BooleanElement.cs" Line="1" Column="1" />
+      <File FileName="MonoTouch.Dialog/Reflection/BindingContext.cs" Line="1" Column="1" />
       <File FileName="MonoMobile.Forms/ElementParsers.cs" Line="104" Column="83" />
-      <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="24" Column="27" />
+      <File FileName="MonoTouch.Dialog/Elements/CheckboxElement.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/RadioGroup.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/RadioElement.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/RefreshTableHeaderView.cs" Line="1" Column="1" />
@@ -36,8 +19,8 @@
       <File FileName="MonoTouch.Dialog/Elements/SearchChangedEventArgs.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/Section.cs" Line="1" Column="1" />
       <File FileName="MonoTouch.Dialog/Elements/SimpleImageElement.cs" Line="1" Column="1" />
-      <File FileName="Sample/js/allelements.js" Line="26" Column="55" />
-      <File FileName="Sample/js/sample.js" Line="28" Column="2" />
+      <File FileName="Sample/js/allelements.js" Line="1" Column="1" />
+      <File FileName="Sample/js/sample.js" Line="1" Column="1" />
       <File FileName="MonoMobile.Forms/Activities/ActivityFactory.cs" Line="1" Column="1" />
       <File FileName="Sample/SampleFormController.cs" Line="1" Column="1" />
       <File FileName="MonoMobile.Forms/Elements/ControllerAction.cs" Line="1" Column="1" />
@@ -52,11 +35,7 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="MonoMobile.Forms" expanded="True">
-            <Node name="Activities" expanded="True" />
-            <Node name="Elements" expanded="True" />
-            <Node name="FormDialogViewController.cs" selected="True" />
-          </Node>
+          <Node name="MonoMobile.Forms" expanded="True" selected="True" />
           <Node name="Sample" expanded="True">
             <Node name="activities" expanded="True" />
             <Node name="js" expanded="True" />
