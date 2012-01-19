@@ -16,5 +16,5 @@ Thumbs.db
 TestResults
 
 # os x system files
-.DS_Store?
+.DS_Store
 **.pidb
