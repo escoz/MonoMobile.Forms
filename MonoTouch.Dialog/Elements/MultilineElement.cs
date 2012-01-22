@@ -48,7 +48,7 @@ namespace MonoTouch.Dialog
 		{
 			SizeF size = new SizeF (280, float.MaxValue);
 			if (string.IsNullOrEmpty(Caption)) return Font.LineHeight+10;
-			return tableView.StringSize (Caption, Font, size, UILineBreakMode.WordWrap).Height + 10;
+			return tableView.StringSize (Caption, Font, size, UILineBreakMode.WordWrap).Height + 20;
 		}
 		
 		public UIFont Font = UIFont.SystemFontOfSize(15f);
