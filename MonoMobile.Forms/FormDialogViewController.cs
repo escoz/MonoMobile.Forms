@@ -176,7 +176,7 @@ namespace MonoMobile.Forms
 							try {
 								resultValue = JsonObject.Parse(result);
 							
-							} catch (Exception e){
+							} catch (Exception){
 								//Console.WriteLine("Exception while parsing result: " +e.ToString() +" Values: " + values);
 								return;
 								
@@ -282,7 +282,7 @@ namespace MonoMobile.Forms
 		private JsonValue _parse(string str){
 			try {
 				return JsonValue.Parse(str);
-			} catch (Exception e){
+			} catch (Exception){
 				//Console.WriteLine("Error while parsing json - " + e.ToString() + "\n" + str);
 				return new JsonObject();
 			}

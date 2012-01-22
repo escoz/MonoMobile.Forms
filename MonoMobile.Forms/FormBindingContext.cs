@@ -61,7 +61,7 @@ namespace MonoMobile.Forms
 			Root = new RootElement(title);
 			try {
 				Populate (json, Root, data);
-			} catch (Exception e) {
+			} catch (Exception) {
 				//Console.WriteLine("Exception on JsonBindingContext " + e.ToString());
 			}
 		}
