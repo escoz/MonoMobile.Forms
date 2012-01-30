@@ -154,7 +154,9 @@ namespace MonoMobile.Forms
 				}, (error)=>{ NetworkFailed(error); });
 			} else {
 				
-				_processContentOfFile(File.ReadAllText(file), values);
+				string str = NSBundle.MainBundle.PathForResource (file, "js");
+				Console.WriteLine(str);
+				_processContentOfFile(File.ReadAllText(str), values);
 			}
 		}
 		
@@ -195,7 +197,7 @@ namespace MonoMobile.Forms
 					}, (error)=>{ NetworkFailed(error); });
 					
 				} else {
-					var datavalue = JsonObject.Parse(File.ReadAllText(values));
+					var datavalue = JsonObject.Parse(File.ReadAllText(NSBundle.MainBundle.PathForResource(values, "json")));
 					Context = new FormBindingContext(this, json, datavalue, Title);
 				}
 					
