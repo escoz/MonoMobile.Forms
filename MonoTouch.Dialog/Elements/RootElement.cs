@@ -319,6 +319,7 @@ namespace MonoTouch.Dialog
 			} 
 		
 			cell.TextLabel.Text = Caption;
+			cell.DetailTextLabel.Text = "";
 			var radio = group as RadioGroup;
 			if (radio != null){
 				int selected = radio.Selected;
