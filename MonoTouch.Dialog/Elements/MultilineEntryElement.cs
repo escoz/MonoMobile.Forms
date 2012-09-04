@@ -155,7 +155,6 @@ namespace MonoTouch.Dialog
 			}
 			if (entry == null) {
 				SizeF size = ComputeEntryPosition (tv, cell);
-				float yOffset = (cell.ContentView.Bounds.Height - size.Height) / 2 - 1;
 				float width = cell.ContentView.Bounds.Width;
 				
 				entry = CreateTextField (new RectangleF (	0, 0, width, size.Height + (height)));
