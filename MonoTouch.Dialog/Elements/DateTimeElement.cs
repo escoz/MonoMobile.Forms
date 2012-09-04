@@ -23,14 +23,14 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
-	public class DateTimeElement : StringElement {
+	public class DateTimeElement : EntryElement {
 		public DateTime DateValue;
 		public UIDatePicker datePicker;
 		protected internal NSDateFormatter fmt = new NSDateFormatter () {
 			DateStyle = NSDateFormatterStyle.Short
 		};
 		
-		public DateTimeElement (string caption, DateTime date) : base (caption)
+		public DateTimeElement (string caption, DateTime date) : base (caption, "", "")
 		{
 			DateValue = date;
 			Value = FormatDate (date);
@@ -39,20 +39,31 @@ namespace MonoTouch.Dialog
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			Value = FormatDate (DateValue);
-			return base.GetCell (tv);
-		}
- 
-		protected override void Dispose (bool disposing)
-		{
-			base.Dispose (disposing);
-			if (disposing){
-				fmt.Dispose ();
-				fmt = null;
-				if (datePicker != null){
-					datePicker.Dispose ();
-					datePicker = null;
-				}
-			}
+			EntryElementCell cell = (EntryElementCell)tv.DequeueReusableCell("DateTimeElement");
+			if (cell == null){
+				cell = new EntryElementCell("DateTimeElement");
+			} 
+
+			cell.Update(this, tv);
+			var picker = CreatePicker();
+			picker.ValueChanged += (sender, e) => { 
+				cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+			};
+			
+			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+			cell.TextField.InputView = picker;
+			cell.TextField.Alpha = 0;
+
+			var toolbar =  new UIToolbar();
+			toolbar.Items = new UIBarButtonItem[] {
+				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
+				new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (e, a)=>{
+					cell.TextField.ResignFirstResponder();
+				})
+			};
+			toolbar.SizeToFit();
+			cell.TextField.InputAccessoryView = toolbar;				
+			return cell;
 		}
 		
 		public virtual string FormatDate (DateTime dt)
@@ -69,71 +80,6 @@ namespace MonoTouch.Dialog
 			};
 			return picker;
 		}
-		                                                                                                                                
-		static RectangleF PickerFrameWithSize (SizeF size)
-		{                                                                                                                                    
-			var screenRect = UIScreen.MainScreen.ApplicationFrame;
-			float fY = 0, fX = 0;
-			
-			switch (UIApplication.SharedApplication.StatusBarOrientation){
-			case UIInterfaceOrientation.LandscapeLeft:
-			case UIInterfaceOrientation.LandscapeRight:
-				fX = (screenRect.Height - size.Width) /2;
-				fY = (screenRect.Width - size.Height) / 2 -17;
-				break;
-				
-			case UIInterfaceOrientation.Portrait:
-			case UIInterfaceOrientation.PortraitUpsideDown:
-				fX = (screenRect.Width - size.Width) / 2;
-				fY = (screenRect.Height - size.Height) / 2 - 25;
-				break;
-			}
-			
-			return new RectangleF (fX, fY, size.Width, size.Height);
-		}                                                                                                                                    
-		
-		
-		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
-		{
-			var vc = new DateTimeElementController (this) {
-				Autorotate = dvc.Autorotate
-			};
-			datePicker = CreatePicker ();
-			datePicker.Frame = PickerFrameWithSize (datePicker.SizeThatFits (SizeF.Empty));
-			                            
-			vc.View.BackgroundColor = UIColor.Black;
-			vc.View.AddSubview (datePicker);
-			dvc.ActivateController (vc, dvc);
-		}
-		
-		
-		
-		class DateTimeElementController : UIViewController {
-			DateTimeElement container;
-			
-			public DateTimeElementController (DateTimeElement container)
-			{
-				this.container = container;
-			}
-			
-			public override void ViewWillDisappear (bool animated)
-			{
-				base.ViewWillDisappear (animated);
-				container.DateValue = container.datePicker.Date;
-			}
-			
-			public override void DidRotate (UIInterfaceOrientation fromInterfaceOrientation)
-			{
-				base.DidRotate (fromInterfaceOrientation);
-				container.datePicker.Frame = PickerFrameWithSize (container.datePicker.SizeThatFits (SizeF.Empty));
-			}
-			
-			public bool Autorotate { get; set; }
-			
-			public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-			{
-				return Autorotate;
-			}
-		}
+		               
 	}
 }

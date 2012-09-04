@@ -15,11 +15,22 @@ namespace MonoTouch.Dialog
 		public static NSString KEY = new NSString ("EntryElement");
 			
 		protected UITextField _entry;
+
+		public UITextField TextField {
+			get {
+				return _entry;
+			}
+		}
+
 		protected EntryElement _element;
 		
 		public EntryElementCell():base(UITableViewCellStyle.Default, KEY){
 			SelectionStyle = UITableViewCellSelectionStyle.None;
 				
+		}
+
+		public EntryElementCell(string key):base(UITableViewCellStyle.Value1, key){
+			SelectionStyle = UITableViewCellSelectionStyle.None;
 		}
 		
 		public void Update(EntryElement element, UITableView tableView){
