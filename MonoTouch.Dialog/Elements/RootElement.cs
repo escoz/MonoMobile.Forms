@@ -21,6 +21,8 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class RootElement : Element, IEnumerable {
+		public string CaptionPrompt { get;set;}
+
 		static NSString rkey = new NSString ("RootElement");
 		int summarySection, summaryElement;
 		internal Group group;
@@ -392,7 +394,8 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
-			dvc.PushRootElement(this);
+			if (this.Sections.Count()>0)
+				dvc.PushRootElement(this);
 		}
 		
 		public void Reload (Section section, UITableViewRowAnimation animation)

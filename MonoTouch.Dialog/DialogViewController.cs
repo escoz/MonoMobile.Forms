@@ -545,9 +545,13 @@ namespace MonoTouch.Dialog
 				return;
 			
 			root.Prepare ();
-			
+
 			if (root.Caption != null) {
 				Title = root.Caption;
+			}
+
+			if (root.CaptionPrompt != null) {
+				this.NavigationItem.Prompt = root.CaptionPrompt;
 			}
 			if (dirty){
 				tableView.ReloadData ();

@@ -23,7 +23,7 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
-	public class StringElement : Element {
+	public class StringElement : RootElement {
 
 		public UITextAlignment Alignment = UITextAlignment.Left;
 		public string Value;
@@ -62,8 +62,8 @@ namespace MonoTouch.Dialog
 					cell = new UITableViewCell (UITableViewCellStyle.Value1, cellid);
 			}
 			
-			cell.SelectionStyle = (Tapped != null) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
-			cell.Accessory = Tapped == null? UITableViewCellAccessory.None : UITableViewCellAccessory.DisclosureIndicator;
+			cell.SelectionStyle = (Tapped != null || Sections.Count>0) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
+			cell.Accessory = (Tapped != null || Sections.Count>0)? UITableViewCellAccessory.DisclosureIndicator : UITableViewCellAccessory.None;
 			cell.ImageView.Image = Image;
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.TextAlignment = Alignment;
