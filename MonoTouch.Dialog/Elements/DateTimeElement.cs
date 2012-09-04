@@ -48,6 +48,8 @@ namespace MonoTouch.Dialog
 			var picker = CreatePicker();
 			picker.ValueChanged += (sender, e) => { 
 				cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+				this.Value = FormatDate(picker.Date);
+				this.DateValue = picker.Date;
 			};
 			
 			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
