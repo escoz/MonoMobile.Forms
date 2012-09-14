@@ -19,7 +19,7 @@ namespace MonoTouch.Dialog
 	public class SimpleImageElement : Element, IElementSizing {
 		public UIImage Value;
 		private string ikey = "simpleimagelement";
-		private UIImageView Image;
+		protected UIImageView Image;
 		
 		public SimpleImageElement (UIImage image) : base ("")
 		{
