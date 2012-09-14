@@ -53,6 +53,7 @@ namespace MonoTouch.Dialog
 			
 			_entry.KeyboardType = element.KeyboardType;
             _entry.ReturnKeyType = element.ReturnKeyType;
+			_entry.AutocorrectionType = element.AutoCorrection;
 			TextLabel.Text = element.Caption;
 		}
 			
