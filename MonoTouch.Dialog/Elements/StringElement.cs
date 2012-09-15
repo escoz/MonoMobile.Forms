@@ -81,10 +81,11 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath indexPath)
 		{
-			base.Selected(dvc, tableView, indexPath);
-			
 			if (Tapped != null)
 				Tapped ();
+
+			base.Selected(dvc, tableView, indexPath);
+
 			tableView.DeselectRow (indexPath, true);
 		}
 		
