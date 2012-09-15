@@ -28,7 +28,8 @@ namespace MonoTouch.Dialog
 		
 		public string ID;
 		public string Caption;
-		
+		public Object Object { get; set; }
+
 		public Element (string caption)
 		{
 			this.Caption = caption;
