@@ -131,7 +131,7 @@ namespace MonoTouch.Dialog
 		public void PushRootElement(RootElement root){
 			InvokeOnMainThread(()=>{
 				var newcontroller = (DialogViewController)Activator.CreateInstance(root.RootControllerType, root);
-				newcontroller.Title = "Select";
+				newcontroller.NavigationItem.Title = "Select";
 				ActivateController(newcontroller, this);
 			});
 		}
@@ -547,7 +547,7 @@ namespace MonoTouch.Dialog
 			root.Prepare ();
 
 			if (root.Caption != null) {
-				Title = root.Caption;
+				NavigationItem.Title = root.Caption;
 			}
 
 			if (root.CaptionPrompt != null) {
