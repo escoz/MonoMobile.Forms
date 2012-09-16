@@ -55,12 +55,12 @@ namespace MonoTouch.Dialog
 		public override UITableViewCell GetCell (UITableView tv)
 		{
 			var cellid = new NSString(Value==null ? "dialog.StringElement" : "dialog.StringElementValue");
-			var cell = tv.DequeueReusableCell (cellid);
+			var cell = (StringElementCell)tv.DequeueReusableCell (cellid);
 			if (cell == null){
 				if (Value==null) 
-					cell = new UITableViewCell (UITableViewCellStyle.Default, cellid);
+					cell = new StringElementCell (UITableViewCellStyle.Default, cellid);
 				else
-					cell = new UITableViewCell (UITableViewCellStyle.Value1, cellid);
+					cell = new StringElementCell (UITableViewCellStyle.Value1, cellid);
 			}
 			
 			cell.SelectionStyle = (Tapped != null || Sections.Count>0) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
@@ -72,22 +72,11 @@ namespace MonoTouch.Dialog
 			if (cell.DetailTextLabel!=null && !String.IsNullOrEmpty(Value)) {
 				if (!ShowValueAsBadge){
 					cell.DetailTextLabel.Text = Value == null ? "" : Value;
-					cell.AccessoryView = null;
+					cell.ShowBadge = false;
 				} else {
 					var frame = cell.DetailTextLabel.Frame;
-
-					var badge = new UILabel {
-						Font = UIFont.BoldSystemFontOfSize(12),
-						BackgroundColor = new UIColor(0.530f , 0.600f , 0.738f , 1.000f),
-						TextColor = UIColor.White,
-						TextAlignment = UITextAlignment.Center,
-						Text = Value == null ? "" : Value
-					};
-					badge.Layer.CornerRadius = 6;
-					var size = badge.StringSize(badge.Text, badge.Font);
-					badge.Frame = new RectangleF(cell.ContentView.Frame.Width-size.Width-18, cell.ContentView.Frame.Height/2-((size.Height+4)/2), size.Width+12, size.Height+4);
-					cell.ContentView.Add(badge);
-					cell.AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin;
+					cell.ShowBadge = true;
+					cell.BadgeLabel.Text = Value == null ? "" : Value;
 				}
 			}
 			return cell;

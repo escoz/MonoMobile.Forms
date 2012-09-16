@@ -109,6 +109,7 @@
     <Compile Include="Fonts.cs" />
     <Compile Include="Views\BooleanElementCell.cs" />
     <Compile Include="Views\EntryElementCell.cs" />
+    <Compile Include="Views\StringElementCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
