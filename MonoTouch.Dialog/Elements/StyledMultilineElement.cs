@@ -32,7 +32,7 @@ namespace MonoTouch.Dialog
 		{
 			SizeF size = new SizeF (280, float.MaxValue);
 			using (var font = UIFont.FromName ("Helvetica", 17f))
-				return tableView.StringSize (Caption, font, size, LineBreakMode).Height;
+				return tableView.StringSize (Caption, font, size, LineBreakMode).Height+20;
 		}
 	}
 }
