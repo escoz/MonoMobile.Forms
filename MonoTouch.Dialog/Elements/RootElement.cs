@@ -126,10 +126,11 @@ namespace MonoTouch.Dialog
 			
 			Sections.Add (section);
 			section.Parent = this;
+
 			if (TableView == null)
 				return;
 			
-			TableView.InsertSections (MakeIndexSet (Sections.Count-1, 1), UITableViewRowAnimation.None);
+			TableView.InsertSections (MakeIndexSet (Sections.Count-1, 1), UITableViewRowAnimation.Fade);
 		}
 
 		//
@@ -428,7 +429,8 @@ namespace MonoTouch.Dialog
 			var path = element.GetIndexPath();
 			if (path == null)
 				return;
-			TableView.ReloadRows (new NSIndexPath [] { path }, animation);
+			if (TableView!=null)
+				TableView.ReloadRows (new NSIndexPath [] { path }, animation);
 		}
 		
 	}

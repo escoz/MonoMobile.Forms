@@ -557,10 +557,10 @@ namespace MonoTouch.Dialog
 				tableView.ReloadData ();
 				dirty = false;
 			}
-			
-			if (root.RadioSelected>-1) {
+
+			try {
 				tableView.ScrollToRow(root.PathForRadio(root.RadioSelected), UITableViewScrollPosition.Top, false);	
-			}
+			} catch (Exception){}
 		}
 
 		public virtual Source CreateSizingSource (bool unevenRows)
