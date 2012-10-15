@@ -28,6 +28,7 @@ namespace MonoTouch.Dialog
 		public UITextAlignment Alignment = UITextAlignment.Left;
 		public string Value;
 		public bool ShowValueAsBadge = false;
+		public UITableViewCellAccessory CellAccessory = UITableViewCellAccessory.DisclosureIndicator;
 		
 		public StringElement (string caption) : base(caption) {}
 		
@@ -64,7 +65,7 @@ namespace MonoTouch.Dialog
 			}
 			
 			cell.SelectionStyle = (Tapped != null || Sections.Count>0) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
-			cell.Accessory = (Tapped != null || Sections.Count>0)? UITableViewCellAccessory.DisclosureIndicator : UITableViewCellAccessory.None;
+			cell.Accessory = (Tapped != null || Sections.Count>0)? CellAccessory : UITableViewCellAccessory.None;
 			cell.ImageView.Image = Image;
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.TextAlignment = Alignment;

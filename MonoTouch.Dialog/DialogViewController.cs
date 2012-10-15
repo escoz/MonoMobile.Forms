@@ -441,6 +441,7 @@ namespace MonoTouch.Dialog
 			if (typeof(DialogViewController) == controller.GetType()){
 				var dialog= (DialogViewController)controller;
 				dialog.TableView.BackgroundColor = oldController.TableView.BackgroundColor;
+				dialog.tableView.BackgroundView = oldController.tableView.BackgroundView;
 			}
 			
 			var parent = ParentViewController;
