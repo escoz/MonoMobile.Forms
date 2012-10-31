@@ -69,8 +69,15 @@ namespace MonoTouch.Dialog
 			cell.ImageView.Image = Image;
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.TextAlignment = Alignment;
+			cell.TextLabel.Font = StringElement.Appearance.LabelFont;
+			cell.TextLabel.TextColor = StringElement.Appearance.LabelTextColor;
+
+			cell.BackgroundColor = StringElement.Appearance.BackgroundColorDisabled;
 			
 			if (cell.DetailTextLabel!=null && !String.IsNullOrEmpty(Value)) {
+				cell.DetailTextLabel.Font = StringElement.Appearance.DetailLabelFont;
+				cell.DetailTextLabel.TextColor = StringElement.Appearance.DetailLabelTextColor;
+
 				if (!ShowValueAsBadge){
 					cell.DetailTextLabel.Text = Value == null ? "" : Value;
 					cell.ShowBadge = false;

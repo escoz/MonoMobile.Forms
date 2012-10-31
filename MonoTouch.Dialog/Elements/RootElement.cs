@@ -21,6 +21,9 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class RootElement : Element, IEnumerable {
+
+		public static ElementAppearance Appearance = new ElementAppearance();
+
 		public string CaptionPrompt { get;set;}
 
 		static NSString rkey = new NSString ("RootElement");
@@ -322,9 +325,15 @@ namespace MonoTouch.Dialog
 			} 
 		
 			cell.TextLabel.Text = Caption;
+			cell.TextLabel.Font = RootElement.Appearance.LabelFont;
+			cell.TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
 			cell.DetailTextLabel.Text = "";
+			cell.DetailTextLabel.Font = RootElement.Appearance.DetailLabelFont;
+			cell.DetailTextLabel.TextColor = RootElement.Appearance.DetailLabelTextColor;
+
 			var radio = group as RadioGroup;
 			if (radio != null){
+				cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
 				int selected = radio.Selected;
 				int current = 0;
 				
@@ -335,12 +344,14 @@ namespace MonoTouch.Dialog
 						
 						if (current == selected){
 							cell.DetailTextLabel.Text = e.Summary ();
+
 							goto le;
 						}
 						current++;
 					}
 				}
 			} else if (group != null){
+				cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
 				int count = 0;
 				
 				foreach (var s in Sections){

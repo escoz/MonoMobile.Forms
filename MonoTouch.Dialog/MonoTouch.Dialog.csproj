@@ -110,6 +110,7 @@
     <Compile Include="Views\BooleanElementCell.cs" />
     <Compile Include="Views\EntryElementCell.cs" />
     <Compile Include="Views\StringElementCell.cs" />
+    <Compile Include="Elements\ElementAppearance.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

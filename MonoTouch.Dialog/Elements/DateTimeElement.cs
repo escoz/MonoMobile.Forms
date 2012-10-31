@@ -51,10 +51,17 @@ namespace MonoTouch.Dialog
 				this.Value = FormatDate(picker.Date);
 				this.DateValue = picker.Date;
 			};
-			
-			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+
 			cell.TextField.InputView = picker;
 			cell.TextField.Alpha = 0;
+			cell.TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
+			cell.TextLabel.Font = RootElement.Appearance.LabelFont;
+			
+			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+			cell.DetailTextLabel.TextColor = RootElement.Appearance.DetailLabelTextColor;
+			cell.DetailTextLabel.Font = RootElement.Appearance.DetailLabelFont;
+
+			cell.BackgroundColor = RadioElement.Appearance.BackgroundColorEditable;
 
 			var toolbar =  new UIToolbar();
 			toolbar.Items = new UIBarButtonItem[] {

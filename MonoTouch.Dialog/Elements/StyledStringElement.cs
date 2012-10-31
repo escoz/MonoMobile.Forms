@@ -33,7 +33,6 @@ namespace MonoTouch.Dialog
 		
 		public UIFont Font;
 		public UIColor TextColor;
-		public UIColor BackgroundColor;
 		public UILineBreakMode LineBreakMode = UILineBreakMode.WordWrap;
 		public int Lines = 1;
 		public UITableViewCellAccessory Accessory = UITableViewCellAccessory.None;
@@ -46,14 +45,15 @@ namespace MonoTouch.Dialog
 				cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 			}
 			cell.Accessory = Accessory;
-			cell.BackgroundColor = BackgroundColor == null ? UIColor.White : BackgroundColor;
+			cell.BackgroundColor = RootElement.Appearance.BackgroundColorDisabled;
+			cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 			
 			var tl = cell.TextLabel;
 			tl.Text = Caption;
 			tl.TextAlignment = Alignment;
 			tl.TextColor = TextColor == null ? UIColor.Black : TextColor;
 			tl.BackgroundColor = UIColor.Clear;
-			tl.Font = Font == null ? UIFont.SystemFontOfSize (17) : Font;
+			tl.Font = Font == null ? RootElement.Appearance.LabelFont : Font;
 			tl.LineBreakMode = LineBreakMode;
 			tl.Lines = 0;			
 			// The check is needed because the cell might have been recycled.
