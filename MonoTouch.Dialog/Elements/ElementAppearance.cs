@@ -13,6 +13,23 @@ namespace MonoTouch.Dialog
 			DetailLabelTextColor = UIColor.FromRGB(0.1653f, 0.2532f, 0.4543f);
 			BackgroundColorDisabled= UIColor.FromRGB(0.9606f, 0.9605f, 0.9605f);
 			BackgroundColorEditable = UIColor.White;
+			GroupedTableBackgroundColor = UIColor.White;
+			UngroupedBackgroundColor = UIColor.GroupTableViewBackgroundColor;
+		}
+
+		public UIView TableBackgroundView {
+			get;
+			set;
+		}
+
+		public UIColor UngroupedBackgroundColor {
+			get;
+			set;
+		}
+
+		public UIColor GroupedTableBackgroundColor {
+			get;
+			set;
 		}
 
 		public UIFont DetailLabelFont {
@@ -48,6 +65,7 @@ namespace MonoTouch.Dialog
 			get;
 			set;
 		}
+
 	}
 }
 
