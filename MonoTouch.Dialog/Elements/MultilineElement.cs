@@ -41,6 +41,9 @@ namespace MonoTouch.Dialog
 			tl.Font = this.Font;
 			tl.Lines = 0;
 
+			cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
+			tl.Font = RootElement.Appearance.LabelFont;
+
 			return cell;
 		}
 		

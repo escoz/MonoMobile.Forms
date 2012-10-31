@@ -19,6 +19,11 @@ namespace MonoTouch.Dialog
 			get;
 			set;
 		}
+
+		public UIColor CellHighlightedColor {
+			get;
+			set;
+		}
 		
 		public UIColor DetailLabelTextColor {
 			get;

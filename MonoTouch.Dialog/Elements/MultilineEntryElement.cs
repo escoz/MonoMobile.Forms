@@ -147,17 +147,21 @@ namespace MonoTouch.Dialog
 		{
 			_tableView = tv;
 			var cell = tv.DequeueReusableCell (cellkey);
+
 			if (cell == null) {
 				cell = new UITableViewCell (UITableViewCellStyle.Default, cellkey);
 				cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 			} else {
 				//RemoveTag (cell, 1);
 			}
+			cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
+
 			if (entry == null) {
 				SizeF size = ComputeEntryPosition (tv, cell);
 				float width = cell.ContentView.Bounds.Width;
 				
 				entry = CreateTextField (new RectangleF (	0, 0, width, size.Height + (height)));
+				entry.Font = RootElement.Appearance.LabelFont;
 
 				var toolbar =  new UIToolbar();
 				toolbar.Items = new UIBarButtonItem[] {

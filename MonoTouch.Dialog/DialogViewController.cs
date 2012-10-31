@@ -332,7 +332,12 @@ namespace MonoTouch.Dialog
 				var section = Root.Sections [indexPath.Section];
 				var element = section.Elements [indexPath.Row];
 				
-				return element.GetCell (tableView);
+				var cell = element.GetCell (tableView);
+				if (RootElement.Appearance.CellHighlightedColor != null) {
+					cell.SelectedBackgroundView = new UIView { BackgroundColor = RadioElement.Appearance.CellHighlightedColor };
+				}
+				 
+				return cell;
 			}
 			
 			public override void RowSelected (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
