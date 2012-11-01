@@ -69,7 +69,7 @@ namespace MonoTouch.Dialog
 			SizeF captionSize = new SizeF (0, 0);
 			if (element.Caption != null){
 				TextLabel.Text = element.Caption;
-				captionSize = TextLabel.StringSize (element.Caption, Fonts.CaptionFont);
+				captionSize = TextLabel.StringSize (element.Caption, RootElement.Appearance.TextFieldFont);
 				captionSize.Width += 8; // Spacing
 			}
 			

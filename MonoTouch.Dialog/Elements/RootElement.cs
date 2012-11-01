@@ -327,9 +327,12 @@ namespace MonoTouch.Dialog
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.Font = RootElement.Appearance.LabelFont;
 			cell.TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
+			cell.TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
 			cell.DetailTextLabel.Text = "";
 			cell.DetailTextLabel.Font = RootElement.Appearance.DetailLabelFont;
 			cell.DetailTextLabel.TextColor = RootElement.Appearance.DetailLabelTextColor;
+			cell.DetailTextLabel.HighlightedTextColor = StringElement.Appearance.DetailLabelHighlightedTextColor;
+
 
 			var radio = group as RadioGroup;
 			if (radio != null){

@@ -106,7 +106,6 @@
     <Compile Include="Elements\RootElement.cs" />
     <Compile Include="Elements\RefreshHeaderUtil.cs" />
     <Compile Include="Elements\ImagePickerElement.cs" />
-    <Compile Include="Fonts.cs" />
     <Compile Include="Views\BooleanElementCell.cs" />
     <Compile Include="Views\EntryElementCell.cs" />
     <Compile Include="Views\StringElementCell.cs" />

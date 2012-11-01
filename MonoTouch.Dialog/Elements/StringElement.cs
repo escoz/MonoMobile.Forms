@@ -71,12 +71,14 @@ namespace MonoTouch.Dialog
 			cell.TextLabel.TextAlignment = Alignment;
 			cell.TextLabel.Font = StringElement.Appearance.LabelFont;
 			cell.TextLabel.TextColor = StringElement.Appearance.LabelTextColor;
+			cell.TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
 
 			cell.BackgroundColor = StringElement.Appearance.BackgroundColorDisabled;
 			
 			if (cell.DetailTextLabel!=null && !String.IsNullOrEmpty(Value)) {
 				cell.DetailTextLabel.Font = StringElement.Appearance.DetailLabelFont;
 				cell.DetailTextLabel.TextColor = StringElement.Appearance.DetailLabelTextColor;
+				cell.DetailTextLabel.HighlightedTextColor = StringElement.Appearance.DetailLabelHighlightedTextColor;
 
 				if (!ShowValueAsBadge){
 					cell.DetailTextLabel.Text = Value == null ? "" : Value;

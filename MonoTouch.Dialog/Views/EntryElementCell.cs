@@ -35,10 +35,17 @@ namespace MonoTouch.Dialog
 		
 		public void Update(EntryElement element, UITableView tableView){
 			_element = element;
-			
+
 			if (_entry==null){
 				PrepareEntry(tableView);
 			}
+
+			_entry.Font = RootElement.Appearance.TextFieldFont;
+			_entry.TextColor = RootElement.Appearance.TextFieldFontTextColor;
+
+			TextLabel.Font = RootElement.Appearance.LabelFont;
+			TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
+			TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
 			
 			_entry.Text = element.Value ?? "";
 			_entry.Placeholder = element.Placeholder ?? "";
@@ -72,7 +79,6 @@ namespace MonoTouch.Dialog
 			SizeF size = _computeEntryPosition(tableview);
 			
 			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-10, size.Height));
-			
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
@@ -143,7 +149,7 @@ namespace MonoTouch.Dialog
 				if (ee == null)
 					continue;
 				
-				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, Fonts.EntryFont);
+				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, RootElement.Appearance.TextFieldFont);
 				if (size.Width > max.Width)
 					max = size;				
 			}

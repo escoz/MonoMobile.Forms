@@ -55,11 +55,15 @@ namespace MonoTouch.Dialog
 			cell.TextField.InputView = picker;
 			cell.TextField.Alpha = 0;
 			cell.TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
+			
+			cell.TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
 			cell.TextLabel.Font = RootElement.Appearance.LabelFont;
 			
 			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
 			cell.DetailTextLabel.TextColor = RootElement.Appearance.DetailLabelTextColor;
 			cell.DetailTextLabel.Font = RootElement.Appearance.DetailLabelFont;
+			cell.DetailTextLabel.HighlightedTextColor = StringElement.Appearance.DetailLabelHighlightedTextColor;
+
 
 			cell.BackgroundColor = RadioElement.Appearance.BackgroundColorEditable;
 

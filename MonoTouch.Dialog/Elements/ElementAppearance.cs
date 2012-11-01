@@ -15,9 +15,23 @@ namespace MonoTouch.Dialog
 			BackgroundColorEditable = UIColor.White;
 			GroupedTableBackgroundColor = UIColor.White;
 			UngroupedBackgroundColor = UIColor.GroupTableViewBackgroundColor;
+			TextFieldFont = LabelFont;
+			TextFieldFontTextColor = UIColor.Black;
+			DetailLabelHighlightedTextColor = UIColor.White;
+			LabelHighlightedTextColor = UIColor.White;
 		}
 
 		public UIView TableBackgroundView {
+			get;
+			set;
+		}
+
+		public UIColor TextFieldFontTextColor {
+			get;
+			set;
+		}
+
+		public UIFont TextFieldFont {
 			get;
 			set;
 		}
@@ -56,6 +70,11 @@ namespace MonoTouch.Dialog
 			set;
 		}
 
+		public UIColor LabelHighlightedTextColor {
+			get;
+			set;
+		}
+
 		public UIColor BackgroundColorDisabled {
 			get;
 			set;
@@ -66,6 +85,10 @@ namespace MonoTouch.Dialog
 			set;
 		}
 
+		public UIColor DetailLabelHighlightedTextColor {
+			get;
+			set;
+		}
 	}
 }
 
