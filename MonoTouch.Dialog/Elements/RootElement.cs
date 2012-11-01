@@ -33,6 +33,7 @@ namespace MonoTouch.Dialog
 		public Func<RootElement, UIViewController> createOnSelected;
 		internal UITableView TableView;
         public Type RootControllerType = new DialogViewController(null).GetType();
+		public bool DeselectAutomatically;
 		
 		public RootElement (string caption) : base (caption)
 		{

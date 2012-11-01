@@ -29,7 +29,8 @@ namespace MonoTouch.Dialog
 		public string Value;
 		public bool ShowValueAsBadge = false;
 		public UITableViewCellAccessory CellAccessory = UITableViewCellAccessory.DisclosureIndicator;
-		
+
+
 		public StringElement (string caption) : base(caption) {}
 		
 		public StringElement (string caption, string value) :  this(caption, value, null){}
@@ -104,7 +105,8 @@ namespace MonoTouch.Dialog
 
 			base.Selected(dvc, tableView, indexPath);
 
-			tableView.DeselectRow (indexPath, true);
+			if (DeselectAutomatically)
+				tableView.DeselectRow (indexPath, true);
 		}
 		
 		public override bool Matches (string text)
