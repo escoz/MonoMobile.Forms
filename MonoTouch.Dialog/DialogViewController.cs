@@ -87,6 +87,8 @@ namespace MonoTouch.Dialog
 			}
 		}
 		
+		public bool EnableSectionIndex { get; set; }
+		
 		// If set, we automatically scroll the content to avoid showing the search bar until 
 		// the user manually pulls it down.
 		public bool AutoHideSearch { get; set; }
@@ -311,6 +313,21 @@ namespace MonoTouch.Dialog
 				
 				return count;
 			}
+
+			public override string[] SectionIndexTitles (UITableView tableView)
+			{
+				if (Container.EnableSectionIndex) {
+					var values = new List<string>();
+					foreach (var section in Root.Sections) {
+						if (section.Caption!=null) {
+							values.Add(section.Caption);
+						}
+					}	
+					return values.ToArray();
+				}
+				return null;
+			}
+
 
 			public override int NumberOfSections (UITableView tableView)
 			{
