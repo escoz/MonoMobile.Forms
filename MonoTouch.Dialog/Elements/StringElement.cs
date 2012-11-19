@@ -23,13 +23,16 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
-	public class StringElement : RootElement {
+	public class StringElement : RootElement, IElementSizing {
 
 		public UITextAlignment Alignment = UITextAlignment.Left;
 		public string Value;
 		public bool ShowValueAsBadge = false;
 		public UITableViewCellAccessory CellAccessory = UITableViewCellAccessory.DisclosureIndicator;
 
+		public float RowHeight = 44.0f;
+
+		public UITableViewCellStyle CellStyle = UITableViewCellStyle.Value1;
 
 		public StringElement (string caption) : base(caption) {}
 		
@@ -53,6 +56,12 @@ namespace MonoTouch.Dialog
 		protected bool HasTappedEvent(){
 			return Tapped != null;
 		}
+
+		public float GetHeight (UITableView tableView, NSIndexPath indexPath)
+		{
+			return this.RowHeight;
+		}
+
 				
 		public override UITableViewCell GetCell (UITableView tv)
 		{
@@ -62,7 +71,7 @@ namespace MonoTouch.Dialog
 				if (Value==null) 
 					cell = new StringElementCell (UITableViewCellStyle.Default, cellid);
 				else
-					cell = new StringElementCell (UITableViewCellStyle.Value1, cellid);
+					cell = new StringElementCell (this.CellStyle, cellid);
 			}
 			
 			cell.SelectionStyle = (Tapped != null || Sections.Count>0) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
