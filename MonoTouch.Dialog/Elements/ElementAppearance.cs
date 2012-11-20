@@ -5,6 +5,25 @@ namespace MonoTouch.Dialog
 {
 	public class ElementAppearance
 	{
+		public ElementAppearance Copy ()
+		{
+			var el = new ElementAppearance ();
+			el.LabelFont = LabelFont;
+			el.LabelTextColor = LabelTextColor;
+			el.DetailLabelFont = DetailLabelFont;
+			el.DetailLabelTextColor = DetailLabelTextColor;
+			el.BackgroundColorDisabled= BackgroundColorDisabled;
+			el.BackgroundColorEditable = BackgroundColorEditable;
+			el.GroupedTableBackgroundColor =  GroupedTableBackgroundColor;
+			el.UngroupedBackgroundColor = UngroupedBackgroundColor;
+			el.TextFieldFont = TextFieldFont;
+			el.TextFieldFontTextColor = TextFieldFontTextColor;
+			el.DetailLabelHighlightedTextColor = DetailLabelHighlightedTextColor;
+			el.LabelHighlightedTextColor = LabelHighlightedTextColor;
+			el.CellHighlightedColor = CellHighlightedColor;
+			return el;
+		}
+
 		public ElementAppearance ()
 		{
 			LabelFont = UIFont.BoldSystemFontOfSize(18);
@@ -18,8 +37,7 @@ namespace MonoTouch.Dialog
 			TextFieldFont = LabelFont;
 			TextFieldFontTextColor = UIColor.Black;
 			DetailLabelHighlightedTextColor = UIColor.White;
-			LabelHighlightedTextColor = UIColor.White;
-		}
+			LabelHighlightedTextColor = UIColor.White;}
 
 		public UIView TableBackgroundView {
 			get;

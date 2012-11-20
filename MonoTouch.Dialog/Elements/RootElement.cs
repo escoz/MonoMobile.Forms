@@ -22,7 +22,6 @@ namespace MonoTouch.Dialog
 {
 	public class RootElement : Element, IEnumerable {
 
-		public static ElementAppearance Appearance = new ElementAppearance();
 
 		public string CaptionPrompt { get;set;}
 
@@ -327,18 +326,18 @@ namespace MonoTouch.Dialog
 			} 
 		
 			cell.TextLabel.Text = Caption;
-			cell.TextLabel.Font = RootElement.Appearance.LabelFont;
-			cell.TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
-			cell.TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
+			cell.TextLabel.Font = Appearance.LabelFont;
+			cell.TextLabel.TextColor = Appearance.LabelTextColor;
+			cell.TextLabel.HighlightedTextColor = Appearance.LabelHighlightedTextColor;
 			cell.DetailTextLabel.Text = "";
-			cell.DetailTextLabel.Font = RootElement.Appearance.DetailLabelFont;
-			cell.DetailTextLabel.TextColor = RootElement.Appearance.DetailLabelTextColor;
-			cell.DetailTextLabel.HighlightedTextColor = StringElement.Appearance.DetailLabelHighlightedTextColor;
+			cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
+			cell.DetailTextLabel.TextColor = Appearance.DetailLabelTextColor;
+			cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
 
 
 			var radio = group as RadioGroup;
 			if (radio != null){
-				cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
+				cell.BackgroundColor = Appearance.BackgroundColorEditable;
 				int selected = radio.Selected;
 				int current = 0;
 				
@@ -356,7 +355,7 @@ namespace MonoTouch.Dialog
 					}
 				}
 			} else if (group != null){
-				cell.BackgroundColor = RootElement.Appearance.BackgroundColorEditable;
+				cell.BackgroundColor = Appearance.BackgroundColorEditable;
 				int count = 0;
 				
 				foreach (var s in Sections){

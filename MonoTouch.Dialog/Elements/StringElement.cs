@@ -79,16 +79,16 @@ namespace MonoTouch.Dialog
 			cell.ImageView.Image = Image;
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.TextAlignment = Alignment;
-			cell.TextLabel.Font = StringElement.Appearance.LabelFont;
-			cell.TextLabel.TextColor = StringElement.Appearance.LabelTextColor;
-			cell.TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
+			cell.TextLabel.Font = this.Appearance.LabelFont;
+			cell.TextLabel.TextColor = this.Appearance.LabelTextColor;
+			cell.TextLabel.HighlightedTextColor = this.Appearance.LabelHighlightedTextColor;
 
-			cell.BackgroundColor = StringElement.Appearance.BackgroundColorDisabled;
+			cell.BackgroundColor = this.Appearance.BackgroundColorDisabled;
 			
 			if (cell.DetailTextLabel!=null && !String.IsNullOrEmpty(Value)) {
-				cell.DetailTextLabel.Font = StringElement.Appearance.DetailLabelFont;
-				cell.DetailTextLabel.TextColor = StringElement.Appearance.DetailLabelTextColor;
-				cell.DetailTextLabel.HighlightedTextColor = StringElement.Appearance.DetailLabelHighlightedTextColor;
+				cell.DetailTextLabel.Font = this.Appearance.DetailLabelFont;
+				cell.DetailTextLabel.TextColor = this.Appearance.DetailLabelTextColor;
+				cell.DetailTextLabel.HighlightedTextColor = this.Appearance.DetailLabelHighlightedTextColor;
 
 				if (!ShowValueAsBadge){
 					cell.DetailTextLabel.Text = Value == null ? "" : Value;

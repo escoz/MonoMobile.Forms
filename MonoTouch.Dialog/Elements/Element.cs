@@ -24,6 +24,28 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public abstract class Element : IDisposable {
+
+		static ElementAppearance _classAppearance = new ElementAppearance();
+
+		private ElementAppearance _appearance;
+		public static ElementAppearance GlobalAppearance  {get {return _classAppearance; } }
+
+		public ElementAppearance Appearance {
+			get {
+				if (_appearance!=null)
+					return _appearance;
+				if (Parent!=null)
+					return Parent.Appearance;
+
+				return _classAppearance;
+			} 
+			set {
+				_appearance = value;
+			}
+		}
+
+
+
 		public Element Parent;
 		
 		public string ID;

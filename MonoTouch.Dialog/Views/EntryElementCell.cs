@@ -40,12 +40,12 @@ namespace MonoTouch.Dialog
 				PrepareEntry(tableView);
 			}
 
-			_entry.Font = RootElement.Appearance.TextFieldFont;
-			_entry.TextColor = RootElement.Appearance.TextFieldFontTextColor;
+			_entry.Font = element.Appearance.TextFieldFont;
+			_entry.TextColor = element.Appearance.TextFieldFontTextColor;
 
-			TextLabel.Font = RootElement.Appearance.LabelFont;
-			TextLabel.TextColor = RootElement.Appearance.LabelTextColor;
-			TextLabel.HighlightedTextColor = StringElement.Appearance.LabelHighlightedTextColor;
+			TextLabel.Font = element.Appearance.LabelFont;
+			TextLabel.TextColor = element.Appearance.LabelTextColor;
+			TextLabel.HighlightedTextColor = element.Appearance.LabelHighlightedTextColor;
 			
 			_entry.Text = element.Value ?? "";
 			_entry.Placeholder = element.Placeholder ?? "";
@@ -149,7 +149,7 @@ namespace MonoTouch.Dialog
 				if (ee == null)
 					continue;
 				
-				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, RootElement.Appearance.TextFieldFont);
+				var size = string.IsNullOrEmpty(ee.Caption) ? new SizeF(0,20) : tv.StringSize (ee.Caption, e.Appearance.TextFieldFont);
 				if (size.Width > max.Width)
 					max = size;				
 			}

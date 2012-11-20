@@ -45,7 +45,7 @@ namespace MonoTouch.Dialog
 				cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 			}
 			cell.Accessory = Accessory;
-			cell.BackgroundColor = RootElement.Appearance.BackgroundColorDisabled;
+			cell.BackgroundColor = Appearance.BackgroundColorDisabled;
 			cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 			
 			var tl = cell.TextLabel;
@@ -53,7 +53,7 @@ namespace MonoTouch.Dialog
 			tl.TextAlignment = Alignment;
 			tl.TextColor = TextColor == null ? UIColor.Black : TextColor;
 			tl.BackgroundColor = UIColor.Clear;
-			tl.Font = Font == null ? RootElement.Appearance.LabelFont : Font;
+			tl.Font = Font == null ? Appearance.LabelFont : Font;
 			tl.LineBreakMode = LineBreakMode;
 			tl.Lines = 0;			
 			// The check is needed because the cell might have been recycled.

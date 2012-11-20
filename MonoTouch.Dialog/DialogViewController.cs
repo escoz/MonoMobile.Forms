@@ -350,8 +350,8 @@ namespace MonoTouch.Dialog
 				var element = section.Elements [indexPath.Row];
 				
 				var cell = element.GetCell (tableView);
-				if (RootElement.Appearance.CellHighlightedColor != null) {
-					cell.SelectedBackgroundView = new UIView { BackgroundColor = RadioElement.Appearance.CellHighlightedColor };
+				if (Root.Appearance.CellHighlightedColor != null) {
+					cell.SelectedBackgroundView = new UIView { BackgroundColor = Root.Appearance.CellHighlightedColor };
 				}
 				 
 				return cell;
