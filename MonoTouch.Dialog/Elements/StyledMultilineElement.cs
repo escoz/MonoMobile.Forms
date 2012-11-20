@@ -24,15 +24,34 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class StyledMultilineElement : StyledStringElement, IElementSizing {
+		public StyledMultilineElement (NSAttributedString attributedString) : base(null) {
+			this.AttributedText = attributedString;
+		}
 		public StyledMultilineElement (string caption) : base (caption) {}
 		public StyledMultilineElement (string caption, string value) : base (caption, value) {}
 		public StyledMultilineElement (string caption, Action tapped) : base (caption, tapped) {}
 
+		public NSAttributedString AttributedText { get;set;}
+
 		public virtual float GetHeight (UITableView tableView, NSIndexPath indexPath)
 		{
+			if (this.RowHeight > 0) {
+				return this.RowHeight;
+			}
 			SizeF size = new SizeF (280, float.MaxValue);
-			using (var font = UIFont.FromName ("Helvetica", 17f))
-				return tableView.StringSize (Caption, font, size, LineBreakMode).Height+20;
+			var text = this.AttributedText == null ? Caption : this.AttributedText.Value;
+			using (var font = this.Font!=null? this.Font : UIFont.FromName ("Helvetica", 17f))
+				return tableView.StringSize (text, font, size, LineBreakMode).Height + 20;
+		}
+
+		public override UITableViewCell GetCell (UITableView tv)
+		{
+			var cell = base.GetCell (tv);
+			if (this.AttributedText == null) 
+				return cell;
+
+			cell.TextLabel.AttributedText = this.AttributedText;
+			return cell;
 		}
 	}
 }
