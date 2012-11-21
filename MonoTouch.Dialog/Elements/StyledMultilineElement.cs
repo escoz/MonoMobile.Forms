@@ -35,10 +35,12 @@ namespace MonoTouch.Dialog
 
 		public virtual float GetHeight (UITableView tableView, NSIndexPath indexPath)
 		{
-			if (this.RowHeight > 0) {
-				return this.RowHeight;
+			if (this.AttributedText!=null) {
+				var sizeAttr = this.AttributedText.GetBoundingRect(new SizeF(270, int.MaxValue), NSStringDrawingOptions.UsesLineFragmentOrigin, new NSStringDrawingContext());
+				return sizeAttr.Height + 20;
 			}
-			SizeF size = new SizeF (280, float.MaxValue);
+
+			SizeF size = new SizeF (270, float.MaxValue);
 			var text = this.AttributedText == null ? Caption : this.AttributedText.Value;
 			using (var font = this.Font!=null? this.Font : UIFont.FromName ("Helvetica", 17f))
 				return tableView.StringSize (text, font, size, LineBreakMode).Height + 20;
