@@ -40,7 +40,7 @@ namespace MonoTouch.Dialog
 				return sizeAttr.Height + 20;
 			}
 
-			SizeF size = new SizeF (270, float.MaxValue);
+			SizeF size = new SizeF (tableView.Frame.Width-40, float.MaxValue);
 			var text = Caption;
 			var size2 = tableView.StringSize (text, this.Font!=null? this.Font : UIFont.FromName ("Helvetica", 17f), size, LineBreakMode);
 			return size2.Height + 20;

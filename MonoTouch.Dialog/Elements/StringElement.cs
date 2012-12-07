@@ -85,12 +85,12 @@ namespace MonoTouch.Dialog
 
 			cell.BackgroundColor = this.Appearance.BackgroundColorDisabled;
 			
-			if (cell.DetailTextLabel!=null && !String.IsNullOrEmpty(Value)) {
+			if (cell.DetailTextLabel != null && !String.IsNullOrEmpty (Value)) {
 				cell.DetailTextLabel.Font = this.Appearance.DetailLabelFont;
 				cell.DetailTextLabel.TextColor = this.Appearance.DetailLabelTextColor;
 				cell.DetailTextLabel.HighlightedTextColor = this.Appearance.DetailLabelHighlightedTextColor;
 
-				if (!ShowValueAsBadge){
+				if (!ShowValueAsBadge) {
 					cell.DetailTextLabel.Text = Value == null ? "" : Value;
 					cell.ShowBadge = false;
 				} else {
@@ -98,6 +98,9 @@ namespace MonoTouch.Dialog
 					cell.ShowBadge = true;
 					cell.BadgeLabel.Text = Value == null ? "" : Value;
 				}
+			} else {
+				if (cell.DetailTextLabel!=null) 
+					cell.DetailTextLabel.Text = "";
 			}
 			return cell;
 		}
