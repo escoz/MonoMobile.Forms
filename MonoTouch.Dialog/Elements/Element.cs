@@ -47,6 +47,7 @@ namespace MonoTouch.Dialog
 
 
 		public Element Parent;
+		public Action<Element> OnValueChanged;
 		
 		public string ID;
 		public string Caption;

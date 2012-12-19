@@ -25,7 +25,16 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public abstract class BooleanElement : Element {
-		public bool Value;
+		bool _value;
+
+		public bool Value {
+			get { return _value; }
+			set { 
+				_value = value;
+				if (this.OnValueChanged != null)
+					OnValueChanged (this);
+			}
+		}
 		
 		public BooleanElement(string caption):base(caption){}
 
