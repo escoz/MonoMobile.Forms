@@ -327,17 +327,19 @@ namespace MonoTouch.Dialog
 		
 			cell.TextLabel.Text = Caption;
 			cell.TextLabel.Font = Appearance.LabelFont;
-			cell.TextLabel.TextColor = Appearance.LabelTextColor;
-			cell.TextLabel.HighlightedTextColor = Appearance.LabelHighlightedTextColor;
+			cell.TextLabel.TextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.LabelTextColor;
+			cell.TextLabel.HighlightedTextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.LabelHighlightedTextColor;
+
 			cell.DetailTextLabel.Text = "";
 			cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
 			cell.DetailTextLabel.TextColor = Appearance.DetailLabelTextColor;
 			cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
 
+			cell.UserInteractionEnabled = !this.ReadOnly;
+			cell.BackgroundColor = this.ReadOnly ? Appearance.BackgroundColorDisabled : Appearance.BackgroundColorEditable;
 
 			var radio = group as RadioGroup;
 			if (radio != null){
-				cell.BackgroundColor = Appearance.BackgroundColorEditable;
 				int selected = radio.Selected;
 				int current = 0;
 				
@@ -355,7 +357,6 @@ namespace MonoTouch.Dialog
 					}
 				}
 			} else if (group != null){
-				cell.BackgroundColor = Appearance.BackgroundColorEditable;
 				int count = 0;
 				
 				foreach (var s in Sections){
@@ -381,7 +382,7 @@ namespace MonoTouch.Dialog
 						cell.DetailTextLabel.Text = s.Elements [summaryElement].Summary ();
 			} 
 		le:
-			cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+			cell.Accessory = this.ReadOnly ? UITableViewCellAccessory.None: UITableViewCellAccessory.DisclosureIndicator;
 			
 			return cell;
 		}

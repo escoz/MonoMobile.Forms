@@ -50,6 +50,7 @@ namespace MonoTouch.Dialog
 		
 		public string ID;
 		public string Caption;
+		public bool ReadOnly;
 		public Object Object { get; set; }
 
 		public Element (string caption)
