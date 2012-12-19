@@ -332,7 +332,7 @@ namespace MonoTouch.Dialog
 
 			cell.DetailTextLabel.Text = "";
 			cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
-			cell.DetailTextLabel.TextColor = Appearance.DetailLabelTextColor;
+			cell.DetailTextLabel.TextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.DetailLabelTextColor;
 			cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
 
 			cell.UserInteractionEnabled = !this.ReadOnly;
