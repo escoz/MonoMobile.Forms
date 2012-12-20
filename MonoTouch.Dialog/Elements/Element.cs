@@ -103,7 +103,25 @@ namespace MonoTouch.Dialog
 			}
 			return null;
 		}
+
 		
+		public Element GetElementForID (string name)
+		{
+			return GetElementForID (name, this);
+		}
+
+		Element GetElementForID(string name, Element element){
+			if (name.Equals (element.ID))
+				return element;
+			if (element is IEnumerable) {
+				foreach (Element s in (IEnumerable)element) {
+					var found = GetElementForID (name, s);
+					if (found!=null) return found;
+				}
+			}
+			return null;
+		}
+
 		public virtual bool Matches (string text)
 		{
 			if (Caption == null)
