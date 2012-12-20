@@ -180,6 +180,7 @@ namespace MonoTouch.Dialog
 				};
 				entry.Ended += delegate {
 					FetchValue ();
+					if (OnValueChanged!=null) OnValueChanged(this);
 				};
 //				entry.ShouldReturn += delegate {
 //					
