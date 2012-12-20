@@ -35,6 +35,13 @@ namespace MonoTouch.Dialog
 					OnValueChanged (this);
 			}
 		}
+
+		public bool ValueWithoutEvent {
+			get { return _value; }
+			set { 
+				_value = value;
+			}
+		}
 		
 		public BooleanElement(string caption):base(caption){}
 
