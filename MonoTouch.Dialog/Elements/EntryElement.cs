@@ -34,6 +34,8 @@ namespace MonoTouch.Dialog
 		public UITextAutocorrectionType AutoCorrection = UITextAutocorrectionType.Default;
 		public UITextAlignment TextAlignment = UITextAlignment.Left;
 
+		public string AppendedText { get; set;}
+
         public event EventHandler Go;
 		
 		public EntryElement (string caption, string placeholder, string value) : this (caption, placeholder, value, false){}

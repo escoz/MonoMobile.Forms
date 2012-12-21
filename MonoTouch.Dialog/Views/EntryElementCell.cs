@@ -14,9 +14,9 @@ namespace MonoTouch.Dialog
 		
 		public static NSString KEY = new NSString ("EntryElement");
 			
-		protected UITextField _entry;
+		protected CustomTextField _entry;
 
-		public UITextField TextField {
+		public CustomTextField TextField {
 			get {
 				return _entry;
 			}
@@ -48,6 +48,7 @@ namespace MonoTouch.Dialog
 			TextLabel.HighlightedTextColor = element.Appearance.LabelHighlightedTextColor;
 			
 			_entry.Text = element.Value ?? "";
+			_entry.RightText = element.AppendedText;
 			_entry.TextAlignment = element.TextAlignment;
 			_entry.Placeholder = element.Placeholder ?? "";
 			_entry.SecureTextEntry = element.IsPassword;
@@ -80,7 +81,7 @@ namespace MonoTouch.Dialog
 		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
-			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-20, size.Height));
+			_entry = new CustomTextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-20, size.Height));
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
@@ -165,6 +166,31 @@ namespace MonoTouch.Dialog
 		}
 		
 		
+	}
+
+	public class CustomTextField : UITextField {
+
+		public string LeftText;
+		public string RightText;
+
+		public CustomTextField(RectangleF rect) : base(rect) {
+
+		}
+
+		public override void LayoutSubviews ()
+		{
+			base.LayoutSubviews ();
+			if (!string.IsNullOrEmpty (RightText)) {
+				if (this.RightView == null) {
+					this.RightView = new UILabel (new RectangleF (0, 0, 50, 50));
+				}
+				((UILabel)this.RightView).Text = RightText;
+				((UILabel)this.RightView).SizeToFit ();
+				this.RightViewMode = UITextFieldViewMode.Always;
+			} else {
+				this.RightView = null;
+			}
+		}
 	}
 	
 	
