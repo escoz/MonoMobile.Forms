@@ -532,6 +532,10 @@ namespace MonoTouch.Dialog
 			if (root == null)
 				return;
 			root.TableView = tableView;
+
+			var endEditingWhenTappingBackgroundGesture = new UITapGestureRecognizer((g)=>this.View.EndEditing(true));
+			endEditingWhenTappingBackgroundGesture.CancelsTouchesInView = false;
+			this.TableView.AddGestureRecognizer (endEditingWhenTappingBackgroundGesture);
 		}
 		
 		void ConfigureTableView ()
