@@ -32,6 +32,7 @@ namespace MonoTouch.Dialog
 		public UITextAutocapitalizationType AutoCapitalize = UITextAutocapitalizationType.Sentences;
         public UIReturnKeyType ReturnKeyType = UIReturnKeyType.Default;
 		public UITextAutocorrectionType AutoCorrection = UITextAutocorrectionType.Default;
+		public UITextAlignment TextAlignment = UITextAlignment.Left;
 
         public event EventHandler Go;
 		
@@ -58,6 +59,9 @@ namespace MonoTouch.Dialog
 			
 			cell.Update(this, tv);
 				
+			cell.BackgroundColor = this.ReadOnly ? this.Appearance.BackgroundColorDisabled : this.Appearance.BackgroundColorEditable;
+			cell.UserInteractionEnabled = !this.ReadOnly;
+
 			return cell;
 		}
 		
@@ -65,6 +69,7 @@ namespace MonoTouch.Dialog
 		{
 			return (Value != null ? Value.IndexOf (text, StringComparison.CurrentCultureIgnoreCase) != -1: false) || base.Matches (text);
 		}
+
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{

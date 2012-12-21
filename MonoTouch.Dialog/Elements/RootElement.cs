@@ -30,7 +30,7 @@ namespace MonoTouch.Dialog
 		internal Group group;
 		public bool UnevenRows;
 		public Func<RootElement, UIViewController> createOnSelected;
-		internal UITableView TableView;
+		protected UITableView TableView;
         public Type RootControllerType = new DialogViewController(null).GetType();
 		public bool DeselectAutomatically;
 

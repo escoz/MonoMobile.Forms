@@ -48,6 +48,7 @@ namespace MonoTouch.Dialog
 			TextLabel.HighlightedTextColor = element.Appearance.LabelHighlightedTextColor;
 			
 			_entry.Text = element.Value ?? "";
+			_entry.TextAlignment = element.TextAlignment;
 			_entry.Placeholder = element.Placeholder ?? "";
 			_entry.SecureTextEntry = element.IsPassword;
 			if (element.KeyboardType==UIKeyboardType.EmailAddress || element.IsPassword){
@@ -62,6 +63,7 @@ namespace MonoTouch.Dialog
             _entry.ReturnKeyType = element.ReturnKeyType;
 			_entry.AutocorrectionType = element.AutoCorrection;
 			TextLabel.Text = element.Caption;
+
 		}
 			
 		public override bool BecomeFirstResponder ()
@@ -78,18 +80,23 @@ namespace MonoTouch.Dialog
 		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
-			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-10, size.Height));
+			_entry = new UITextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-20, size.Height));
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
 			
 			_entry.ValueChanged += delegate {
-				if (_element != null)
+				if (_element != null) {
 					_element.Value = _entry.Text;
+				}
 			};
 			_entry.Ended += delegate {
-				if (_element != null)
+				if (_element != null) {
 					_element.Value = _entry.Text;
+					
+					if (_element.OnValueChanged!=null)
+						_element.OnValueChanged(_element);
+				}
 			};
 			
 			_entry.AddTarget((object o, EventArgs r)=>{
