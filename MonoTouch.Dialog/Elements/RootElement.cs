@@ -301,7 +301,7 @@ namespace MonoTouch.Dialog
 		/// <summary>
 		/// The currently selected Radio item in the whole Root.
 		/// </summary>
-		public int RadioSelected {
+		public int Value {
 			get {
 				var radio = group as RadioGroup;
 				if (radio != null)

@@ -342,10 +342,10 @@ namespace MonoTouch.Dialog
 					var re = element as RootElement;
 					if (re.group as MemberRadioGroup != null){
 						var group = re.group as MemberRadioGroup;
-						SetValue (group.mi, obj, re.RadioSelected);
+						SetValue (group.mi, obj, re.Value);
 					} else if (re.group as RadioGroup != null){
 						var mType = GetTypeForMember (mi);
-						var fi = mType.GetFields (BindingFlags.Public | BindingFlags.Static) [re.RadioSelected];
+						var fi = mType.GetFields (BindingFlags.Public | BindingFlags.Static) [re.Value];
 						
 						SetValue (mi, obj, fi.GetValue (null));
 					}

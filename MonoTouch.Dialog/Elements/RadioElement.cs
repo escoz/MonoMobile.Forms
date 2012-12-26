@@ -60,8 +60,8 @@ namespace MonoTouch.Dialog
 		{
 			RootElement root = (RootElement) Parent.Parent;
 			UITableViewCell cell = null;
-			if (RadioIdx != root.RadioSelected){
-				var indexForOldItem = root.PathForRadio (root.RadioSelected);
+			if (RadioIdx != root.Value){
+				var indexForOldItem = root.PathForRadio (root.Value);
 				if (indexForOldItem!=null){
 					cell = tableView.CellAt (indexForOldItem);
 					if (cell != null)
@@ -70,7 +70,7 @@ namespace MonoTouch.Dialog
 				cell = tableView.CellAt (indexPath);
 				if (cell != null)
 					cell.Accessory = UITableViewCellAccessory.Checkmark;
-				root.RadioSelected = RadioIdx;
+				root.Value = RadioIdx;
 			}
 			
 			base.Selected (dvc, tableView, indexPath);

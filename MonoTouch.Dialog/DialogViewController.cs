@@ -586,7 +586,7 @@ namespace MonoTouch.Dialog
 			}
 
 			try {
-				tableView.ScrollToRow(root.PathForRadio(root.RadioSelected), UITableViewScrollPosition.Middle, false);	
+				tableView.ScrollToRow(root.PathForRadio(root.Value), UITableViewScrollPosition.Middle, false);	
 			} catch (Exception){}
 		}
 
