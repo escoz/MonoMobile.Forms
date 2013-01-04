@@ -254,6 +254,7 @@ namespace MonoTouch.Dialog
 		
 		public virtual void SearchButtonClicked (string text)
 		{
+			this.View.EndEditing (true);
 		}
 			
 		class SearchDelegate : UISearchBarDelegate {

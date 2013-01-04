@@ -184,11 +184,12 @@ namespace MonoTouch.Dialog
 				if (this.RightView == null) {
 					this.RightView = new UILabel (new RectangleF (0, 0, 50, 50));
 				}
+
 				((UILabel)this.RightView).Text = RightText;
 				((UILabel)this.RightView).SizeToFit ();
 				this.RightViewMode = UITextFieldViewMode.Always;
 			} else {
-				this.RightView = null;
+//				this.RightView = null;
 			}
 		}
 	}
