@@ -92,7 +92,16 @@ namespace MonoTouch.Dialog
 		// If set, we automatically scroll the content to avoid showing the search bar until 
 		// the user manually pulls it down.
 		public bool AutoHideSearch { get; set; }
-		
+
+		public void EnableSearchCancelButton (){
+			foreach (UIView subview in searchBar.Subviews) {
+				if (subview is UIButton) {
+					((UIButton)subview).Enabled = true;
+					return;
+				}
+			}
+		}
+
 		public string SearchPlaceholder { get; set; }
 			
 		/// <summary>
@@ -267,14 +276,15 @@ namespace MonoTouch.Dialog
 			
 			public override void OnEditingStarted (UISearchBar searchBar)
 			{
-				searchBar.ShowsCancelButton = true;
+				searchBar.SetShowsCancelButton (true, true);
 				container.StartSearch ();
 			}
 			
 			public override void OnEditingStopped (UISearchBar searchBar)
 			{
-				searchBar.ShowsCancelButton = false;
-				container.FinishSearch ();
+				if (searchBar.Text=="")
+					searchBar.SetShowsCancelButton (false, true);
+				//container.FinishSearch ();
 			}
 			
 			public override void TextChanged (UISearchBar searchBar, string searchText)
@@ -284,7 +294,8 @@ namespace MonoTouch.Dialog
 			
 			public override void CancelButtonClicked (UISearchBar searchBar)
 			{
-				searchBar.ShowsCancelButton = false;
+				searchBar.Text = "";
+				searchBar.SetShowsCancelButton (false, true);
 				container.FinishSearch ();
 				searchBar.ResignFirstResponder ();
 			}
@@ -292,6 +303,9 @@ namespace MonoTouch.Dialog
 			public override void SearchButtonClicked (UISearchBar searchBar)
 			{
 				container.SearchButtonClicked (searchBar.Text);
+
+				if (!String.IsNullOrEmpty(searchBar.Text))
+					container.EnableSearchCancelButton ();
 			}
 		}
 		
@@ -496,8 +510,10 @@ namespace MonoTouch.Dialog
 		{
 			if (enableSearch){
 				searchBar = new UISearchBar (new RectangleF (0, 0, tableView.Bounds.Width, 44)) {
-					Delegate = new SearchDelegate (this)
+					Delegate = new SearchDelegate (this),
+					
 				};
+
 				if (SearchPlaceholder != null)
 					searchBar.Placeholder = this.SearchPlaceholder;
 				tableView.TableHeaderView = searchBar;					
@@ -517,6 +533,7 @@ namespace MonoTouch.Dialog
 			var tv = new UITableView (UIScreen.MainScreen.Bounds, Style);
 			tv.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin;
 			tv.AutosizesSubviews = true;
+			tv.DelaysContentTouches = false;
 			return tv;
 			
 		}
