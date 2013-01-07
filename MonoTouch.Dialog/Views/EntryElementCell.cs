@@ -41,7 +41,7 @@ namespace MonoTouch.Dialog
 			}
 
 			_entry.Font = element.Appearance.TextFieldFont;
-			_entry.TextColor = element.Appearance.TextFieldFontTextColor;
+			_entry.TextColor = element.ReadOnly ? element.Appearance.DisabledLabelTextColor : element.Appearance.TextFieldFontTextColor;
 
 			TextLabel.Font = element.Appearance.LabelFont;
 			TextLabel.TextColor = element.ReadOnly ? element.Appearance.DisabledLabelTextColor : element.Appearance.LabelTextColor;
