@@ -61,8 +61,6 @@ namespace MonoTouch.Dialog
 			
 			cell.Update(this, tv);
 				
-			cell.BackgroundColor = this.ReadOnly ? this.Appearance.BackgroundColorDisabled : this.Appearance.BackgroundColorEditable;
-			cell.UserInteractionEnabled = !this.ReadOnly;
 
 			return cell;
 		}

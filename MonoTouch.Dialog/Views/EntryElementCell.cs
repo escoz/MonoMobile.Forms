@@ -44,11 +44,16 @@ namespace MonoTouch.Dialog
 			_entry.TextColor = element.Appearance.TextFieldFontTextColor;
 
 			TextLabel.Font = element.Appearance.LabelFont;
-			TextLabel.TextColor = element.Appearance.LabelTextColor;
+			TextLabel.TextColor = element.ReadOnly ? element.Appearance.DisabledLabelTextColor : element.Appearance.LabelTextColor;
 			TextLabel.HighlightedTextColor = element.Appearance.LabelHighlightedTextColor;
-			
+
+			_entry.Enabled = !element.ReadOnly;
 			_entry.Text = element.Value ?? "";
 			_entry.RightText = element.AppendedText;
+			if (_entry.GetType()==typeof(CustomTextField)) {
+				((UILabel)((CustomTextField)_entry).RightView).TextColor = element.ReadOnly ? element.Appearance.DisabledLabelTextColor : element.Appearance.LabelTextColor;
+			}
+
 			_entry.TextAlignment = element.TextAlignment;
 			_entry.Placeholder = element.Placeholder ?? "";
 			_entry.SecureTextEntry = element.IsPassword;
@@ -64,6 +69,10 @@ namespace MonoTouch.Dialog
             _entry.ReturnKeyType = element.ReturnKeyType;
 			_entry.AutocorrectionType = element.AutoCorrection;
 			TextLabel.Text = element.Caption;
+
+			this.BackgroundColor = element.ReadOnly ? element.Appearance.BackgroundColorDisabled : element.Appearance.BackgroundColorEditable;
+			this.UserInteractionEnabled = !element.ReadOnly;
+
 
 		}
 			
@@ -170,27 +179,30 @@ namespace MonoTouch.Dialog
 
 	public class CustomTextField : UITextField {
 
-		public string LeftText;
-		public string RightText;
+		string _rightText;
+
+		public string RightText { 
+			get { return _rightText; } 
+			set { _rightText = value; this.SetNeedsLayout(); }
+		}
 
 		public CustomTextField(RectangleF rect) : base(rect) {
-
+			this.RightView = new UILabel (new RectangleF (0, 0, 0, 0));
 		}
 
 		public override void LayoutSubviews ()
 		{
-			base.LayoutSubviews ();
 			if (!string.IsNullOrEmpty (RightText)) {
-				if (this.RightView == null) {
-					this.RightView = new UILabel (new RectangleF (0, 0, 50, 50));
-				}
-
 				((UILabel)this.RightView).Text = RightText;
 				((UILabel)this.RightView).SizeToFit ();
+				((UILabel)this.RightView).BackgroundColor = UIColor.Clear;
 				this.RightViewMode = UITextFieldViewMode.Always;
 			} else {
 //				this.RightView = null;
+				this.RightViewMode = UITextFieldViewMode.Never;
 			}
+			
+			base.LayoutSubviews ();
 		}
 	}
 	

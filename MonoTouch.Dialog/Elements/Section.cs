@@ -59,6 +59,10 @@ namespace MonoTouch.Dialog
 			Footer = footer;
 		}
 
+		public Section (string caption, string footer, string ID ) : this(caption, footer) {
+			this.ID = ID;
+		}
+
 		public Section (UIView header) : base (null)
 		{
 			HeaderView = header;
