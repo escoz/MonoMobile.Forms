@@ -25,7 +25,7 @@ namespace MonoTouch.Dialog
 		public UITableViewStyle Style = UITableViewStyle.Grouped;
 		UISearchBar searchBar;
 		UITableView tableView;
-		RefreshTableHeaderView refreshView;
+		RefreshTableHeaderView topRefreshView, bottomRefreshView;
 		RootElement root;
 		bool pushing;
 		bool dirty;
@@ -53,20 +53,35 @@ namespace MonoTouch.Dialog
 			}
 		} 
 		
+		EventHandler bottomRefreshRequested;
+		/// <summary>
+		/// If you assign a handler to this event before the view is shown, the
+		/// DialogViewController will have support for pull-to-refresh from bottom UI.
+		/// </summary>
+		public event EventHandler BottomRefreshRequested {
+			add {
+				if (tableView != null)
+					throw new ArgumentException ("You should set the handler before the controller is shown");
+				bottomRefreshRequested += value; 
+			}
+			remove {
+				bottomRefreshRequested -= value;
+			}
+		}
 
-		EventHandler refreshRequested;
+		EventHandler topRefreshRequested;
 		/// <summary>
 		/// If you assign a handler to this event before the view is shown, the
 		/// DialogViewController will have support for pull-to-refresh UI.
 		/// </summary>
-		public event EventHandler RefreshRequested {
+		public event EventHandler TopRefreshRequested {
 			add {
 				if (tableView != null)
 					throw new ArgumentException ("You should set the handler before the controller is shown");
-				refreshRequested += value; 
+				topRefreshRequested += value; 
 			}
 			remove {
-				refreshRequested -= value;
+				topRefreshRequested -= value;
 			}
 		}
 		
@@ -112,28 +127,54 @@ namespace MonoTouch.Dialog
 		/// should start the background operation to fetch the data and when it completes
 		/// it should call ReloadComplete to restore the control state.
 		/// </remarks>
-		public void TriggerRefresh ()
+		public void TriggerTopRefresh ()
 		{
-			TriggerRefresh (false);
+			TriggerTopRefresh (false);
 		}
 		
-		void TriggerRefresh (bool showStatus)
+		void TriggerTopRefresh (bool showStatus)
 		{
-			if (refreshRequested == null)
+			if (topRefreshRequested == null)
 				return;
 
 			if (reloading)
 				return;
 			
 			reloading = true;
-			if (refreshView != null)
-				refreshView.SetActivity (true);
-			refreshRequested (this, EventArgs.Empty);
+			if (topRefreshView != null)
+				topRefreshView.SetActivity (true);
+			topRefreshRequested (this, EventArgs.Empty);
 
-			if (showStatus && refreshView != null){
+			if (showStatus && topRefreshView != null){
 				UIView.BeginAnimations ("reloadingData");
 				UIView.SetAnimationDuration (0.2);
 				TableView.ContentInset = new UIEdgeInsets (60, 0, 0, 0);
+				UIView.CommitAnimations ();
+			}
+		}
+
+		public void TriggerBottomRefresh ()
+		{
+			TriggerBottomRefresh (false);
+		}
+		
+		void TriggerBottomRefresh (bool showStatus)
+		{
+			if (bottomRefreshRequested == null)
+				return;
+			
+			if (reloading)
+				return;
+			
+			reloading = true;
+			if (bottomRefreshView != null)
+				bottomRefreshView.SetActivity (true);
+			bottomRefreshRequested (this, EventArgs.Empty);
+			
+			if (showStatus && bottomRefreshView != null){
+				UIView.BeginAnimations ("reloadingData");
+				UIView.SetAnimationDuration (0.2);
+				TableView.ContentInset = new UIEdgeInsets (0, 0, 60, 0);
 				UIView.CommitAnimations ();
 			}
 		}
@@ -152,22 +193,33 @@ namespace MonoTouch.Dialog
 		/// </summary>
 		public void ReloadComplete ()
 		{
-			if (refreshView != null)
-				refreshView.LastUpdate = DateTime.Now;
+			if (topRefreshView != null)
+				topRefreshView.LastUpdate = DateTime.Now;
+			
+			if (bottomRefreshView != null)
+				bottomRefreshView.LastUpdate = DateTime.Now;
 			if (!reloading)
 				return;
 
 			reloading = false;
-			if (refreshView == null)
-				return;
-			
-			refreshView.SetActivity (false);
-			refreshView.Flip (false);
-			UIView.BeginAnimations ("doneReloading");
-			UIView.SetAnimationDuration (0.3f);
-			TableView.ContentInset = new UIEdgeInsets (0, 0, 0, 0);
-			refreshView.SetStatus (RefreshViewStatus.PullToReload);
-			UIView.CommitAnimations ();
+			if (topRefreshView != null) {
+				topRefreshView.SetActivity (false);
+				topRefreshView.Flip (false);
+				UIView.BeginAnimations ("doneReloading");
+				UIView.SetAnimationDuration (0.3f);
+				TableView.ContentInset = new UIEdgeInsets (0, 0, 0, 0);
+				topRefreshView.SetStatus (RefreshViewStatus.PullToReload);
+				UIView.CommitAnimations ();
+			}
+			if (bottomRefreshView != null) {
+				bottomRefreshView.SetActivity (false);
+				bottomRefreshView.Flip (false);
+				UIView.BeginAnimations ("doneReloading");
+				UIView.SetAnimationDuration (0.3f);
+				TableView.ContentInset = new UIEdgeInsets (0, 0, 0, 0);
+				bottomRefreshView.SetStatus (RefreshViewStatus.PullToReload);
+				UIView.CommitAnimations ();
+			}
 		}
 		
 		/// <summary>
@@ -412,21 +464,45 @@ namespace MonoTouch.Dialog
 					return;
 				if (Container.reloading)
 					return;
-				var view  = Container.refreshView;
-				if (view == null)
+				var point = Container.TableView.ContentOffset;
+
+				var topView  = Container.topRefreshView;
+				if (topView == null)
 					return;
 				
-				var point = Container.TableView.ContentOffset;
-				
-				if (view.IsFlipped && point.Y > -yboundary && point.Y < 0){
-					view.Flip (true);
-					view.SetStatus (RefreshViewStatus.PullToReload);
-				} else if (!view.IsFlipped && point.Y < -yboundary){
-					view.Flip (true);
-					view.SetStatus (RefreshViewStatus.ReleaseToReload);
+				if (topView.IsFlipped && point.Y > -yboundary && point.Y < 0){
+					topView.Flip (true);
+					topView.SetStatus (RefreshViewStatus.PullToReload);
+				} else if (!topView.IsFlipped && point.Y < -yboundary){
+					topView.Flip (true);
+					topView.SetStatus (RefreshViewStatus.ReleaseToReload);
+				}
+
+				var bottomView  = Container.bottomRefreshView;
+				if (bottomView == null)
+					return;
+				var bottomOffset = this.TableScrollOffset();
+				if (bottomView.IsFlipped && point.Y > yboundary && bottomOffset < 0 && bottomOffset >= -yboundary) {
+					bottomView.Flip (true);
+					bottomView.SetStatus (RefreshViewStatus.PullToReload);
+				} else if (!bottomView.IsFlipped && bottomOffset < -yboundary){
+					bottomView.Flip (true);
+					bottomView.SetStatus (RefreshViewStatus.ReleaseToReload);
 				}
 			}
-			
+
+			public float TableScrollOffset() {
+				float offset = 0;
+				var table = Container.TableView;
+				if (table.ContentSize.Height < table.Frame.Height) {
+					offset = -table.ContentOffset.Y;
+				} else {
+					offset = (table.ContentSize.Height - table.ContentOffset.Y) - table.Frame.Height;
+				}
+				
+				return offset;
+			}
+
 			public override void DraggingStarted (UIScrollView scrollView)
 			{
 				checkForRefresh = true;
@@ -434,13 +510,17 @@ namespace MonoTouch.Dialog
 			
 			public override void DraggingEnded (UIScrollView scrollView, bool willDecelerate)
 			{
-				if (Container.refreshView == null)
-					return;
-				
-				checkForRefresh = false;
-				if (Container.TableView.ContentOffset.Y > -yboundary)
-					return;
-				Container.TriggerRefresh (true);
+				if (Container.topRefreshView != null) {
+					checkForRefresh = false;
+					if (Container.TableView.ContentOffset.Y< 0 && Container.TableView.ContentOffset.Y <= -yboundary)
+						Container.TriggerTopRefresh (true);
+				}
+
+				if (Container.bottomRefreshView != null) {
+					checkForRefresh = false;
+					if (-this.TableScrollOffset() > yboundary)
+						Container.TriggerBottomRefresh (true);
+				}
 			}
 			#endregion
 		}
@@ -558,14 +638,21 @@ namespace MonoTouch.Dialog
 		
 		void ConfigureTableView ()
 		{
-			if (refreshRequested != null){
-				// The dimensions should be large enough so that even if the user scrolls, we render the
-				// whole are with the background color.
+			if (topRefreshRequested != null){
 				var bounds = View.Bounds;
-				refreshView = MakeRefreshTableHeaderView (new RectangleF (0, -bounds.Height, bounds.Width, bounds.Height));
+				topRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, -bounds.Height, bounds.Width, bounds.Height));
 				if (reloading)
-					refreshView.SetActivity (true);
-				TableView.AddSubview (refreshView);
+					topRefreshView.SetActivity (true);
+				TableView.AddSubview (topRefreshView);
+			}
+			if (bottomRefreshRequested != null){
+				var bounds = View.Bounds;
+				tableView.LayoutIfNeeded();
+				bottomRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, tableView.ContentSize.Height, bounds.Width, bounds.Height));
+				bottomRefreshView.FromTop = false;
+				if (reloading)
+					bottomRefreshView.SetActivity (true);
+				TableView.AddSubview (bottomRefreshView);
 			}
 		}
 		
@@ -577,6 +664,8 @@ namespace MonoTouch.Dialog
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+
+
 			if (AutoHideSearch){
 				if (enableSearch){
 					if (TableView.ContentOffset.Y < 44)

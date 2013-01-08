@@ -25,9 +25,14 @@ namespace MonoTouch.Dialog
 {
 	public class RefreshTableHeaderView : UIView {
 		static UIImage arrow = RefreshHeaderUtil.FromResource (null, "arrow.png");
-		UIActivityIndicatorView activity;
-		UILabel lastUpdateLabel, statusLabel;
-		UIImageView arrowView;		
+		public UIActivityIndicatorView activity;
+		public UILabel lastUpdateLabel, statusLabel;
+		public bool FromTop = true;
+		public UIImageView arrowView;
+		public string PullDownMessage = "Pull Down to Refresh...";
+
+		public string ReleaseMessage = "Release to refresh";
+		
 			
 		public RefreshTableHeaderView (RectangleF rect) : base (rect)
 		{
@@ -54,6 +59,7 @@ namespace MonoTouch.Dialog
 				BackgroundColor = this.BackgroundColor,
 				Opaque = true,
 				TextAlignment = UITextAlignment.Center,
+				Lines = 0,
 				AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
 			};
 			AddSubview (statusLabel);
@@ -79,10 +85,10 @@ namespace MonoTouch.Dialog
 			base.LayoutSubviews ();
 			var bounds = Bounds;
 			
-			lastUpdateLabel.Frame = new RectangleF (0, bounds.Height - 30, bounds.Width, 20);
-			statusLabel.Frame = new RectangleF (0, bounds.Height-48, bounds.Width, 20);
-			arrowView.Frame = new RectangleF (20, bounds.Height - 65, 30, 55);
-			activity.Frame = new RectangleF (25, bounds.Height-38, 20, 20);
+			lastUpdateLabel.Frame = new RectangleF (0, FromTop ? bounds.Height - 30  : 30, bounds.Width, 20);
+			statusLabel.Frame = new RectangleF (0, FromTop ? bounds.Height-48 : 4, bounds.Width, lastUpdateLabel.Hidden ? 44 : 20);
+			arrowView.Frame = new RectangleF (20, FromTop ? bounds.Height - 65 : 0, 30, 55);
+			activity.Frame = new RectangleF (25, FromTop ? bounds.Height-38 : 0, 20, 20);
 		}
 		
 		RefreshViewStatus status = (RefreshViewStatus) (-1);
@@ -92,7 +98,7 @@ namespace MonoTouch.Dialog
 			if (this.status == status)
 				return;
 			
-			string s = "Release to refresh";
+			string s = ReleaseMessage;
 	
 			switch (status){
 			case RefreshViewStatus.Loading:
@@ -100,7 +106,7 @@ namespace MonoTouch.Dialog
 				break;
 				
 			case RefreshViewStatus.PullToReload:
-				s = "Pull down to refresh...";
+				s = PullDownMessage;
 				break;
 			}
 			statusLabel.Text = s;
@@ -114,6 +120,11 @@ namespace MonoTouch.Dialog
 			context.BeginPath ();
 			context.MoveTo (0, Bounds.Height-1);
 			context.AddLineToPoint (Bounds.Width, Bounds.Height-1);
+			context.StrokePath ();
+
+			context.BeginPath ();
+			context.MoveTo (0, 0);
+			context.AddLineToPoint (Bounds.Width, 0);
 			context.StrokePath ();
 		}		
 		
