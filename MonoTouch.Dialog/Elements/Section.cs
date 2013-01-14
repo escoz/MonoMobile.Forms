@@ -330,9 +330,16 @@ namespace MonoTouch.Dialog
 		/// </returns>
 		public IEnumerator GetEnumerator ()
 		{
-			foreach (var e in Elements)
-				yield return e;
+			foreach (var s in Elements)
+				yield return s;
 		}
+
+		public IEnumerable<Element> VisibleElements  {
+			get {
+				return from x in this.Elements where !x.Hidden select x;
+			}
+		}
+
 
 		public int Count {
 			get {

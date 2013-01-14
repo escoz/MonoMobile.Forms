@@ -69,6 +69,7 @@ namespace MonoTouch.Dialog
             _entry.ReturnKeyType = element.ReturnKeyType;
 			_entry.AutocorrectionType = element.AutoCorrection;
 			TextLabel.Text = element.Caption;
+			_entry.Hidden = element.Hidden;
 
 			this.BackgroundColor = element.ReadOnly ? element.Appearance.BackgroundColorDisabled : element.Appearance.BackgroundColorEditable;
 			this.UserInteractionEnabled = !element.ReadOnly;
@@ -94,7 +95,7 @@ namespace MonoTouch.Dialog
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
-			
+
 			_entry.ValueChanged += delegate {
 				if (_element != null) {
 					_element.Value = _entry.Text;

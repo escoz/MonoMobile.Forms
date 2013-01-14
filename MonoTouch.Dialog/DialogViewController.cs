@@ -538,6 +538,8 @@ namespace MonoTouch.Dialog
 				var section = Root.Sections [indexPath.Section];
 				var element = section.Elements [indexPath.Row];
 				
+				if (element.Hidden)
+					return 0;
 				var sizable = element as IElementSizing;
 				if (sizable == null)
 					return tableView.RowHeight;

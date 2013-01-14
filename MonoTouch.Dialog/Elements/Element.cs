@@ -52,6 +52,8 @@ namespace MonoTouch.Dialog
 		public string ID;
 		public string Caption;
 		public bool ReadOnly;
+		public bool Hidden = false;
+
 		public Object Object { get; set; }
 
 		public Element (string caption)

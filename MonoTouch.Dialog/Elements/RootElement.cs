@@ -33,7 +33,6 @@ namespace MonoTouch.Dialog
 		public UITableView TableView { internal set; get; } 
         public Type RootControllerType = new DialogViewController(null).GetType();
 		public bool DeselectAutomatically;
-
 		
 		public RootElement (string caption) : base (caption)
 		{
@@ -296,6 +295,12 @@ namespace MonoTouch.Dialog
 		{
 			foreach (var s in Sections)
 				yield return s;
+		}
+
+		public IEnumerable<Section> VisibleSections  {
+			get {
+				return from x in this.Sections where !x.Hidden select x;
+			}
 		}
 
 		/// <summary>
