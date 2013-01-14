@@ -24,8 +24,8 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class EntryElement : Element {
-		
-		public string Value, Placeholder;
+		public virtual string Value { get; set; }
+		public string Placeholder;
 		public bool IsPassword = false;
 		
 		public UIKeyboardType KeyboardType = UIKeyboardType.Default;

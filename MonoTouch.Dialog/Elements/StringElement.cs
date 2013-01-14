@@ -78,6 +78,8 @@ namespace MonoTouch.Dialog
 			cell.Accessory = (Tapped != null || Sections.Count>0)? CellAccessory : UITableViewCellAccessory.None;
 			cell.ImageView.Image = Image;
 			cell.TextLabel.Text = Caption;
+			cell.TextLabel.MinimumFontSize = 11;
+			cell.TextLabel.AdjustsFontSizeToFitWidth = true;
 			cell.TextLabel.TextAlignment = Alignment;
 			cell.TextLabel.Font = this.Appearance.LabelFont;
 			cell.TextLabel.TextColor = this.Appearance.LabelTextColor;
@@ -88,6 +90,8 @@ namespace MonoTouch.Dialog
 			if (cell.DetailTextLabel != null && !String.IsNullOrEmpty (Value)) {
 				cell.DetailTextLabel.Font = this.Appearance.DetailLabelFont;
 				cell.DetailTextLabel.TextColor = this.Appearance.DetailLabelTextColor;
+				cell.DetailTextLabel.MinimumFontSize = 11;
+				cell.DetailTextLabel.AdjustsFontSizeToFitWidth = true;
 				cell.DetailTextLabel.HighlightedTextColor = this.Appearance.DetailLabelHighlightedTextColor;
 
 				if (!ShowValueAsBadge) {
