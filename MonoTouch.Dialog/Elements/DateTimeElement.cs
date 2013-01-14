@@ -47,9 +47,16 @@ namespace MonoTouch.Dialog
 			cell.Update(this, tv);
 			var picker = CreatePicker();
 			picker.ValueChanged += (sender, e) => { 
+				this.DateValue = picker.Date;
 				cell.DetailTextLabel.Text = FormatDate(picker.Date); 
 				this.Value = FormatDate(picker.Date);
+				cell.SetNeedsLayout();
+			};
+			cell.TextField.EditingDidBegin += (sender, e) => {
 				this.DateValue = picker.Date;
+				cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+				this.Value = FormatDate(picker.Date);
+				cell.SetNeedsLayout();
 			};
 
 			cell.TextField.InputView = picker;
@@ -59,7 +66,7 @@ namespace MonoTouch.Dialog
 			cell.TextLabel.HighlightedTextColor = Appearance.LabelHighlightedTextColor;
 			cell.TextLabel.Font = Appearance.LabelFont;
 			
-			cell.DetailTextLabel.Text = FormatDate(picker.Date); 
+			cell.DetailTextLabel.Text = FormatDate(this.DateValue); 
 			cell.DetailTextLabel.TextColor = Appearance.DetailLabelTextColor;
 			cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
 			cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
