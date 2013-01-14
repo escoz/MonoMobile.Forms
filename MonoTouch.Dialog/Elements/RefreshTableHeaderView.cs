@@ -29,15 +29,15 @@ namespace MonoTouch.Dialog
 		public UILabel lastUpdateLabel, statusLabel;
 		public bool FromTop = true;
 		public UIImageView arrowView;
-		public string PullDownMessage = "Pull Down to Refresh...";
-
-		public string ReleaseMessage = "Release to refresh";
+		public virtual string PullMessage {get;set;}
+		public virtual string ReleaseMessage {get;set;}
 		
 			
 		public RefreshTableHeaderView (RectangleF rect) : base (rect)
 		{
 			this.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
-			
+			PullMessage = "Pull Down to Refresh...";
+			ReleaseMessage = "Release to refresh";
 			BackgroundColor = new UIColor (0.88f, 0.9f, 0.92f, 1);
 			lastUpdateLabel = new UILabel (){
 				Font = UIFont.SystemFontOfSize (13f),
@@ -106,7 +106,7 @@ namespace MonoTouch.Dialog
 				break;
 				
 			case RefreshViewStatus.PullToReload:
-				s = PullDownMessage;
+				s = PullMessage;
 				break;
 			}
 			statusLabel.Text = s;

@@ -640,7 +640,7 @@ namespace MonoTouch.Dialog
 		{
 			if (topRefreshRequested != null){
 				var bounds = View.Bounds;
-				topRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, -bounds.Height, bounds.Width, bounds.Height));
+				topRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, -bounds.Height, bounds.Width, bounds.Height), true);
 				if (reloading)
 					topRefreshView.SetActivity (true);
 				TableView.AddSubview (topRefreshView);
@@ -648,7 +648,7 @@ namespace MonoTouch.Dialog
 			if (bottomRefreshRequested != null){
 				var bounds = View.Bounds;
 				tableView.LayoutIfNeeded();
-				bottomRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, tableView.ContentSize.Height, bounds.Width, bounds.Height));
+				bottomRefreshView = MakeRefreshTableHeaderView (new RectangleF (0, tableView.ContentSize.Height, bounds.Width, bounds.Height), false);
 				bottomRefreshView.FromTop = false;
 				if (reloading)
 					bottomRefreshView.SetActivity (true);
@@ -656,7 +656,7 @@ namespace MonoTouch.Dialog
 			}
 		}
 		
-		public virtual RefreshTableHeaderView MakeRefreshTableHeaderView (RectangleF rect)
+		public virtual RefreshTableHeaderView MakeRefreshTableHeaderView (RectangleF rect, bool isTop)
 		{
 			return new RefreshTableHeaderView (rect);
 		}
