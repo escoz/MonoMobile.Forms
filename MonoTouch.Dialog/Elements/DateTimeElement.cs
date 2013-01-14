@@ -24,13 +24,13 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class DateTimeElement : EntryElement {
-		public DateTime DateValue;
+		public DateTime? DateValue;
 		public UIDatePicker datePicker;
 		protected internal NSDateFormatter fmt = new NSDateFormatter () {
 			DateStyle = NSDateFormatterStyle.Short
 		};
 		
-		public DateTimeElement (string caption, DateTime date) : base (caption, "", "")
+		public DateTimeElement (string caption, DateTime? date) : base (caption, "", "")
 		{
 			DateValue = date;
 			Value = FormatDate (date);
@@ -79,9 +79,11 @@ namespace MonoTouch.Dialog
 			return cell;
 		}
 		
-		public virtual string FormatDate (DateTime dt)
+		public virtual string FormatDate (DateTime? dt)
 		{
-			return fmt.ToString (dt) + " " + dt.ToLocalTime ().ToShortTimeString ();
+			if (dt.HasValue)
+				return fmt.ToString (dt) + " " + dt.Value.ToLocalTime ().ToShortTimeString ();
+			return "";
 		}
 		
 		public virtual UIDatePicker CreatePicker ()
@@ -89,7 +91,7 @@ namespace MonoTouch.Dialog
 			var picker = new UIDatePicker (RectangleF.Empty){
 				AutoresizingMask = UIViewAutoresizing.FlexibleWidth,
 				Mode = UIDatePickerMode.Date,
-				Date = DateValue
+				Date = DateValue.HasValue ? DateValue.Value : DateTime.Now
 			};
 			return picker;
 		}

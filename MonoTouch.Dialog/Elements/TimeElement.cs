@@ -28,9 +28,9 @@ namespace MonoTouch.Dialog
 		{
 		}
 		
-		public override string FormatDate (DateTime dt)
+		public override string FormatDate (DateTime? dt)
 		{
-			return dt.ToLocalTime ().ToShortTimeString ();
+			return dt.Value.ToLocalTime ().ToShortTimeString ();
 		}
 		
 		public override UIDatePicker CreatePicker ()

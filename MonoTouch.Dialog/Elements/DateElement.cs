@@ -24,14 +24,16 @@ using MonoTouch.ObjCRuntime;
 namespace MonoTouch.Dialog
 {
 	public class DateElement : DateTimeElement {
-		public DateElement (string caption, DateTime date) : base (caption, date)
+		public DateElement (string caption, DateTime? date) : base (caption, date)
 		{
 			fmt.DateStyle = NSDateFormatterStyle.Medium;
 		}
 		
-		public override string FormatDate (DateTime dt)
+		public override string FormatDate (DateTime? dt)
 		{
-			return dt==DateTime.MinValue ? "" : fmt.ToString (dt);
+			if (dt.HasValue)
+				return dt==DateTime.MinValue ? "" : fmt.ToString (dt);
+			return "";
 		}
 		
 		public override UIDatePicker CreatePicker ()
