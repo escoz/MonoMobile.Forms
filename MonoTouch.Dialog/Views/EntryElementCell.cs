@@ -87,14 +87,21 @@ namespace MonoTouch.Dialog
 			base.PrepareForReuse ();
 			_element = null;
 		}
+
+		CustomTextFieldDelegate _delegate;
 			
 		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
 			_entry = new CustomTextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-20, size.Height));
+			_delegate = new CustomTextFieldDelegate ();
+			_entry.Delegate = _delegate;
+
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
 				UIViewAutoresizing.FlexibleLeftMargin;
+
+			_entry.MaxCharacters = 5;
 
 			_entry.ValueChanged += delegate {
 				if (_element != null) {
@@ -182,6 +189,8 @@ namespace MonoTouch.Dialog
 
 		string _rightText;
 
+		public int MaxCharacters = -1;
+
 		public string RightText { 
 			get { return _rightText; } 
 			set { _rightText = value; this.SetNeedsLayout(); }
@@ -189,6 +198,7 @@ namespace MonoTouch.Dialog
 
 		public CustomTextField(RectangleF rect) : base(rect) {
 			this.RightView = new UILabel (new RectangleF (0, 0, 0, 0));
+
 		}
 
 		public override void LayoutSubviews ()
@@ -199,11 +209,17 @@ namespace MonoTouch.Dialog
 				((UILabel)this.RightView).BackgroundColor = UIColor.Clear;
 				this.RightViewMode = UITextFieldViewMode.Always;
 			} else {
-//				this.RightView = null;
 				this.RightViewMode = UITextFieldViewMode.Never;
 			}
 			
 			base.LayoutSubviews ();
+		}
+	}
+
+	public class CustomTextFieldDelegate : UITextFieldDelegate {
+		public override bool ShouldChangeCharacters (UITextField textField, NSRange range, string replacementString)
+		{
+			return false;
 		}
 	}
 	

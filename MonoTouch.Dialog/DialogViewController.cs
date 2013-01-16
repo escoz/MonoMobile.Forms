@@ -421,6 +421,7 @@ namespace MonoTouch.Dialog
 					cell.SelectedBackgroundView = new UIView { BackgroundColor = Root.Appearance.CellHighlightedColor };
 				}
 				 
+				cell.Hidden= element.Hidden;
 				return cell;
 			}
 			
@@ -538,7 +539,7 @@ namespace MonoTouch.Dialog
 				var section = Root.Sections [indexPath.Section];
 				var element = section.Elements [indexPath.Row];
 				
-				if (element.Hidden)
+				if (element.Hidden) 
 					return 0;
 				var sizable = element as IElementSizing;
 				if (sizable == null)

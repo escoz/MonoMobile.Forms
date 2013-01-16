@@ -44,6 +44,7 @@ namespace MonoTouch.Dialog
 				cell = new UITableViewCell (Value == null ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1, skey);
 				cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 			}
+			
 			cell.Accessory = Accessory;
 			cell.BackgroundColor = Appearance.BackgroundColorDisabled;
 			cell.SelectionStyle = UITableViewCellSelectionStyle.None;

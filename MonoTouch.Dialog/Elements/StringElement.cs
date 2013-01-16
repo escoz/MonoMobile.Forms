@@ -73,7 +73,7 @@ namespace MonoTouch.Dialog
 				else
 					cell = new StringElementCell (this.CellStyle, cellid);
 			}
-			
+
 			cell.SelectionStyle = (Tapped != null || Sections.Count>0) ? UITableViewCellSelectionStyle.Blue : UITableViewCellSelectionStyle.None;
 			cell.Accessory = (Tapped != null || Sections.Count>0)? CellAccessory : UITableViewCellAccessory.None;
 			cell.ImageView.Image = Image;
