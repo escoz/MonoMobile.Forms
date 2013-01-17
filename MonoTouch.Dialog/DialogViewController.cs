@@ -52,7 +52,7 @@ namespace MonoTouch.Dialog
 				ReloadData ();
 			}
 		} 
-		
+
 		EventHandler bottomRefreshRequested;
 		/// <summary>
 		/// If you assign a handler to this event before the view is shown, the
@@ -267,6 +267,7 @@ namespace MonoTouch.Dialog
 			Root.Sections = new List<Section> (originalSections);
 			originalSections = null;
 			originalElements = null;
+			searchBar.Text = "";
 			searchBar.ResignFirstResponder ();
 			ReloadData ();
 		}
@@ -667,6 +668,14 @@ namespace MonoTouch.Dialog
 			return new RefreshTableHeaderView (rect, isTop);
 		}
 
+		public void HideSearchBar ()
+		{
+			searchBar.Text = "";
+			searchBar.ResignFirstResponder ();
+			if (TableView.ContentOffset.Y < 44)
+				TableView.ContentOffset = new PointF (0, 44);
+		}
+
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
@@ -674,8 +683,7 @@ namespace MonoTouch.Dialog
 
 			if (AutoHideSearch){
 				if (enableSearch){
-					if (TableView.ContentOffset.Y < 44)
-						TableView.ContentOffset = new PointF (0, 44);
+					this.HideSearchBar();
 				}
 			}
 			
