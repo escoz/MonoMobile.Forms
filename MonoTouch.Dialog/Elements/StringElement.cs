@@ -82,14 +82,14 @@ namespace MonoTouch.Dialog
 			cell.TextLabel.AdjustsFontSizeToFitWidth = true;
 			cell.TextLabel.TextAlignment = Alignment;
 			cell.TextLabel.Font = this.Appearance.LabelFont;
-			cell.TextLabel.TextColor = this.Appearance.LabelTextColor;
+			cell.TextLabel.TextColor = this.ReadOnly ?  this.Appearance.DisabledLabelTextColor : this.Appearance.LabelTextColor;
 			cell.TextLabel.HighlightedTextColor = this.Appearance.LabelHighlightedTextColor;
 
 			cell.BackgroundColor = this.Appearance.BackgroundColorDisabled;
 			
 			if (cell.DetailTextLabel != null && !String.IsNullOrEmpty (Value)) {
 				cell.DetailTextLabel.Font = this.Appearance.DetailLabelFont;
-				cell.DetailTextLabel.TextColor = this.Appearance.DetailLabelTextColor;
+				cell.DetailTextLabel.TextColor = this.ReadOnly ? this.Appearance.DisabledLabelTextColor : this.Appearance.DetailLabelTextColor;
 				cell.DetailTextLabel.MinimumFontSize = 11;
 				cell.DetailTextLabel.AdjustsFontSizeToFitWidth = true;
 				cell.DetailTextLabel.HighlightedTextColor = this.Appearance.DetailLabelHighlightedTextColor;
