@@ -480,6 +480,9 @@ namespace MonoTouch.Dialog
 				}
 
 				var bottomView  = Container.bottomRefreshView;
+				if (bottomView!=null && bottomView.Frame!=null && bottomView.Frame.Y!=scrollView.ContentSize.Height)
+					bottomView.Frame = new RectangleF(0,scrollView.ContentSize.Height, bottomView.Frame.Width, bottomView.Frame.Height);
+
 				if (bottomView == null)
 					return;
 				var bottomOffset = this.TableScrollOffset();
@@ -661,7 +664,7 @@ namespace MonoTouch.Dialog
 		
 		public virtual RefreshTableHeaderView MakeRefreshTableHeaderView (RectangleF rect, bool isTop)
 		{
-			return new RefreshTableHeaderView (rect);
+			return new RefreshTableHeaderView (rect, isTop);
 		}
 
 		public override void ViewWillAppear (bool animated)

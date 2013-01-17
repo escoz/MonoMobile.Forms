@@ -74,6 +74,17 @@ namespace MonoTouch.Dialog
 			this.BackgroundColor = element.ReadOnly ? element.Appearance.BackgroundColorDisabled : element.Appearance.BackgroundColorEditable;
 			this.UserInteractionEnabled = !element.ReadOnly;
 
+			
+			var toolbar = new UIToolbar {Translucent = true, Frame = new RectangleF(0,0,320,44)};
+			_entry.InputAccessoryView = toolbar;
+			
+			toolbar.Items = new UIBarButtonItem[]{
+				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null),
+				new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (e, a)=>{
+					_entry.ResignFirstResponder();
+				}) ,
+			};
+
 
 		}
 			

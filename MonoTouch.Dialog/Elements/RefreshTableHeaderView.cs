@@ -33,7 +33,7 @@ namespace MonoTouch.Dialog
 		public virtual string ReleaseMessage {get;set;}
 		
 			
-		public RefreshTableHeaderView (RectangleF rect) : base (rect)
+		public RefreshTableHeaderView (RectangleF rect, bool isTop) : base (rect)
 		{
 			this.AutoresizingMask = UIViewAutoresizing.FlexibleWidth;
 			PullMessage = "Pull Down to Refresh...";
@@ -47,7 +47,8 @@ namespace MonoTouch.Dialog
 				BackgroundColor = this.BackgroundColor,
 				Opaque = true,
 				TextAlignment = UITextAlignment.Center,
-				AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin
+				AutoresizingMask = UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleRightMargin | 
+							(isTop ? UIViewAutoresizing.FlexibleBottomMargin : UIViewAutoresizing.FlexibleTopMargin)
 			};
 			AddSubview (lastUpdateLabel);
 			
