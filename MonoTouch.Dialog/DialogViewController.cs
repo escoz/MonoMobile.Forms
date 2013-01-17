@@ -668,22 +668,19 @@ namespace MonoTouch.Dialog
 			return new RefreshTableHeaderView (rect, isTop);
 		}
 
-		public void HideSearchBar ()
+		public void ClearSearchBar ()
 		{
 			searchBar.Text = "";
-			searchBar.ResignFirstResponder ();
-			if (TableView.ContentOffset.Y < 44)
-				TableView.ContentOffset = new PointF (0, 44);
+			searchBar.EndEditing(true);
 		}
 
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
 
-
 			if (AutoHideSearch){
 				if (enableSearch){
-					this.HideSearchBar();
+					this.ClearSearchBar();
 				}
 			}
 			
@@ -731,7 +728,7 @@ namespace MonoTouch.Dialog
 		{
 			if (root == null)
 				return;
-			
+
 			root.Prepare ();
 			if (tableView != null){
 				UpdateSource ();

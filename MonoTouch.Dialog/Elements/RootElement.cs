@@ -111,7 +111,9 @@ namespace MonoTouch.Dialog
 		internal void Prepare ()
 		{
 			int current = 0;
-			foreach (Section s in Sections){				
+			if (Sections==null) return;
+			foreach (Section s in Sections){	
+				if (s.Elements==null) return;
 				foreach (Element e in s.Elements){
 					var re = e as RadioElement;
 					if (re != null)
