@@ -127,7 +127,19 @@ namespace MonoTouch.Dialog
 						_element.OnValueChanged(_element);
 				}
 			};
-			
+			_entry.ShouldChangeCharacters = (textField, range, replacement) => 
+			{
+				if (_element.MaxLength<0) return true;
+				if (_element.MaxLength==0) return false;
+				using (NSString original = new NSString(textField.Text))
+				{
+					var replace = original.Replace(range, new NSString(replacement));
+					if (replace.Length>_element.MaxLength)
+						return false;
+				}
+				return true;
+			};
+
 			_entry.AddTarget((object o, EventArgs r)=>{
 				if (_element != null)
 					_element.Value = _entry.Text;
