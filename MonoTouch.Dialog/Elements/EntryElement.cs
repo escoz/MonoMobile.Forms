@@ -28,6 +28,8 @@ namespace MonoTouch.Dialog
 		public string Placeholder;
 		public bool IsPassword = false;
 		public int MaxLength = -1;
+
+		public bool ShowToolbar;
 		
 		public UIKeyboardType KeyboardType = UIKeyboardType.Default;
 		public UITextAutocapitalizationType AutoCapitalize = UITextAutocapitalizationType.Sentences;

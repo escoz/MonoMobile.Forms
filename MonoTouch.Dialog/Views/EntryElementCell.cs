@@ -75,14 +75,16 @@ namespace MonoTouch.Dialog
 			this.UserInteractionEnabled = !element.ReadOnly;
 
 			
-			var toolbar = new UIToolbar {Translucent = true, Frame = new RectangleF(0,0,320,44)};
-			_entry.InputAccessoryView = toolbar;
-			
-			toolbar.Items = new UIBarButtonItem[]{
-				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null),
-				new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (e, a)=>{
-					_entry.ResignFirstResponder();
-				}) ,
+			if (element.ShowToolbar) {
+				var toolbar = new UIToolbar {Translucent = true, Frame = new RectangleF(0,0,320,44)};
+				_entry.InputAccessoryView = toolbar;
+
+				toolbar.Items = new UIBarButtonItem[]{
+					new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null),
+					new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (e, a)=>{
+						_entry.ResignFirstResponder();
+					}) ,
+				};
 			};
 
 
