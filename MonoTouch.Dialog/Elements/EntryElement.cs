@@ -76,6 +76,7 @@ namespace MonoTouch.Dialog
 		
 		public override void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
+			tableView.SelectRow(path, false, UITableViewScrollPosition.None);
 			((EntryElementCell)tableView.CellAt(path)).BecomeFirstResponder();
 		}
 

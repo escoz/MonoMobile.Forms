@@ -79,6 +79,7 @@ namespace MonoTouch.Dialog
 		
 		public virtual void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
+			tableView.EndEditing(true);
 			tableView.CellAt(path).BecomeFirstResponder();
 		}
 		

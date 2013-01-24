@@ -377,6 +377,8 @@ namespace MonoTouch.Dialog
 			public override int RowsInSection (UITableView tableview, int section)
 			{
 				var s = Root.Sections [section];
+				if (s.Elements==null)
+					return 0;
 				var count = s.Elements.Count;
 				
 				return count;
@@ -618,6 +620,7 @@ namespace MonoTouch.Dialog
 		public virtual UITableView MakeTableView ()
 		{
 			var tv = new UITableView (UIScreen.MainScreen.Bounds, Style);
+			tv.DelaysContentTouches = false;
 			tv.AutoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleTopMargin;
 			tv.AutosizesSubviews = true;
 			tv.DelaysContentTouches = false;
@@ -640,7 +643,7 @@ namespace MonoTouch.Dialog
 
 			var endEditingWhenTappingBackgroundGesture = new UITapGestureRecognizer((g)=>this.View.EndEditing(true));
 			endEditingWhenTappingBackgroundGesture.CancelsTouchesInView = false;
-			this.TableView.AddGestureRecognizer (endEditingWhenTappingBackgroundGesture);
+			//this.TableView.AddGestureRecognizer (endEditingWhenTappingBackgroundGesture);
 		}
 		
 		void ConfigureTableView ()

@@ -70,19 +70,19 @@ namespace MonoTouch.Dialog
 			_entry.AutocorrectionType = element.AutoCorrection;
 			TextLabel.Text = element.Caption;
 			_entry.Hidden = element.Hidden;
-
 			this.BackgroundColor = element.ReadOnly ? element.Appearance.BackgroundColorDisabled : element.Appearance.BackgroundColorEditable;
 			this.UserInteractionEnabled = !element.ReadOnly;
 
 			
-			if (element.ShowToolbar) {
+			if (element.ShowToolbar || element.KeyboardType == UIKeyboardType.DecimalPad) {
 				var toolbar = new UIToolbar {Translucent = true, Frame = new RectangleF(0,0,320,44)};
 				_entry.InputAccessoryView = toolbar;
 
 				toolbar.Items = new UIBarButtonItem[]{
 					new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null, null),
 					new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (e, a)=>{
-						_entry.ResignFirstResponder();
+
+						this.ResignFirstResponder();
 					}) ,
 				};
 			};
@@ -93,6 +93,15 @@ namespace MonoTouch.Dialog
 		public override bool BecomeFirstResponder ()
 		{
 			return _entry.BecomeFirstResponder();
+		}
+
+		public override bool ResignFirstResponder ()
+		{
+			var tableview = ((UITableView)this.Superview);
+
+			tableview.DeselectRow(tableview.IndexPathForSelectedRow, false);
+			tableview.EndEditing(true);
+			return true;
 		}
 		
 		public override void PrepareForReuse ()
@@ -106,9 +115,11 @@ namespace MonoTouch.Dialog
 		protected virtual void PrepareEntry(UITableView tableview){
 			SizeF size = _computeEntryPosition(tableview);
 			
-			_entry = new CustomTextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-1, 320-size.Width-20, size.Height));
+			_entry = new CustomTextField (new RectangleF (size.Width+10, (ContentView.Bounds.Height-size.Height)/2-10, 320-size.Width-20, size.Height+20));
 			_delegate = new CustomTextFieldDelegate ();
 			_entry.Delegate = _delegate;
+
+			_entry.VerticalAlignment = UIControlContentVerticalAlignment.Center;
 
 			TextLabel.BackgroundColor = UIColor.Clear;
 			_entry.AutoresizingMask = UIViewAutoresizing.FlexibleWidth |
@@ -116,18 +127,30 @@ namespace MonoTouch.Dialog
 
 			_entry.MaxCharacters = 5;
 
+			_entry.Started += delegate {
+				var position = tableview.IndexPathForCell(this);
+				tableview.SelectRow(position, false, UITableViewScrollPosition.None);
+			};
+
 			_entry.ValueChanged += delegate {
 				if (_element != null) {
 					_element.Value = _entry.Text;
 				}
 			};
-			_entry.Ended += delegate {
+			_entry.EnablesReturnKeyAutomatically = true;
+			_entry.Ended += (object sender, EventArgs e) => {
 				if (_element != null) {
 					_element.Value = _entry.Text;
 					
 					if (_element.OnValueChanged!=null)
 						_element.OnValueChanged(_element);
 				}
+				
+				var position = tableview.IndexPathForCell(this);
+				if (tableview.IndexPathForSelectedRow!=null && position!=null && position.Compare(tableview.IndexPathForSelectedRow)==0){
+					tableview.DeselectRow(position, false);
+				}
+
 			};
 			_entry.ShouldChangeCharacters = (textField, range, replacement) => 
 			{
