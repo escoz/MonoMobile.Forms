@@ -427,7 +427,12 @@ namespace MonoTouch.Dialog
 				cell.Hidden= element.Hidden;
 				return cell;
 			}
-			
+
+			public override void AccessoryButtonTapped (UITableView tableView, NSIndexPath indexPath)
+			{
+				Container.AccessorySelected(indexPath);
+			}
+
 			public override void RowSelected (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
 			{
 				Container.Selected (indexPath);
@@ -608,7 +613,16 @@ namespace MonoTouch.Dialog
 				tableView.TableHeaderView = searchBar;					
 			} 
 		}
-		
+
+		public virtual void AccessorySelected (NSIndexPath indexPath)
+		{
+			var section = root.Sections [indexPath.Section];
+			var element = section.Elements [indexPath.Row];
+			
+			element.AccessorySelected (this, tableView, indexPath);
+		}
+
+
 		public virtual void Selected (NSIndexPath indexPath)
 		{
 			var section = root.Sections [indexPath.Section];

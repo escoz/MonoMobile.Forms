@@ -76,7 +76,11 @@ namespace MonoTouch.Dialog
 		{
 			return "";
 		}
-		
+
+		public virtual void AccessorySelected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
+		{
+		}
+
 		public virtual void Selected (DialogViewController dvc, UITableView tableView, NSIndexPath path)
 		{
 			tableView.EndEditing(true);
