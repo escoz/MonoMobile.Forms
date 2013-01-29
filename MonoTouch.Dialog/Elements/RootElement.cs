@@ -57,6 +57,21 @@ namespace MonoTouch.Dialog
 		{
 			this.group = group;
 		}
+
+		
+		public Section GetSectionForID (string name)
+		{
+			return GetSectionForID (name, this);
+		}
+		
+		Section GetSectionForID(string name, RootElement element){
+			if (element is IEnumerable) {
+				foreach (Section s in element.Sections) {
+					if (s.ID==name) return s;
+				}
+			}
+			return null;
+		}
 		
 		internal List<Section> Sections = new List<Section> ();
 

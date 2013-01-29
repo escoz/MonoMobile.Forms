@@ -16,6 +16,20 @@ namespace MonoTouch.Dialog
 			
 		protected CustomTextField _entry;
 
+		UIView _customEditView;
+		public UIView CustomEditView {
+			get{ return _customEditView; }
+			set {
+				
+				if (_customEditView!=null) {
+					_customEditView.RemoveFromSuperview();
+				}
+				_customEditView = value;
+				if (_customEditView!=null)
+					this.ContentView.Add(_customEditView);
+			}
+		}
+
 		public CustomTextField TextField {
 			get {
 				return _entry;
@@ -87,7 +101,8 @@ namespace MonoTouch.Dialog
 				};
 			};
 
-
+			//if (_customEditView!=null)
+				//this.ContentView.AddSubview(_customEditView);
 		}
 			
 		public override bool BecomeFirstResponder ()
@@ -107,6 +122,8 @@ namespace MonoTouch.Dialog
 		public override void PrepareForReuse ()
 		{
 			base.PrepareForReuse ();
+			this.CustomEditView = null;
+			CustomEditView = null;
 			_element = null;
 		}
 
