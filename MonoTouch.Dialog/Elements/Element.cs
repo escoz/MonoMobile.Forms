@@ -44,14 +44,23 @@ namespace MonoTouch.Dialog
 			}
 		}
 
-
+		public bool _readOnly;
 
 		public Element Parent;
 		public Action<Element> OnValueChanged;
 		
 		public string ID;
 		public string Caption;
-		public bool ReadOnly;
+		public bool ReadOnly {
+			get {
+				return (_readOnly? true : this.Parent!=null ? this.Parent.ReadOnly : false);
+			}
+			set {
+				_readOnly = value;
+
+			}
+		}
+
 		public bool Hidden = false;
 
 		public Object Object { get; set; }
