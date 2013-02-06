@@ -110,6 +110,7 @@
     <Compile Include="Views\EntryElementCell.cs" />
     <Compile Include="Views\StringElementCell.cs" />
     <Compile Include="Elements\ElementAppearance.cs" />
+    <Compile Include="Elements\DialogTextView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

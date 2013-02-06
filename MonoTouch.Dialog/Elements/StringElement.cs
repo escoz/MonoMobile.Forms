@@ -89,6 +89,7 @@ namespace MonoTouch.Dialog
 			cell.BackgroundColor = this.ReadOnly ?  this.Appearance.BackgroundColorDisabled : this.Appearance.BackgroundColorEditable;
 			
 			if (cell.DetailTextLabel != null && !String.IsNullOrEmpty (Value)) {
+				cell.DetailTextLabel.Lines = 0;
 				cell.DetailTextLabel.Font = this.Appearance.DetailLabelFont;
 				cell.DetailTextLabel.TextColor = this.Appearance.DetailLabelTextColor; //this.ReadOnly ? this.Appearance.DisabledLabelTextColor : 
 				cell.DetailTextLabel.MinimumFontSize = 11;

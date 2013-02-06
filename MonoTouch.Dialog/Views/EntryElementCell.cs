@@ -20,13 +20,16 @@ namespace MonoTouch.Dialog
 		public UIView CustomEditView {
 			get{ return _customEditView; }
 			set {
-				
+				if (_customEditView==value) return;
 				if (_customEditView!=null) {
+					Console.WriteLine("!!! Removing " + this.TextLabel.Text + " -> " + _customEditView.Handle);
 					_customEditView.RemoveFromSuperview();
 				}
-				_customEditView = value;
-				if (_customEditView!=null)
+				if (value!=null) {
+					_customEditView = value;
+					Console.WriteLine(">> Added " + _customEditView.Handle);
 					this.ContentView.Add(_customEditView);
+				}
 			}
 		}
 
@@ -100,9 +103,6 @@ namespace MonoTouch.Dialog
 					}) ,
 				};
 			};
-
-			//if (_customEditView!=null)
-				//this.ContentView.AddSubview(_customEditView);
 		}
 			
 		public override bool BecomeFirstResponder ()
@@ -122,8 +122,11 @@ namespace MonoTouch.Dialog
 		public override void PrepareForReuse ()
 		{
 			base.PrepareForReuse ();
-			this.CustomEditView = null;
-			CustomEditView = null;
+			if (_customEditView!=null) {
+				Console.WriteLine("## removed " +_customEditView.Handle);
+				_customEditView.RemoveFromSuperview();
+				_customEditView = null;
+			}
 			_element = null;
 		}
 

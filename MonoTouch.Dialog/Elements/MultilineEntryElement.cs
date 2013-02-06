@@ -15,7 +15,7 @@ namespace MonoTouch.Dialog
 	/// </remarks>
 	public class MultilineEntryElement : EntryElement, IElementSizing
 	{
-
+		public string PlaceholderText {get;set;}
 		/// <summary>
 		/// The key used for reusable UITableViewCells.
 		/// </summary>
@@ -74,7 +74,7 @@ namespace MonoTouch.Dialog
 		UITextAutocapitalizationType autocapitalizationType = UITextAutocapitalizationType.Sentences;
 		UITextAutocorrectionType autocorrectionType = UITextAutocorrectionType.Default;
 		bool becomeResponder;
-		UITextView entry;
+		DialogTextView entry;
 		static UIFont font = UIFont.BoldSystemFontOfSize (17);
 
 		public event EventHandler Changed;
@@ -84,9 +84,6 @@ namespace MonoTouch.Dialog
 		/// </summary>
 		/// <param name="caption">
 		/// The caption to use
-		/// </param>
-		/// <param name="placeholder">
-		/// Placeholder to display when no value is set.
 		/// </param>
 		/// <param name="value">
 		/// Initial value.
@@ -128,9 +125,9 @@ namespace MonoTouch.Dialog
 			return s.EntryAlignment;
 		}
 
-		protected virtual UITextView CreateTextField (RectangleF frame)
+		protected virtual DialogTextView CreateTextField (RectangleF frame)
 		{
-			return new UITextView (frame) {
+			return new DialogTextView (frame) {
 				AutoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleLeftMargin,
 				Text = Value ?? "",
 				Tag = 1,
@@ -162,7 +159,7 @@ namespace MonoTouch.Dialog
 				
 				entry = CreateTextField (new RectangleF (	0, 0, width, size.Height + (height)));
 				entry.Font = Appearance.LabelFont;
-
+				
 				var toolbar =  new UIToolbar();
 				toolbar.Items = new UIBarButtonItem[] {
 				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace),
@@ -225,7 +222,8 @@ namespace MonoTouch.Dialog
 				becomeResponder = false;
 			}
 			entry.KeyboardType = KeyboardType;
-			
+			entry.PlaceholderText = PlaceholderText;
+
 			entry.AutocapitalizationType = AutocapitalizationType;
 			entry.AutocorrectionType = AutocorrectionType;
 			
