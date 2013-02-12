@@ -20,10 +20,10 @@ using MonoTouch.ObjCRuntime;
 
 namespace MonoTouch.Dialog
 {
-	public class RootElement : Element, IEnumerable {
-
-
+	public class RootElement : Element, IEnumerable, IElementSizing {
+		public UITableViewCellStyle CellStyle = UITableViewCellStyle.Value1;
 		public string CaptionPrompt { get;set;}
+		public float RowHeight = 44.0f;
 
 		static NSString rkey = new NSString ("RootElement");
 		int summarySection, summaryElement;
@@ -57,6 +57,13 @@ namespace MonoTouch.Dialog
 		{
 			this.group = group;
 		}
+		
+		
+		public float GetHeight (UITableView tableView, NSIndexPath indexPath)
+		{
+			return this.RowHeight;
+		}
+		
 
 		
 		public Section GetSectionForID (string name)
@@ -341,7 +348,7 @@ namespace MonoTouch.Dialog
 		{
 			var cell = tv.DequeueReusableCell (rkey);
 			if (cell == null){
-				var style = summarySection == -1 ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1;
+				var style = CellStyle !=null? CellStyle : (UITableViewCellStyle) (summarySection == -1 ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1);
 				
 				cell = new UITableViewCell (style, rkey);
 				cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
@@ -352,11 +359,12 @@ namespace MonoTouch.Dialog
 			cell.TextLabel.TextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.LabelTextColor;
 			cell.TextLabel.HighlightedTextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.LabelHighlightedTextColor;
 
-			cell.DetailTextLabel.Text = "";
-			cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
-			cell.DetailTextLabel.TextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.DetailLabelTextColor;
-			cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
-
+			if (cell.DetailTextLabel!=null) {
+				cell.DetailTextLabel.Text = "";
+				cell.DetailTextLabel.Font = Appearance.DetailLabelFont;
+				cell.DetailTextLabel.TextColor = this.ReadOnly ? Appearance.DisabledLabelTextColor : Appearance.DetailLabelTextColor;
+				cell.DetailTextLabel.HighlightedTextColor = Appearance.DetailLabelHighlightedTextColor;
+			}
 			cell.UserInteractionEnabled = !this.ReadOnly;
 			cell.BackgroundColor = this.ReadOnly ? Appearance.BackgroundColorDisabled : Appearance.BackgroundColorEditable;
 
@@ -370,7 +378,7 @@ namespace MonoTouch.Dialog
 						if (!(e is RadioElement))
 							continue;
 						
-						if (current == selected){
+						if (current == selected && cell.DetailTextLabel!=null){
 							cell.DetailTextLabel.Text = e.Summary ();
 
 							goto le;
