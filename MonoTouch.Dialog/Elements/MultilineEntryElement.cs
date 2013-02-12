@@ -213,8 +213,6 @@ namespace MonoTouch.Dialog
 //				};
 				entry.Started += delegate {
 					entry.ReturnKeyType = UIReturnKeyType.Default;
-
-					_tableView.ScrollToRow (GetIndexPath(), UITableViewScrollPosition.Middle, true);
 				};
 			}
 			if (becomeResponder) {
