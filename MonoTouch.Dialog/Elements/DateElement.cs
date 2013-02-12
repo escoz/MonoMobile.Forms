@@ -40,7 +40,8 @@ namespace MonoTouch.Dialog
 		{
 			var picker = base.CreatePicker ();
 			picker.Mode = UIDatePickerMode.Date;
-			picker.MaximumDate = MaxDate;
+			if (MaxDate!=DateTime.MinValue)
+				picker.MaximumDate = MaxDate;
 			return picker;
 		}
 

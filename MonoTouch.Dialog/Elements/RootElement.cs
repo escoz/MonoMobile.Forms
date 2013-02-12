@@ -350,7 +350,7 @@ namespace MonoTouch.Dialog
 			if (cell == null){
 				var style = CellStyle !=null? CellStyle : (UITableViewCellStyle) (summarySection == -1 ? UITableViewCellStyle.Default : UITableViewCellStyle.Value1);
 				
-				cell = new UITableViewCell (style, rkey);
+				cell = new UITableViewCell (style, rkey+this.CellStyle.ToString());
 				cell.SelectionStyle = UITableViewCellSelectionStyle.Blue;
 			} 
 		
