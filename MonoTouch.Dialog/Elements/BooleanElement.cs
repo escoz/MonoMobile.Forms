@@ -36,12 +36,13 @@ namespace MonoTouch.Dialog
 			}
 		}
 
-		public bool ValueWithoutEvent {
+		public bool? ValueWithoutEvent {
 			get { return _value; }
 			set { 
-				_value = value;
+				_value = value.HasValue ? value.Value : false;
 			}
 		}
+
 		
 		public BooleanElement(string caption):base(caption){}
 

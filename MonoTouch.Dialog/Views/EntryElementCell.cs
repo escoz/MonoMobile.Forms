@@ -22,12 +22,11 @@ namespace MonoTouch.Dialog
 			set {
 				if (_customEditView==value) return;
 				if (_customEditView!=null) {
-					Console.WriteLine("!!! Removing " + this.TextLabel.Text + " -> " + _customEditView.Handle);
 					_customEditView.RemoveFromSuperview();
+					_customEditView=null;
 				}
 				if (value!=null) {
 					_customEditView = value;
-					Console.WriteLine(">> Added " + _customEditView.Handle);
 					this.ContentView.Add(_customEditView);
 				}
 			}
